@@ -1,0 +1,35 @@
+header{
+	/* background-color: var(--bg-color); */
+	border: 1px solid black;
+	border-radius: 40px;
+
+	position: fixed;
+	top:    10px;
+	bottom: 10px;
+	left:   var(--header-horizontal-margin);
+	
+	width: var(--header-width);
+}
+
+header h1{
+	margin: 20px 0px;
+	text-align: center;
+}
+header li{	
+	/* ocultar el puntito */
+	list-style-type: none;
+
+	margin-bottom: 10px;
+	margin-left: 5px;
+}
+header a{
+	color: var(--txt-color);
+	text-decoration: none;
+	padding: 5px 10px;
+	border-radius: 50px;
+
+	transition: var(--header-buttons-transition);
+}
+header a:hover{
+	background-color: var(--button-hover-color);
+}
