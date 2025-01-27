@@ -1,0 +1,19 @@
+/* cambiar el body para que se pueda centrar el formulario */
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+form {
+	padding: 20px;
+	width: 350px;
+
+	background-color: var(--bg-color-2);
+	border: 1px solid var(--body-border-color);
+	border-radius: 25px;
+
+	align-items: center;
+	text-align: center;
+}
