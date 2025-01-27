@@ -1,33 +1,39 @@
 <?php
 namespace App\Controller;
 
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use App\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserController extends AbstractController
+class SignInController extends AbstractController
 {
-    public function signIn(UserPasswordHasherInterface $passwordHasher, $nameTag, $email, $passwd): Response
-    {
+
+    #[Route('/signInForm', name:'load_signin')]
+    public function load_signIn(){    
+        return $this->render('signin.html.twig');
+    }
+
+
+    #[Route('/signIn', name:'crtl_signin')]
+    public function signIn(UserPasswordHasherInterface $passwordHasher): Response
+    {   
+        // Obtenemos todos los datos del formulario a través de POST
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        // TODO: Más info...
+        $password = $passwordHasher->hashPassword($user, $password);
+
+        // Creamos el usuario
         $user = new User();
-        $plaintextPassword = $passwd;
+        $user->setEmail($email);
+        $user->setPassword($password);
 
-        // hash the password (based on the security.yaml config for the $user class)
-        $hashedPassword = $passwordHasher->hashPassword(
-            $user,
-            $plaintextPassword
-        );
-        $user->setPassword($hashedPassword);
-
-        // ...
-    }
-
-    public function delete(UserPasswordHasherInterface $passwordHasher, UserInterface $user, $passwd): void
-    {
-        // ... e.g. get the password from a "confirm deletion" dialog
-        $plaintextPassword = $passwd;
-
-        if (!$passwordHasher->isPasswordValid($user, $plaintextPassword)) {
-            throw new AccessDeniedHttpException();
-        }
-    }
+        // Aquí guardarías el usuario (EntityManager)
+        // $entityManager->persist($user);
+        // $entityManager->flush();
+        return $this->redirectToRoute('ctrl_login');
+    }    
 }
