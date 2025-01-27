@@ -4,6 +4,11 @@ body {
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+
+	background-image: url('../images/wave-haikei.svg')!important;
+	background-size: cover; /* Ajusta el tamaño */
+	background-repeat: no-repeat; /* Evita repeticiones */
+	background-position: center; /* Centra la imagen */
 }
 
 form {
