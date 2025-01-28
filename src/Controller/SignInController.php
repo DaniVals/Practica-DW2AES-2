@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,40 +11,42 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class SignInController extends AbstractController
 {
-
     #[Route('/signInForm', name:'load_signin')]
     public function load_signIn(){    
         return $this->render('signin.html.twig');
     }
 
 
-    #[Route('/signIn', name:'crtl_signin')]
-    public function signIn(UserPasswordHasherInterface $passwordHasher): Response
+    #[Route('/signIn', name:'ctrl_signin')]
+    public function signIn(entityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {   
-        $name = $_POST['name'];
-        $surname = $_POST['surname'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $password = $_POST['password'];
-        $password2 = $_POST['password2'];
-        $bDate = $_POST['bDate'];
+        $name = $_POST['_username'];
+        $surname = $_POST['_surname'];
+        $email = $_POST['_email'];
+        $phone = $_POST['_phone'];
+        $password = $_POST['_password'];
+        $password2 = $_POST['_password2'];
+        $bDate = $_POST['_bDate'];
 
-        if (checkSignIn($name, $surname, $email, $phone, $password, $password2, $bDate) != '') {
+        if ($this->checkSignIn($entityManager, $name, $surname, $email, $phone, $password, $password2, $bDate) != '') {
             $user = new User();
             $user->setName($name);
             $user->setSurname($surname);
             $user->setEmail($email);
-            $user->setPhone($phone);
+            $user->setPhoneNumber($phone);
             $user->setPassword($passwordHasher->hashPassword($user, $password));
-            $user->setBDate(new \DateTime($bDate));
-            $user->setRole('ROLE_USER');
-            
+            $user->setBirthDate(new \DateTime($bDate));
+            $user->getRoles();
+            $entityManager->persist($user);
+            $entityManager->flush();
         }
 
         return $this->redirectToRoute('ctrl_login');
     }   
+
     
-    public function checkSignIn($name, $surname, $email, $phone, $password, $password2, $bDate){
+    public function checkSignIn(EntityManagerInterface $entityManager, $name, $surname, $email, $phone, $password, $password2, $bDate){
+
         if ($password != $password2){
             return 'Passwords do not match';
         }
@@ -57,11 +60,11 @@ class SignInController extends AbstractController
         }
 
         // Si el número de telefono y el email ya pertenecen a un usuario, no se crea la cuenta
-        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $email]);
+        $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
         if ($user){
             return 'Email already in use';
         }
-        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['phone' => $phone]);
+        $user = $entityManager->getRepository(User::class)->findOneBy(['phoneNumber' => $phone]);
         if ($user){
             return 'Phone already in use';
         }

@@ -10,115 +10,106 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-	#[ORM\id]
-    #[ORM\Column(type:'integer', name:'idUser')]
-	#[OneToOne(targetEntity: Profile::class, mappedBy: 'idUser')]
-    #[ORM\GeneratedValue]
-    private $idUser;
+	#[ORM\Id]
+	#[ORM\Column(type:'integer', name:'idUser')]
+	#[ORM\OneToOne(targetEntity: Profile::class, mappedBy: 'idUser')]
+	#[ORM\GeneratedValue]
+	private $idUser;
 
 	#[ORM\Column(type:'string', name:'name')]
-    private $name;
+	private $name;
 
 	#[ORM\Column(type:'string', name:'surname')]
-    private $surname;
+	private $surname;
 
 	#[ORM\Column(type:'string', name:'email')]
-    private $email;
+	private $email;
 
 	#[ORM\Column(type:'integer', name:'phoneNumber')]
-    private $phoneNumber;
+	private $phoneNumber;
 
 	#[ORM\Column(type:'string', name:'password')]
-    private $password;
+	private $password;
 
 	#[ORM\Column(type:'date', name:'birthDate')]
-    private $birthDate;
+	private $birthDate;
 
-//-----------------------------------------------------------
+	//-----------------------------------------------------------
 
 	public function getIdUser() {
 		return $this->idUser;
 	}
+	public function setIdUser($idUser) {
+		$this->idUser = $idUser;
+	}
+
 	public function getName() {
 		return $this->name;
 	}
+	public function setName($name) {
+		$this->name = $name;
+	}
+
 	public function getSurname() {
 		return $this->surname;
 	}
+	public function setSurname($surname) {
+		$this->surname = $surname;
+	}
+
 	public function getEmail() {
 		return $this->email;
 	}
+	public function setEmail($email) {
+		$this->email = $email;
+	}
+
 	public function getPhoneNumber() {
 		return $this->phoneNumber;
 	}
-	public function getPassword() {
-		return $this->password;
+	public function setPhoneNumber($phoneNumber) {
+		$this->phoneNumber = $phoneNumber;
 	}
+
 	public function getBirthDate() {
 		return $this->birthDate;
 	}
-
-	public function setIdUser() {
-		$this->idUser = $idUser;
-	}
-	public function setName() {
-		$this->name = $name;
-	}
-	public function setSurname() {
-		$this->surname = $surname;
-	}
-	public function setEmail() {
-		$this->email = $email;
-	}
-	public function setPhoneNumber() {
-		$this->phoneNumber = $phoneNumber;
-	}
-	public function setPassword() {
-		$this->password = $password;
-	}
-	public function setBirthDate() {
+	public function setBirthDate($birthDate) {
 		$this->birthDate = $birthDate;
 	}
 
-//-----------------------------------------------------------
+	public function getPassword(): ?string
+	{
+		return $this->password;
+	}
 
-    private ?int $idUser = null;
+	public function setPassword(string $password): self
+	{
+		$this->password = $password;
 
-    private ?string $email = null;
+		return $this;
+	}
 
-    private ?string $password = null; // Hashed password
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
 
 	public function getRoles(): array
-    {
+	{
 		return ['ROLE_USER'];            
 	}
 
-    public function getUserIdentifier(): string
-    {
-        return $this->getMail();
-    }
+	public function getUserIdentifier(): string
+	{
+		return $this->getEmail();
+	}
 
-    public function getSalt(): ?string
-    {
-        return null;
-    }
-	
-    public function eraseCredentials(): void
-    {
+	public function getSalt(): ?string
+	{
+		return null;
+	}
 
-    }
+	public function eraseCredentials(): void
+	{
 
-    // Otros métodos necesarios como getUsername(), getRoles(), eraseCredentials(), etc.
+	}
+
+	// Otros métodos necesarios como getUsername(), getRoles(), eraseCredentials(), etc.
 }
