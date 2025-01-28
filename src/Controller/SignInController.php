@@ -20,20 +20,52 @@ class SignInController extends AbstractController
     #[Route('/signIn', name:'crtl_signin')]
     public function signIn(UserPasswordHasherInterface $passwordHasher): Response
     {   
-        // Obtenemos todos los datos del formulario a través de POST
+        $name = $_POST['name'];
+        $surname = $_POST['surname'];
         $email = $_POST['email'];
+        $phone = $_POST['phone'];
         $password = $_POST['password'];
-        // TODO: Más info...
-        $password = $passwordHasher->hashPassword($user, $password);
+        $password2 = $_POST['password2'];
+        $bDate = $_POST['bDate'];
 
-        // Creamos el usuario
-        $user = new User();
-        $user->setEmail($email);
-        $user->setPassword($password);
+        if (checkSignIn($name, $surname, $email, $phone, $password, $password2, $bDate) != '') {
+            $user = new User();
+            $user->setName($name);
+            $user->setSurname($surname);
+            $user->setEmail($email);
+            $user->setPhone($phone);
+            $user->setPassword($passwordHasher->hashPassword($user, $password));
+            $user->setBDate(new \DateTime($bDate));
+            $user->setRole('ROLE_USER');
+            
+        }
 
-        // Aquí guardarías el usuario (EntityManager)
-        // $entityManager->persist($user);
-        // $entityManager->flush();
         return $this->redirectToRoute('ctrl_login');
-    }    
+    }   
+    
+    public function checkSignIn($name, $surname, $email, $phone, $password, $password2, $bDate){
+        if ($password != $password2){
+            return 'Passwords do not match';
+        }
+        
+        // No se crea la cuenta tienes menos de 16 años
+        $date = new \DateTime($bDate);
+        $now = new \DateTime();
+        $diff = $now->diff($date);
+        if ($diff->y < 16){
+            return 'You must be at least 16 years old to create an account';
+        }
+
+        // Si el número de telefono y el email ya pertenecen a un usuario, no se crea la cuenta
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $email]);
+        if ($user){
+            return 'Email already in use';
+        }
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['phone' => $phone]);
+        if ($user){
+            return 'Phone already in use';
+        }
+        return '';
+    }
+
 }

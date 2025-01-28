@@ -1,0 +1,31 @@
+{# templates/login.html.twig #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		{% include "content.html.twig" %}
+		<link rel="stylesheet" href="{{asset('css/form.css')}}">
+        <title>LogIn</title>
+    </head>
+    <body>	
+    	<form action="{{ path('crtl_signin')}}" method="post">
+	    Usuario
+	    <input type="text" id="user" name="_user" /> <br>
+	    Nombre
+	    <input type="text" id="name" name="_name" /> <br>
+	    Apellidos
+	    <input type="text" id="surname" name="_surname" /> <br>
+	    Correo electronico 
+	    <input type="text" id="email" name="_email" /> <br>
+	    Fecha de nacimiento 
+	    <input type="date" id="bDate" name="_bDate" /> <br>
+	    Número de teléfono 
+	    <input type="text" id="phone" name="_phone" /> <br>
+	    Contraseña
+	    <input type="password" id="password" name="_password" /> <br>
+	    Repite la contraseña
+	    <input type="password" id="password2" name="_password2" /> <br>
+	    <button type="submit">Sign In</button>
+	</form>
+    </body>
+</html>
