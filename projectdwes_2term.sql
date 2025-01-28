@@ -20,6 +20,11 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `projectdwes_2term`
 --
+-- Crear base de datos
+--
+DROP DATABASE IF EXISTS `projectdwes_2term`;
+CREATE DATABASE IF NOT EXISTS `projectdwes_2term` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `projectdwes_2term`;
 
 -- --------------------------------------------------------
 
