@@ -15,28 +15,28 @@ class Post
 	
 	#[ORM\Column(type:'integer', name:'idPoster')]
 	#[ManyToOne(targetEntity: User::class, inversedBy: 'idUser')]
-    #[JoinColumn(name: 'idUser', referencedColumnName: 'idUser')]
-    private $name;
+    #[JoinColumn(name: 'idPoster', referencedColumnName: 'idUser')]
+    private $idPoster;
 
-	#[ORM\Column(type:'string', name:'surname')]
-    private $surname;
+	#[ORM\Column(type:'integer', name:'likes')]
+    private $likes;
 
-	#[ORM\Column(type:'string', name:'email')]
-    private $email;
+	#[ORM\Column(type:'integer', name:'dislikes')]
+    private $dislikes;
 
-	#[ORM\Column(type:'integer', name:'phoneNumber')]
-    private $phoneNumber;
+	#[ORM\Column(type:'datetime', name:'postingTime')]
+    private $postingTime;
 
-	#[ORM\Column(type:'string', name:'password')]
-    private $password;
+	#[ORM\Column(type:'integer', name:'commentAmount')]
+    private $commentAmount;
 
-	#[ORM\Column(type:'date', name:'birthDate')]
-    private $birthDate;
+	#[ORM\Column(type:'string', name:'contentRoute')]
+    private $contentRoute;
 
 //-----------------------------------------------------------
 
-	public function getIdUser() {
-		return $this->idUser;
+	public function getIdPoster() {
+		return $this->idPoster;
 	}
 	public function getName() {
 		return $this->name;
