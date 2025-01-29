@@ -8,12 +8,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LogInController extends AbstractController
 {
-	#[Route('/login', name:'ctrl_login')]
+    #[Route('/login', name:'ctrl_login')]
     public function login(){    
         return $this->render('login.html.twig');
     }    
-	
-	#[Route('/logout', name:'ctrl_logout')]
+
+    #[Route('/logout', name:'ctrl_logout')]
     public function logout(){    
         return new Response();
     }    

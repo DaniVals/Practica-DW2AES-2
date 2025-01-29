@@ -28,7 +28,7 @@ class SignInController extends AbstractController
         $password2 = $_POST['_password2'];
         $bDate = $_POST['_bDate'];
 
-        if ($this->checkSignIn($entityManager, $name, $surname, $email, $phone, $password, $password2, $bDate) != '') {
+        if ($this->checkSignIn($entityManager, $name, $surname, $email, $phone, $password, $password2, $bDate) == '') {
             $user = new User();
             $user->setName($name);
             $user->setSurname($surname);
