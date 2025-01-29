@@ -9,11 +9,19 @@
     </head>
     <body>	
     	<form action="{{ path('ctrl_login') }}" method="post">
-			Usuario
-			<input type="text" id="username" name="_username" /> <br>
-			Clave
-			<input type="password" id="password" name="_password" /> <br>
-			<button type="submit">login</button>
+		<table>
+			<tr>
+				<td>Usuario</td>
+				<td><input type="text" id="username" name="_username" /></td>
+			</tr>
+			<tr>
+				<td>Nombre</td>
+				<td><input type="password" id="password" name="_password" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><button type="submit">Log In</button></td>
+			</tr>
+		</table>
 		</form>
     </body>
 </html>

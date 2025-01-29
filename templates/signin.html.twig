@@ -9,23 +9,43 @@
     </head>
     <body>	
     	<form action="{{ path('ctrl_signin')}}" method="post">
-	    Usuario
-	    <input type="text" id="user" name="_user" /> <br>
-	    Nombre
-	    <input type="text" id="username" name="_username" /> <br>
-	    Apellidos
-	    <input type="text" id="surname" name="_surname" /> <br>
-	    Correo electronico 
-	    <input type="text" id="email" name="_email" /> <br>
-	    Fecha de nacimiento 
-	    <input type="date" id="bDate" name="_bDate" /> <br>
-	    Número de teléfono 
-	    <input type="text" id="phone" name="_phone" /> <br>
-	    Contraseña
-	    <input type="password" id="password" name="_password" /> <br>
-	    Repite la contraseña
-	    <input type="password" id="password2" name="_password2" /> <br>
-	    <button type="submit">Sign In</button>
-	</form>
+		<table>
+			<tr>
+				<td>Usuario</td>
+				<td><input type="text" id="user" name="_user" /></td>
+			</tr>
+			<tr>
+				<td>Nombre</td>
+				<td><input type="text" id="username" name="_username" /></td>
+			</tr>
+			<tr>
+				<td>Apellidos</td>
+				<td><input type="text" id="surname" name="_surname" /></td>
+			</tr>
+			<tr>
+				<td>Correo electronico</td>
+				<td><input type="text" id="email" name="_email" /></td>
+			</tr>
+			<tr>
+				<td>Fecha de nacimiento</td>
+				<td><input type="date" id="bDate" name="_bDate" /></td>
+			</tr>
+			<tr>
+				<td>Número de teléfono</td>
+				<td><input type="text" id="phone" name="_phone" /></td>
+			</tr>
+			<tr>
+				<td>Contraseña</td>
+				<td><input type="password" id="password" name="_password" /></td>
+			</tr>
+			<tr>
+				<td>Repite la contraseña</td>
+				<td><input type="password" id="password2" name="_password2" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><button type="submit">Sign In</button></td>
+			</tr>
+		</table>
+		</form>
     </body>
 </html>

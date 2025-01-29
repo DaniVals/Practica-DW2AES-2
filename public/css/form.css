@@ -13,12 +13,27 @@ body {
 
 form {
 	padding: 20px;
-	width: 350px;
+	width: 400px;
 
 	background-color: var(--bg-color-2);
 	border: 1px solid var(--body-border-color);
 	border-radius: 25px;
+}
 
-	align-items: center;
-	text-align: center;
+table{
+	width: 100%;
+}
+td{
+	width: 50%;
+}
+tr + tr td{
+	padding-top: 5px;
+}
+button{
+	width: 80%;
+	margin: 0px 10%;
+	padding: 5px;
+
+	border-radius: 100px;
+	border: none;
 }
