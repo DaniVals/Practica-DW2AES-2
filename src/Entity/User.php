@@ -34,6 +34,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	#[ORM\Column(type:'date', name:'birthDate')]
 	private $birthDate;
 
+	#[ORM\ManyToOne(targetEntity:'role')]
+	#[ORM\JoinColumn(name:'role', referencedColumn:'idRole')]
+	private $role;
+
 	//-----------------------------------------------------------
 
 	public function getIdUser() {
@@ -82,7 +86,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	{
 		return $this->password;
 	}
-
 	public function setPassword(string $password): self
 	{
 		$this->password = $password;
@@ -90,8 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 		return $this;
 	}
 
-
-	public function getRoles(): array
+	public function getRole(): array
 	{
 		return ['ROLE_USER'];            
 	}
@@ -110,6 +112,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	{
 
 	}
-
-	// Otros métodos necesarios como getUsername(), getRoles(), eraseCredentials(), etc.
 }

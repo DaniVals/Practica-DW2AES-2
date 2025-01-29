@@ -24,7 +24,7 @@ class Post
 	#[ORM\Column(type:'integer', name:'dislikes')]
     private $dislikes;
 
-	#[ORM\Column(type:'datetime', name:'postingTime')]
+	#[ORM\Column(type:'Types::DATETIME_IMMUTABLE', name:'postingTime')]
     private $postingTime;
 
 	#[ORM\Column(type:'integer', name:'commentAmount')]
