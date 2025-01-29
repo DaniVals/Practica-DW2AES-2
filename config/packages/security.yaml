@@ -3,7 +3,7 @@ security:
         login:
             entity:
                 class: App\Entity\User
-                property: username
+                property: email 
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
             algorithm: auto
@@ -17,7 +17,7 @@ security:
             form_login:
                 login_path: ctrl_login
                 check_path: ctrl_login
-                default_target_path: categorias
+                default_target_path: feed 
             logout:
                 path:   ctrl_logout
                 target: ctrl_login    
