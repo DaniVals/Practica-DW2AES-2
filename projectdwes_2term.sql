@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-01-2025 a las 12:09:07
+-- Tiempo de generación: 29-01-2025 a las 09:59:25
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 
 --
 -- Base de datos: `projectdwes_2term`
---
--- Crear base de datos
 --
 DROP DATABASE IF EXISTS `projectdwes_2term`;
 CREATE DATABASE IF NOT EXISTS `projectdwes_2term` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
@@ -75,6 +73,17 @@ CREATE TABLE `profile` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `role`
+--
+
+CREATE TABLE `role` (
+  `idRol` int(1) NOT NULL,
+  `name` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `user`
 --
 
@@ -85,7 +94,8 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `phoneNumber` int(9) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `birthDate` date NOT NULL
+  `birthDate` date NOT NULL,
+  `role` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -115,12 +125,20 @@ ALTER TABLE `profile`
   ADD KEY `FK_IdU_UIdU` (`idUser`);
 
 --
+-- Indices de la tabla `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`idRol`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
 -- Indices de la tabla `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`idUser`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `phoneNumber` (`phoneNumber`);
+  ADD UNIQUE KEY `phoneNumber` (`phoneNumber`),
+  ADD KEY `FK_UR_IdR` (`role`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -166,6 +184,12 @@ ALTER TABLE `post`
 --
 ALTER TABLE `profile`
   ADD CONSTRAINT `FK_IdU_UIdU` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `FK_UR_IdR` FOREIGN KEY (`role`) REFERENCES `role` (`idRol`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
