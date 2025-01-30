@@ -2,7 +2,10 @@
 
 namespace App\Util;
 
-class Functions
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Attribute\Route;
+
+class Functions extends AbstractController
 {
     public static function getPost($key)
     {
