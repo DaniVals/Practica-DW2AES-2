@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Role;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,13 +40,13 @@ class SignInController extends AbstractController
             $user->setPhoneNumber($phone);
             $user->setPassword($passwordHasher->hashPassword($user, $password));
             $user->setBirthDate(new \DateTime($bDate));
-            $user->setActive(0);
-            $user->getRoles();
+			$user->setRole($entityManager->getRepository(Role::class)->findOneBy(['idRole' => 0])); //Por defecto todos los usuarios son usuarios normales
+			$user->getRoles();
             $entityManager->persist($user);
             $entityManager->flush();
 
             //Mandar correo de activación
-            return $this->redirectToRoute('send_activation', ['email' => $email, 'name' => $name]);
+            return $this->redirectToRoute('send_activation', ['email' => $email]);
         }
         return $this->redirectToRoute('ctrl_login');
     }   
@@ -72,7 +73,7 @@ class SignInController extends AbstractController
         ");
 
         $mailer->send($message);
-        return $this->render('accManagment/activation.html.twig');
+        return $this->render('accManagment/activationEmail.html.twig');
     }
 
     #[Route('/activation', name:'activation')]

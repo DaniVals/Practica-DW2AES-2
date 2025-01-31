@@ -8,10 +8,26 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Role
 {
-	#[ORM\id]
+	#[ORM\Id]
     #[ORM\Column(type:'integer', name:'idRole')]
     private $idRole;
 
 	#[ORM\Column(type:'string', name:'name')]
     private $name;
+
+	public function getIdRole() {
+		return $this->idRole;
+	}
+
+	public function getName() {
+		return $this->name;
+	}
+
+	public function setIdRole() {
+		$this->idRole = $idRole;
+	}
+
+	public function setName() {
+		$this->name = $name;
+	}
 }

@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	#[ORM\Column(type:'date', name:'birthDate')]
 	private $birthDate;
 
-	#[ORM\ManyToOne(targetEntity:'role')]
+	#[ORM\ManyToOne(targetEntity:'Role')]
 	#[ORM\JoinColumn(name:'role', referencedColumnName:'idRole')]
 	private $role;
 
@@ -92,8 +92,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 		return $this;
 	}
 
+	public function getRole() {
+		return $this->role;
+	}
+
+	public function setRole(?Role $role) {
+		$this->role = $role;
+	}
+
 	public function getRoles(): array
 	{
+		if ($this->role) {
+			return [$this->role->getName()];
+		}
 		return ['ROLE_USER'];            
 	}
 
