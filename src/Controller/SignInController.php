@@ -40,19 +40,23 @@ class SignInController extends AbstractController
             $user->setPhoneNumber($phone);
             $user->setPassword($passwordHasher->hashPassword($user, $password));
             $user->setBirthDate(new \DateTime($bDate));
-	    $user->setRole($entityManager->getRepository(Role::class)->findOneBy(['idRole' => 0]));
+            // Asignar el rol de usuario 0 de la tabla role
+            $role = $entityManager->getRepository(Role::class)->findOneBy(['idRole' => 0]);
+            $user->setRole($role);
 	    $user->getRoles();
             $entityManager->persist($user);
             $entityManager->flush();
 
             //Mandar correo de activación
-            return $this->redirectToRoute('send_activation', ['email' => $email]);
+            return $this->redirectToRoute('send_activation', ['email' => $email, 'name' => $name]);
         }
         return $this->redirectToRoute('ctrl_login');
     }   
     
-    #[Route('/activationSent', name:'send_activation')]
-    public function sendActivation(MailerInterface $mailer, $email, $name) {
+    #[Route('/activationSent/{email}/{name}', name:'send_activation')]
+    public function sendActivation(MailerInterface $mailer, Request $request){
+        $email = $request->get('email');
+        $name = $request->get('name');
         $message = new email();
         $message->from(new Address('noreply_wizardmoneygang@shadowgram.com', 'Shadow Wizard Money Gang'));
         $message->to($email);
