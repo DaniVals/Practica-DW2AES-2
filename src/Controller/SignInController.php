@@ -45,20 +45,44 @@ class SignInController extends AbstractController
             $entityManager->flush();
 
             //Mandar correo de activación
-            return $this->redirectToRoute('send_activation', ['email' => $email]);
+            return $this->redirectToRoute('send_activation', ['email' => $email, 'name' => $name]);
         }
         return $this->redirectToRoute('ctrl_login');
     }   
     
-    #[Route('/activation', name:'send_activation')]
-    public function sendActivation(MailerInterface $mailer, $email) {
+    #[Route('/activationSent', name:'send_activation')]
+    public function sendActivation(MailerInterface $mailer, $email, $name) {
         $message = new email();
         $message->from(new Address('noreply_wizardmoneygang@shadowgram.com', 'Shadow Wizard Money Gang'));
         $message->to($email);
         $message->subject('Activate your account!');
-        $message->html('');
+        $message->html("
+            <body>
+                <h2>¡Activa tu cuenta en ShadowGram</h2>
+                <p>Hola , $name</p>
+                <p>Gracias por registrarte en ShadowGram. Para comenzar a disfrutar de nuestra plataforma, activa tu cuenta haciendo clic en el siguiente botón:</p>
+                <p>
+                <a href='https://localhost:8000/activation' style='display: inline-block; padding: 12px 20px; font-size: 18px; color: #fff; background-color: #007bff; text-decoration: none; border-radius: 5px;'>Activar mi cuenta</a>
+                </p>
+                <p>Si el botón no funciona, copia y pega el siguiente enlace en tu navegador:</p>
+                <p><a href='https://localhost:8000/activation'>https://localhost:8000/activation</a></p>
+                <p style='font-size: 14px; color: #999;'>Si no has solicitado esta cuenta, ignora este mensaje.</p>
+                <p style='font-size: 14px; color: #999;'>El equipo de ShadowGram</p>
+            </body>
+        ");
+
         $mailer->send($message);
         return $this->render('accManagment/activation.html.twig');
+    }
+
+    #[Route('/activation', name:'activation')]
+    public function activateAccount(EntityManagerInterface $entityManager){
+        $email = $_POST['email'];
+        $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
+        $user->setActive(1);
+        $entityManager->persist($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('ctrl_login');
     }
     
     public function checkSignIn(EntityManagerInterface $entityManager, $name, $surname, $email, $phone, $password, $password2, $bDate){
