@@ -102,10 +102,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 	public function getRoles(): array
 	{
-		if ($this->role) {
-			return [$this->role->getName()];
+		// Switch para asignar roles
+		switch ($this->role->getIdRole()) {
+			case 0:
+				return ['ROLE_NOTV'];
+				break;
+			case 1:
+				return ['ROLE_USER'];
+				break;
+			case 2:
+				return ['ROLE_USER', 'ROLE_ADMIN'];
+				break;
+			default:
+				// No se que poner en el caso default, lo dejo vacío
+				return [];
+				break;
 		}
-		return ['ROLE_USER'];            
 	}
 
 	public function getUserIdentifier(): string
