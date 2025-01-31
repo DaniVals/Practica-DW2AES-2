@@ -9,11 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Role
 {
 	#[ORM\Id]
-    #[ORM\Column(type:'integer', name:'idRole')]
-    private $idRole;
+	#[ORM\Column(type:'integer', name:'idRole')]
+	private $idRole;
 
 	#[ORM\Column(type:'string', name:'name')]
-    private $name;
+	private $name;
 
 	public function getIdRole() {
 		return $this->idRole;
