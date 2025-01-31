@@ -40,8 +40,8 @@ class SignInController extends AbstractController
             $user->setPhoneNumber($phone);
             $user->setPassword($passwordHasher->hashPassword($user, $password));
             $user->setBirthDate(new \DateTime($bDate));
-			$user->setRole($entityManager->getRepository(Role::class)->findOneBy(['idRole' => 0])); //Por defecto todos los usuarios son usuarios normales
-			$user->getRoles();
+	    $user->setRole($entityManager->getRepository(Role::class)->findOneBy(['idRole' => 0]));
+	    $user->getRoles();
             $entityManager->persist($user);
             $entityManager->flush();
 
