@@ -53,15 +53,15 @@ class SignInController extends AbstractController
         return $this->redirectToRoute('ctrl_login');
     }   
     
-    #[Route('/activationSent/{email}/{name}', name:'send_activation')]
+    #[Route('/activationSent', name:'send_activation')]
     public function sendActivation(MailerInterface $mailer, Request $request){
         $email = $request->get('email');
         $name = $request->get('name');
-        $message = new email();
-        $message->from(new Address('noreply_wizardmoneygang@shadowgram.com', 'Shadow Wizard Money Gang'));
-        $message->to($email);
-        $message->subject('Activate your account!');
-        $message->html("
+        $message = (new Email())
+        ->from(new Address('noreply_wizardmoneygang@shadowgram.com', 'Shadow Wizard Money Gang'))
+        ->to($email)
+        ->subject('Activate your account!')
+        ->html("
             <body>
                 <h2>¡Activa tu cuenta en ShadowGram</h2>
                 <p>Hola , $name</p>
