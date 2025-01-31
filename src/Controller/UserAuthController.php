@@ -13,7 +13,7 @@ class UserAuthController extends AbstractController {
     }
     #[Route('/feed', name:'load_feed')]
     public function load_feed() {   
-        return $this->render('feed.html.twig');
+        return $this->render('navigation/feed.html.twig');
     }
     
 }

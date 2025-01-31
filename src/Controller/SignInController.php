@@ -6,6 +6,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -13,7 +16,7 @@ class SignInController extends AbstractController
 {
     #[Route('/signInForm', name:'load_signin')]
     public function load_signIn(){    
-        return $this->render('signin.html.twig');
+        return $this->render('accMagagment/signin.html.twig');
     }
 
 
@@ -36,14 +39,27 @@ class SignInController extends AbstractController
             $user->setPhoneNumber($phone);
             $user->setPassword($passwordHasher->hashPassword($user, $password));
             $user->setBirthDate(new \DateTime($bDate));
+            $user->setActive(0);
             $user->getRoles();
             $entityManager->persist($user);
             $entityManager->flush();
-        }
 
+            //Mandar correo de activación
+            return $this->redirectToRoute('send_activation', ['email' => $email]);
+        }
         return $this->redirectToRoute('ctrl_login');
     }   
-
+    
+    #[Route('/activation', name:'send_activation')]
+    public function sendActivation(MailerInterface $mailer, $email) {
+        $message = new email();
+        $message->from(new Address('noreply_wizardmoneygang@shadowgram.com', 'Shadow Wizard Money Gang'));
+        $message->to($email);
+        $message->subject('Activate your account!');
+        $message->html('');
+        $mailer->send($message);
+        return $this->render('accMagagment/activation.html.twig');
+    }
     
     public function checkSignIn(EntityManagerInterface $entityManager, $name, $surname, $email, $phone, $password, $password2, $bDate){
 
