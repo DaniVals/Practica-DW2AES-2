@@ -22,11 +22,21 @@ class TestingDELETE extends AbstractController
 	#[Route('/feed', name:'feed')]
     public function loadFeed() {
 
-		return $this->render("feed.html.twig");
+		return $this->render("navigation/feed.html.twig");
     }
 	#[Route('/iniciasesion', name:'inicio_sesion')]
     public function loadIS() {
 
 		return $this->render("singin.html.twig");
+    }
+	#[Route('/profile', name:'profile')]
+    public function loadProfile() {
+
+		$usuario["idUser"] = "0";
+		$usuario["userName"] = "nombre";
+		$usuario["bio"] = "una biografia muy bonita";
+		$usuario["followers"] = "777";
+		$usuario["following"] = "69";
+		return $this->render("navigation/profile.html.twig" , [ "targetUser" => $usuario ]);
     }
 }

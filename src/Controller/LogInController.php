@@ -10,7 +10,7 @@ class LogInController extends AbstractController
 {
     #[Route('/login', name:'ctrl_login')]
     public function login(){    
-        return $this->render('accMagagment/login.html.twig');
+        return $this->render('accManagment/login.html.twig');
     }    
 
     #[Route('/logout', name:'ctrl_logout')]

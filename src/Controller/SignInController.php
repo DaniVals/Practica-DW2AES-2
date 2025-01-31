@@ -16,7 +16,7 @@ class SignInController extends AbstractController
 {
     #[Route('/signInForm', name:'load_signin')]
     public function load_signIn(){    
-        return $this->render('accMagagment/signin.html.twig');
+        return $this->render('accManagment/signin.html.twig');
     }
 
 
@@ -58,7 +58,7 @@ class SignInController extends AbstractController
         $message->subject('Activate your account!');
         $message->html('');
         $mailer->send($message);
-        return $this->render('accMagagment/activation.html.twig');
+        return $this->render('accManagment/activation.html.twig');
     }
     
     public function checkSignIn(EntityManagerInterface $entityManager, $name, $surname, $email, $phone, $password, $password2, $bDate){

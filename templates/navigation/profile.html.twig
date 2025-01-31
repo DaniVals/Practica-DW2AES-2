@@ -13,11 +13,11 @@
 	{% include "header.html.twig" %}
     <body>
 		<div id="profileHeader">
-			<img src="{{asset('userData/{{targetUser.idUser}}/ProfilePicture.png')}}  ../userData/0/ProfilePicture.png" alt="ProfilePicture">
+			<img src="{{asset('userData/'~targetUser.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
 			<!-- idUser -->
-			<h1>{{targetUser.idUser}}</h1>
-			<p>bio</p>
-			<p>Seguidores: <span>F</span> Siguiendo: <span>F</span></p>
+			<h1>{{targetUser.userName}}</h1>
+			<p>{{targetUser.bio}}</p>
+			<p>Seguidores: <span>{{targetUser.followers}}</span> Siguiendo: <span>{{targetUser.following}}</span></p>
 		</div>
     </body>
 </html>
