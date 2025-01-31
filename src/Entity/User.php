@@ -34,7 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	private $birthDate;
 
 	#[ORM\ManyToOne(targetEntity:'role')]
-	#[ORM\JoinColumn(name:'role', referencedColumn:'idRole')]
+	#[ORM\JoinColumn(name:'role', referencedColumnName:'idRole')]
 	private $role;
 
 	//-----------------------------------------------------------
