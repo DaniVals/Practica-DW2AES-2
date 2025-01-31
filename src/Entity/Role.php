@@ -23,11 +23,11 @@ class Role
 		return $this->name;
 	}
 
-	public function setIdRole() {
+	public function setIdRole($idRole) {
 		$this->idRole = $idRole;
 	}
 
-	public function setName() {
+	public function setName($name) {
 		$this->name = $name;
 	}
 }
