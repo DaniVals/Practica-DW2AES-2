@@ -89,7 +89,7 @@ CREATE TABLE `profile` (
 --
 
 CREATE TABLE `role` (
-  `idRol` int(1) NOT NULL,
+  `idRole` int(1) NOT NULL,
   `name` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
