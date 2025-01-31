@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-01-2025 a las 09:59:25
+-- Tiempo de generación: 31-01-2025 a las 10:32:24
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -23,6 +23,18 @@ SET time_zone = "+00:00";
 DROP DATABASE IF EXISTS `projectdwes_2term`;
 CREATE DATABASE IF NOT EXISTS `projectdwes_2term` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `projectdwes_2term`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `accactivation`
+--
+
+CREATE TABLE `accactivation` (
+  `idUser` int(10) NOT NULL,
+  `token` varchar(64),
+  `expiration` datetime
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -51,7 +63,7 @@ CREATE TABLE `post` (
   `idPoster` int(10) NOT NULL,
   `likes` int(6) NOT NULL DEFAULT 0,
   `dislikes` int(6) NOT NULL,
-  `postingTime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `postingTime` timestamp NOT NULL DEFAULT current_timestamp(),
   `commentAmount` int(6) NOT NULL DEFAULT 0,
   `contentRoute` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -101,6 +113,14 @@ CREATE TABLE `user` (
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `accactivation`
+--
+ALTER TABLE `accactivation`
+  ADD PRIMARY KEY (`idUser`),
+  ADD KEY `FK_IdU_UIdU` (`idUser`),
+  ADD UNIQUE KEY `token` (`token`);
 
 --
 -- Indices de la tabla `comment`
@@ -167,6 +187,12 @@ ALTER TABLE `user`
 --
 
 --
+-- Filtros para la tabla `accactivation``
+--
+ALTER TABLE `accactivation`
+  ADD CONSTRAINT `FK_IdU_UIdU` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `comment`
 --
 ALTER TABLE `comment`
@@ -183,7 +209,7 @@ ALTER TABLE `post`
 -- Filtros para la tabla `profile`
 --
 ALTER TABLE `profile`
-  ADD CONSTRAINT `FK_IdU_UIdU` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_PIdU_UIdU` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `user`
