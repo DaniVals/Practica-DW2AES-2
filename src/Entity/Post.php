@@ -13,7 +13,6 @@ class Post
     #[ORM\GeneratedValue]
     private $idPost;
 	
-	#[ORM\Column(type:'integer', name:'idPoster')]
 	#[ManyToOne(targetEntity: User::class, inversedBy: 'idUser')]
     #[JoinColumn(name: 'idPoster', referencedColumnName: 'idUser')]
     private $idPoster;
@@ -38,42 +37,47 @@ class Post
 	public function getIdPoster() {
 		return $this->idPoster;
 	}
-	public function getName() {
-		return $this->name;
-	}
-	public function getSurname() {
-		return $this->surname;
-	}
-	public function getEmail() {
-		return $this->email;
-	}
-	public function getPhoneNumber() {
-		return $this->phoneNumber;
-	}
-	public function getPassword() {
-		return $this->password;
-	}
-	public function getBirthDate() {
-		return $this->birthDate;
-	}
-
 	public function setIdUser() {
 		$this->idUser = $idUser;
+	}
+
+	public function getName() {
+		return $this->name;
 	}
 	public function setName() {
 		$this->name = $name;
 	}
+
+	public function getSurname() {
+		return $this->surname;
+	}
 	public function setSurname() {
 		$this->surname = $surname;
+	}
+
+	public function getEmail() {
+		return $this->email;
 	}
 	public function setEmail() {
 		$this->email = $email;
 	}
+
+	public function getPhoneNumber() {
+		return $this->phoneNumber;
+	}
 	public function setPhoneNumber() {
 		$this->phoneNumber = $phoneNumber;
 	}
+
+	public function getPassword() {
+		return $this->password;
+	}
 	public function setPassword() {
 		$this->password = $password;
+	}
+
+	public function getBirthDate() {
+		return $this->birthDate;
 	}
 	public function setBirthDate() {
 		$this->birthDate = $birthDate;
