@@ -45,7 +45,7 @@ CREATE TABLE `accactivation` (
 CREATE TABLE `comment` (
   `idComment` int(11) NOT NULL,
   `commentedPost` int(10) NOT NULL,
-  `commentedComment` int(10) NOT NULL,
+  `commentedComment` int(10),
   `content` varchar(255) NOT NULL,
   `likes` int(6) NOT NULL DEFAULT 0,
   `dislikes` int(6) NOT NULL DEFAULT 0,
