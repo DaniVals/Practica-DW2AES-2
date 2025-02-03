@@ -12,7 +12,6 @@ class Profile
     #[ORM\Column(type:'string', name:'userName')]
     private $userName;
 
-	#[ORM\Column(type:'integer', name:'idUser')]
 	#[OneToOne(targetEntity: User::class, inversedBy: 'idUser')]
     #[JoinColumn(name: 'idUser', referencedColumnName: 'idUser')]
 	private $idUser;
@@ -31,30 +30,33 @@ class Profile
 	public function getUserName() {
 		return $this->userName;
 	}
-	public function getIdUser() {
-		return $this->idUser;
-	}
-	public function getBio() {
-		return $this->bio;
-	}
-	public function getFollowers() {
-		return $this->followers;
-	}
-	public function getFollowing() {
-		return $this->following;
-	}
-
 	public function setUserName() {
 		$this->userName = $userName;
+	}
+
+	public function getIdUser() {
+		return $this->idUser;
 	}
 	public function setIdUser() {
 		$this->idUser = $idUser;
 	}
+
+	public function getBio() {
+		return $this->bio;
+	}
 	public function setBio() {
 		$this->bio = $bio;
 	}
+
+	public function getFollowers() {
+		return $this->followers;
+	}
 	public function setFollowers() {
 		$this->followers = $followers;
+	}
+
+	public function getFollowing() {
+		return $this->following;
 	}
 	public function setFollowing() {
 		$this->following = $following;
