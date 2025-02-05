@@ -2,16 +2,16 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-		
+
 		{% include "content.html.twig" %}
 		<link rel="stylesheet" href="{{asset('css/thread.css')}}">
 
-		<script src="./loadPosts.js"></script>
+		<script src="{{asset('js/loadPosts.js')}}"></script>
 
         <title>Feed</title>
     </head>
 	{% include "header.html.twig" %}
     <body>
-		<button id="loadMore"></button>
+		<button id="loadMore">Cargar Mas</button>
     </body>
 </html>

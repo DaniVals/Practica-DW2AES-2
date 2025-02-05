@@ -60,4 +60,14 @@ class Profile
 	public function setFollowing($following) {
 		$this->following = $following;
 	}
+
+	public function toArray() {
+		return [
+			"userName" => $this->userName,
+			"idUser" => $this->idUser,
+			"bio" => $this->bio,
+			"followers" => $this->followers,
+			"following" => $this->following
+		];
+	}
 }

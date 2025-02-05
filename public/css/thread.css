@@ -3,4 +3,20 @@ body{
 
 	margin-left: calc(var(--header-horizontal-margin)*2 + var(--header-width));
 	margin-right: var(--thread-right-margin);
+	
+	max-width: 90vh;
+}
+
+.post{
+	border: 10px solid #666;
+	margin: var(--post-margin);
+	padding: var(--post-padding);
+}
+.post .postImg{
+	width: 100%;
+}
+.post .postStats{
+	padding: 5px;
+	display: flex;
+	justify-content: space-around;
 }

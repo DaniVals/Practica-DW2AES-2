@@ -11,6 +11,7 @@ body {
 	background-position: center;
 }
 
+.contenidoCentral,
 form {
 	padding: 20px;
 	width: 400px;
@@ -18,6 +19,9 @@ form {
 	background-color: var(--bg-color-2);
 	border: 1px solid var(--body-border-color);
 	border-radius: 25px;
+}
+.contenidoCentral{
+	text-align: center;
 }
 
 table{

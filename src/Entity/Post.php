@@ -82,4 +82,16 @@ class Post
 	public function setContentRoute($contentRoute) {
 		$this->contentRoute = $contentRoute;
 	}
+
+	public function toArray(): array {
+        return [
+            'idPost' => $this->idPost,
+            'idPoster' => $this->idPoster->getProfile()->toArray(),
+            'likes' => $this->likes,
+            'dislikes' => $this->dislikes,
+            'postingTime' => $this->postingTime,
+            'commentAmount' => $this->commentAmount,
+            'contentRoute' => $this->contentRoute,
+        ];
+	}
 }

@@ -6,16 +6,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Categoria;
-use App\Entity\Producto;
-use App\Entity\Pedido;
-use App\Entity\PedidoProducto;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+use App\Entity\Post;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TestingDELETE extends AbstractController
 {
@@ -40,25 +39,39 @@ class TestingDELETE extends AbstractController
 		return $this->render("navigation/profile.html.twig" , [ "targetUser" => $usuario ]);
     }
 	#[Route('/posts', name:'posts')]
-    public function loadPosts() {
+    public function loadPosts(entityManagerInterface $entityManager) {
 		$posts = array();
 
-		$usuario["idUser"] = "0";
-		$usuario["userName"] = "nombre";
-		$usuario["bio"] = "una biografia muy bonita";
-		$usuario["followers"] = "777";
-		$usuario["following"] = "69";
+		// $usuario["idUser"] = "0";
+		// $usuario["userName"] = "nombre";
+		// $usuario["bio"] = "una biografia muy bonita";
+		// $usuario["followers"] = "777";
+		// $usuario["following"] = "69";
 
-		$post["idPost"] = "0";
-		$post["idPoster"] = $usuario;
-		$post["likes"] = "3";
-		$post["postingTime"] = "0";
-		$post["commentAmount"] = "about";
-		$post["contentRoute"] = "";
+		// $post["idPost"] = "0";
+		// $post["idPoster"] = $usuario;
+		// $post["likes"] = "3";
+		// $post["dislikes"] = "8";
+		// $post["postingTime"] = "0";
+		// $post["commentAmount"] = "420";
+		// $post["contentRoute"] = "userData/0/posts/0.png";
 
-		array_push($posts, $post);
+
+		$post = $entityManager->getRepository(Post::class)->findOneBy(['idPost' => 1]);
+		array_push($posts, $post->toArray());
+
+		$post = new Post();
+		$post->setIdPost(0);
+		$post->setIdPoster(0);
+		$post->setLikes(3);
+		$post->setDislikes(8);
+		$post->setPostingTime(0);
+		$post->setCommentAmount(420);
+		$post->setContentRoute("userData/0/posts/0.png");
+
+		array_push($posts, $post->toArray());
 
 		// devolver un new Response con un json para AJAX
-		return new Response(json_encode($posts));
+		return new JsonResponse($posts);
     }
 }
