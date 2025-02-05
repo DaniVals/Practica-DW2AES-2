@@ -9,13 +9,18 @@ use Doctrine\ORM\Mapping as ORM;
 class Accactivation
 {
 	#[ORM\Id]
+<<<<<<< HEAD
     #[ORM\Column(type:'integer', name:'idUser')]
     private $idUser;
+=======
+	#[ORM\Column(type:'integer', name:'idUser')]
+	private $idUser;
+>>>>>>> ce78572 (feat: Ativación de cuenta através de email, hecho)
 
-	#[ORM\Column(type:'varchar', name:'token')]
-    private $token;
+	#[ORM\Column(type:'string', name:'token')]
+	private $token;
 
-	#[ORM\Column(type:'integer', name:'expiration')]
+	#[ORM\Column(type:'datetime', name:'expiration')]
 	private $expiration;
 
 //-----------------------------------------------------------
@@ -37,7 +42,7 @@ class Accactivation
 	public function getExpiration() {
 		return $this->expiration;
 	}
-	public function setExpriration($expiration) {
+	public function setExpiration($expiration) {
 		$this->expiration = $expiration;
 	}
 }
