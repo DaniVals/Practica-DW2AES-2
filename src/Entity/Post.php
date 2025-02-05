@@ -8,13 +8,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Post
 {
-	#[ORM\id]
+	#[ORM\Id]
     #[ORM\Column(type:'integer', name:'idPost')]
     #[ORM\GeneratedValue]
     private $idPost;
 	
-	#[ManyToOne(targetEntity: User::class, inversedBy: 'idUser')]
-    #[JoinColumn(name: 'idPoster', referencedColumnName: 'idUser')]
+	#[ORM\ManyToOne(targetEntity: User::class, mappedBy: 'idUser')]
+    #[ORM\JoinColumn(name: 'idPoster', referencedColumnName: 'idUser')]
     private $idPoster;
 
 	#[ORM\Column(type:'integer', name:'likes')]
@@ -34,52 +34,52 @@ class Post
 
 //-----------------------------------------------------------
 
+	public function getIdPost() {
+		return $this->idPost;
+	}
+	public function setIdPost($idPost) {
+		$this->idPost = $idPost;
+	}
+
 	public function getIdPoster() {
 		return $this->idPoster;
 	}
-	public function setIdUser($idUser) {
-		$this->idUser = $idUser;
+	public function setIdPoster($idPoster) {
+		$this->idPoster = $idPoster;
 	}
 
-	public function getName() {
-		return $this->name;
+	public function getLikes() {
+		return $this->likes;
 	}
-	public function setName($name) {
-		$this->name = $name;
-	}
-
-	public function getSurname() {
-		return $this->surname;
-	}
-	public function setSurname($surname) {
-		$this->surname = $surname;
+	public function setLikes($likes) {
+		$this->likes = $likes;
 	}
 
-	public function getEmail() {
-		return $this->email;
+	public function getDislikes() {
+		return $this->dislikes;
 	}
-	public function setEmail($email) {
-		$this->email = $email;
-	}
-
-	public function getPhoneNumber() {
-		return $this->phoneNumber;
-	}
-	public function setPhoneNumber($phoneNumber) {
-		$this->phoneNumber = $phoneNumber;
+	public function setDislikes($dislikes) {
+		$this->dislikes = $dislikes;
 	}
 
-	public function getPassword() {
-		return $this->password;
+	public function getPostingTime() {
+		return $this->postingTime;
 	}
-	public function setPassword($password) {
-		$this->password = $password;
+	public function setPostingTime($postingTime) {
+		$this->postingTime = $postingTime;
 	}
 
-	public function getBirthDate() {
-		return $this->birthDate;
+	public function getCommentAmount() {
+		return $this->commentAmount;
 	}
-	public function setBirthDate($birthDate) {
-		$this->birthDate = $birthDate;
+	public function setCommentAmount($commentAmount) {
+		$this->commentAmount = $commentAmount;
+	}
+
+	public function getContentRoute() {
+		return $this->contentRoute;
+	}
+	public function setContentRoute($contentRoute) {
+		$this->contentRoute = $contentRoute;
 	}
 }

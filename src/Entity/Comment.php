@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Comment
 {
-	#[ORM\id]
+	#[ORM\Id]
     #[ORM\Column(type:'integer', name:'idComment')]
     #[ORM\GeneratedValue]
     private $idComment;
@@ -33,11 +33,11 @@ class Comment
 
 //-----------------------------------------------------------
 
-	public function getIdUser() {
-		return $this->idUser;
+	public function getIdComment() {
+		return $this->idComment;
 	}
-	public function setIdUser($idUser) {
-		$this->idUser = $idUser;
+	public function setIdComment($idComment) {
+		$this->idComment = $idComment;
 	}
 
 	public function getCommentedPost() {
@@ -50,7 +50,7 @@ class Comment
 	public function getCommentedComment() {
 		return $this->commentedComment;
 	}
-	public function setCommentedPost($commentedComment) {
+	public function setCommentedComment($commentedComment) {
 		$this->commentedComment = $commentedComment;
 	}
 

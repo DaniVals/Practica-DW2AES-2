@@ -12,8 +12,7 @@ class Profile
     #[ORM\Column(type:'string', name:'userName')]
     private $userName;
 
-	#[OneToOne(targetEntity: User::class, inversedBy: 'idUser')]
-    #[JoinColumn(name: 'idUser', referencedColumnName: 'idUser')]
+	#[ORM\OneToOne(targetEntity: User::class, mappedBy: 'idUser')]
 	private $idUser;
 
 	#[ORM\Column(type:'string', name:'bio')]

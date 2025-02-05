@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Accactivation
 {
-	#[ORM\id]
+	#[ORM\Id]
     #[ORM\Column(type:'integer', name:'idUser')]
     private $idUser;
 
