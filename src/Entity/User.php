@@ -12,7 +12,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	#[ORM\Id]
 	#[ORM\Column(type:'integer', name:'idUser')]
 	#[ORM\OneToOne(targetEntity: Profile::class, inversedBy: 'idUser')]
-	#[ORM\OneToMany(targetEntity: Post::class, inversedBy: 'idPoster')]
+	#[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'idPoster')]
 	#[ORM\GeneratedValue]
 	private $idUser;
 

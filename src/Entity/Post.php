@@ -9,28 +9,28 @@ use Doctrine\ORM\Mapping as ORM;
 class Post
 {
 	#[ORM\Id]
-    #[ORM\Column(type:'integer', name:'idPost')]
-    #[ORM\GeneratedValue]
-    private $idPost;
-	
-	#[ORM\ManyToOne(targetEntity: User::class, mappedBy: 'idUser')]
-    #[ORM\JoinColumn(name: 'idPoster', referencedColumnName: 'idUser')]
-    private $idPoster;
+	#[ORM\Column(type:'integer', name:'idPost')]
+	#[ORM\GeneratedValue]
+	private $idPost;
+
+	#[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'idUser')]
+	#[ORM\JoinColumn(name: 'idPoster', referencedColumnName: 'idUser')]
+	private $idPoster;
 
 	#[ORM\Column(type:'integer', name:'likes')]
-    private $likes;
+	private $likes;
 
 	#[ORM\Column(type:'integer', name:'dislikes')]
-    private $dislikes;
+	private $dislikes;
 
 	#[ORM\Column(type:'Types::DATETIME_IMMUTABLE', name:'postingTime')]
-    private $postingTime;
+	private $postingTime;
 
 	#[ORM\Column(type:'integer', name:'commentAmount')]
-    private $commentAmount;
+	private $commentAmount;
 
 	#[ORM\Column(type:'string', name:'contentRoute')]
-    private $contentRoute;
+	private $contentRoute;
 
 //-----------------------------------------------------------
 
