@@ -10,8 +10,13 @@ class Accactivation
 {
 	#[ORM\Id]
 <<<<<<< HEAD
+<<<<<<< HEAD
     #[ORM\Column(type:'integer', name:'idUser')]
     private $idUser;
+=======
+	#[ORM\Column(type:'integer', name:'idUser')]
+	private $idUser;
+>>>>>>> ce78572 (feat: Ativación de cuenta através de email, hecho)
 =======
 	#[ORM\Column(type:'integer', name:'idUser')]
 	private $idUser;
