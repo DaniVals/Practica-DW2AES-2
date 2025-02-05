@@ -10,7 +10,6 @@ class Role
 {
 	#[ORM\Id]
 	#[ORM\Column(type:'integer', name:'idRole')]
-	#[ORM\OneToMany(targetEntity: User::class, mappedBy: 'role')]
 	private $idRole;
 
 	#[ORM\Column(type:'string', name:'name')]
@@ -18,17 +17,24 @@ class Role
 
 //-----------------------------------------------------------
 
-	public function getIdRole() {
+	public function getIdRole() : ?int {
 		return $this->idRole;
 	}
-	public function setIdRole($idRole) {
+	public function setIdRole(?int $idRole) {
 		$this->idRole = $idRole;
 	}
 
-	public function getName() {
+	public function getName() : ?string {
 		return $this->name;
 	}
-	public function setName($name) {
+	public function setName(?string $name) {
 		$this->name = $name;
+	}
+
+	public function toArray() {
+		return [
+			'idRole' => $this->idRole,
+			'name' => $this->name
+		];
 	}
 }

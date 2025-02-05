@@ -10,72 +10,72 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 	#[ORM\Id]
-	#[ORM\Column(type:'integer', name:'idUser')]
-	#[ORM\OneToOne(targetEntity: Profile::class, inversedBy: 'idUser')]
-	#[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'idPoster')]
 	#[ORM\GeneratedValue]
+	#[ORM\Column(type:'integer', name:'idUser')]
 	private $idUser;
-
+	
 	#[ORM\Column(type:'string', name:'name')]
 	private $name;
-
+	
 	#[ORM\Column(type:'string', name:'surname')]
 	private $surname;
 
 	#[ORM\Column(type:'string', name:'email')]
 	private $email;
-
+	
 	#[ORM\Column(type:'integer', name:'phoneNumber')]
 	private $phoneNumber;
 
 	#[ORM\Column(type:'string', name:'password')]
 	private $password;
-
+	
 	#[ORM\Column(type:'date', name:'birthDate')]
 	private $birthDate;
-
+	
 	#[ORM\ManyToOne(targetEntity: Role::class, inversedBy: 'idRole')]
 	#[ORM\JoinColumn(name:'role', referencedColumnName:'idRole')]
 	private $role;
-
-	#[ORM\ManyToOne(targetEntity: Profile::class, inversedBy: 'idUser')]
-	#[ORM\JoinColumn(name:'idUser', referencedColumnName:'idUser')]
+	
+	#[ORM\OneToOne(targetEntity: Profile::class, mappedBy: 'User')]
 	private $profile;
+	
+	// #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'idPoster')]
+	// private $posts;
 
 	//-----------------------------------------------------------
 
-	public function getIdUser() {
+	public function getIdUser() : ?int {
 		return $this->idUser;
 	}
-	public function setIdUser($idUser) {
+	public function setIdUser(?int $idUser) {
 		$this->idUser = $idUser;
 	}
 
-	public function getName() {
+	public function getName() : ?string {
 		return $this->name;
 	}
-	public function setName($name) {
+	public function setName(?string $name) {
 		$this->name = $name;
 	}
 
-	public function getSurname() {
+	public function getSurname() : ?string {
 		return $this->surname;
 	}
-	public function setSurname($surname) {
+	public function setSurname(?string $surname) {
 		$this->surname = $surname;
 	}
 
-	public function getEmail() {
+	public function getEmail() : ?string {
 		return $this->email;
 	}
-	public function setEmail($email) {
+	public function setEmail(?string $email) {
 		$this->email = $email;
 	}
 
-	public function getPhoneNumber() {
+	public function getPhoneNumber() : ?int {
 		return $this->phoneNumber;
 	}
-	public function setPhoneNumber($phoneNumber) {
+	public function setPhoneNumber(?int $phoneNumber) {
 		$this->phoneNumber = $phoneNumber;
 	}
 
@@ -96,11 +96,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 		return $this;
 	}
 
-	public function getRole() {
+	public function getRole() : ?Role {
 		return $this->role;
 	}
 	public function setRole(?Role $role) {
 		$this->role = $role;
+	}
+
+	public function getProfile() : ?Profile {
+		return $this->profile;
+	}
+	public function setProfile(?Profile $profile) {
+		$this->profile = $profile;
+	}
+
+	public function toArray(): array {
+		return [
+			'idUser' => $this->idUser,
+			'name' => $this->name,
+			'surname' => $this->surname,
+			'email' => $this->email,
+			'phoneNumber' => $this->phoneNumber,
+			'birthDate' => $this->birthDate,
+			'role' => $this->role->toArray(),
+			'profile' => $this->profile->toArray(false)
+		];
 	}
 
 //-----------------------------------------------------------

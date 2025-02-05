@@ -18,16 +18,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TestingDELETE extends AbstractController
 {
-	#[Route('/feed', name:'feed')]
-    public function loadFeed() {
-
-		return $this->render("navigation/feed.html.twig");
-    }
-	#[Route('/iniciasesion', name:'inicio_sesion')]
-    public function loadIS() {
-
-		return $this->render("singin.html.twig");
-    }
 	#[Route('/profile', name:'profile')]
     public function loadProfile() {
 
@@ -57,19 +47,19 @@ class TestingDELETE extends AbstractController
 		// $post["contentRoute"] = "userData/0/posts/0.png";
 
 
-		$post = $entityManager->getRepository(Post::class)->findOneBy(['idPost' => 1]);
-		array_push($posts, $post->toArray());
+		$post1 = $entityManager->getRepository(Post::class)->findOneBy(['idPost' => 1]);
+		array_push($posts, $post1->toArray());
 
-		$post = new Post();
-		$post->setIdPost(0);
-		$post->setIdPoster(0);
-		$post->setLikes(3);
-		$post->setDislikes(8);
-		$post->setPostingTime(0);
-		$post->setCommentAmount(420);
-		$post->setContentRoute("userData/0/posts/0.png");
+		// $post2 = new Post();
+		// $post2->setIdPost(0);
+		// $post2->setIdPoster($post1->getIdPoster());
+		// $post2->setLikes(3);
+		// $post2->setDislikes(8);
+		// $post2->setPostingTime(0);
+		// $post2->setCommentAmount(420);
+		// $post2->setContentRoute("userData/0/posts/0.png");
 
-		array_push($posts, $post->toArray());
+		// array_push($posts, $post2->toArray());
 
 		// devolver un new Response con un json para AJAX
 		return new JsonResponse($posts);

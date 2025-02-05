@@ -9,13 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Post
 {
 	#[ORM\Id]
-	#[ORM\Column(type:'integer', name:'idPost')]
 	#[ORM\GeneratedValue]
+	#[ORM\Column(type:'integer', name:'idPost')]
 	private $idPost;
-
-	#[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'idUser')]
-	#[ORM\JoinColumn(name: 'idPoster', referencedColumnName: 'idUser')]
-	private $idPoster;
 
 	#[ORM\Column(type:'integer', name:'likes')]
 	private $likes;
@@ -32,61 +28,65 @@ class Post
 	#[ORM\Column(type:'string', name:'contentRoute')]
 	private $contentRoute;
 
+	#[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'idUser')]
+	#[ORM\JoinColumn(name: 'idPoster', referencedColumnName: 'idUser')]
+	private $PosterUser;
+
 //-----------------------------------------------------------
 
-	public function getIdPost() {
+	public function getIdPost() : ?int {
 		return $this->idPost;
 	}
-	public function setIdPost($idPost) {
+	public function setIdPost(?int $idPost) {
 		$this->idPost = $idPost;
 	}
 
-	public function getIdPoster() {
-		return $this->idPoster;
-	}
-	public function setIdPoster($idPoster) {
-		$this->idPoster = $idPoster;
-	}
-
-	public function getLikes() {
+	public function getLikes() : ?int {
 		return $this->likes;
 	}
-	public function setLikes($likes) {
+	public function setLikes(?int $likes) {
 		$this->likes = $likes;
 	}
 
-	public function getDislikes() {
+	public function getDislikes() : ?int {
 		return $this->dislikes;
 	}
-	public function setDislikes($dislikes) {
+	public function setDislikes(?int $dislikes) {
 		$this->dislikes = $dislikes;
 	}
 
-	public function getPostingTime() {
+	public function getPostingTime() : ?int {
 		return $this->postingTime;
 	}
 	public function setPostingTime($postingTime) {
 		$this->postingTime = $postingTime;
 	}
 
-	public function getCommentAmount() {
+	public function getCommentAmount() : ?int {
 		return $this->commentAmount;
 	}
-	public function setCommentAmount($commentAmount) {
+	public function setCommentAmount(?int $commentAmount) {
 		$this->commentAmount = $commentAmount;
 	}
 
-	public function getContentRoute() {
+	public function getContentRoute() : ?int {
 		return $this->contentRoute;
 	}
-	public function setContentRoute($contentRoute) {
+	public function setContentRoute(?int $contentRoute) {
 		$this->contentRoute = $contentRoute;
 	}
+	
+	public function getPosterUser() : ?User {
+		return $this->PosterUser;
+	}
+	public function setPosterUser(?User $PosterUser) {
+		$this->PosterUser = $PosterUser;
+	}
 
-	public function toArray(): array {
+	public function toArray() : array {
         return [
             'idPost' => $this->idPost,
-            'idPoster' => $this->idPoster->getProfile()->toArray(),
+            'PosterUser' => $this->PosterUser->getProfile()->toArray(),
             'likes' => $this->likes,
             'dislikes' => $this->dislikes,
             'postingTime' => $this->postingTime,
