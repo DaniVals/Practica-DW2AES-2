@@ -1,0 +1,24 @@
+{# templates/login.html.twig #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		{% include "content.html.twig" %}
+		<link rel="stylesheet" href="{{asset('css/thread.css')}}">
+		<link rel="stylesheet" href="{{asset('css/userProfile.css')}}">
+        <title>Perfil</title>
+		{# esto deberia poner el nombre del usuario que estas buscando #}
+		{# targerUser #}
+    </head>
+	{% include "header.html.twig" %}
+    <body>
+		<div id="profileHeader">
+			<h2>Editar perfil</h2>
+			<img src="{{asset('userData/'~targetUser.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
+			<!-- idUser -->
+			<h1>{{targetUser.userName}}</h1>
+			<p>{{targetUser.bio}}</p>
+			<p>Seguidores: <span>{{targetUser.followers}}</span> Siguiendo: <span>{{targetUser.following}}</span></p>
+		</div>
+    </body>
+</html>
