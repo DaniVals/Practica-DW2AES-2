@@ -10,9 +10,12 @@ function loadPost() {
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			const json = JSON.parse(this.responseText);
+			const posts = JSON.parse(this.responseText);
 
-			
+			for (let i = 0; i < posts.length; i++) {
+				const element = array[i];
+				
+			}
 
 
 		}

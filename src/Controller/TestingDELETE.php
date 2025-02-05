@@ -39,4 +39,26 @@ class TestingDELETE extends AbstractController
 		$usuario["following"] = "69";
 		return $this->render("navigation/profile.html.twig" , [ "targetUser" => $usuario ]);
     }
+	#[Route('/posts', name:'posts')]
+    public function loadPosts() {
+		$posts = array();
+
+		$usuario["idUser"] = "0";
+		$usuario["userName"] = "nombre";
+		$usuario["bio"] = "una biografia muy bonita";
+		$usuario["followers"] = "777";
+		$usuario["following"] = "69";
+
+		$post["idPost"] = "0";
+		$post["idPoster"] = $usuario;
+		$post["likes"] = "3";
+		$post["postingTime"] = "0";
+		$post["commentAmount"] = "about";
+		$post["contentRoute"] = "";
+
+		array_push($posts, $post);
+
+		// devolver un new Response con un json para AJAX
+		return new Response(json_encode($posts));
+    }
 }
