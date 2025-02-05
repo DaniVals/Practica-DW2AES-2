@@ -10,6 +10,7 @@ class Role
 {
 	#[ORM\Id]
 	#[ORM\Column(type:'integer', name:'idRole')]
+	#[ORM\OneToMany(targetEntity: User::class, mappedBy: 'role')]
 	private $idRole;
 
 	#[ORM\Column(type:'string', name:'name')]

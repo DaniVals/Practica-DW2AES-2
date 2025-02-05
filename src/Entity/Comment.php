@@ -17,6 +17,7 @@ class Comment
     private $commentedPost;
 
 	#[ORM\Column(type:'integer', name:'commentedComment')]
+	// onetomany post
     private $commentedComment;
 
 	#[ORM\Column(type:'string', name:'content')]
