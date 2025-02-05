@@ -37,49 +37,49 @@ class Post
 	public function getIdPoster() {
 		return $this->idPoster;
 	}
-	public function setIdUser() {
+	public function setIdUser($idUser) {
 		$this->idUser = $idUser;
 	}
 
 	public function getName() {
 		return $this->name;
 	}
-	public function setName() {
+	public function setName($name) {
 		$this->name = $name;
 	}
 
 	public function getSurname() {
 		return $this->surname;
 	}
-	public function setSurname() {
+	public function setSurname($surname) {
 		$this->surname = $surname;
 	}
 
 	public function getEmail() {
 		return $this->email;
 	}
-	public function setEmail() {
+	public function setEmail($email) {
 		$this->email = $email;
 	}
 
 	public function getPhoneNumber() {
 		return $this->phoneNumber;
 	}
-	public function setPhoneNumber() {
+	public function setPhoneNumber($phoneNumber) {
 		$this->phoneNumber = $phoneNumber;
 	}
 
 	public function getPassword() {
 		return $this->password;
 	}
-	public function setPassword() {
+	public function setPassword($password) {
 		$this->password = $password;
 	}
 
 	public function getBirthDate() {
 		return $this->birthDate;
 	}
-	public function setBirthDate() {
+	public function setBirthDate($birthDate) {
 		$this->birthDate = $birthDate;
 	}
 }

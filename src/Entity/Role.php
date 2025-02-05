@@ -15,18 +15,18 @@ class Role
 	#[ORM\Column(type:'string', name:'name')]
 	private $name;
 
+//-----------------------------------------------------------
+
 	public function getIdRole() {
 		return $this->idRole;
+	}
+	public function setIdRole($idRole) {
+		$this->idRole = $idRole;
 	}
 
 	public function getName() {
 		return $this->name;
 	}
-
-	public function setIdRole($idRole) {
-		$this->idRole = $idRole;
-	}
-
 	public function setName($name) {
 		$this->name = $name;
 	}

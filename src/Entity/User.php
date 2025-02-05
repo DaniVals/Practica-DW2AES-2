@@ -88,17 +88,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	public function setPassword(string $password): self
 	{
 		$this->password = $password;
-
 		return $this;
 	}
 
 	public function getRole() {
 		return $this->role;
 	}
-
 	public function setRole(?Role $role) {
 		$this->role = $role;
 	}
+
+//-----------------------------------------------------------
 
 	public function getRoles(): array
 	{
