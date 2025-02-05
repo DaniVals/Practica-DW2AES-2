@@ -38,6 +38,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	#[ORM\JoinColumn(name:'role', referencedColumnName:'idRole')]
 	private $role;
 
+	#[ORM\ManyToOne(targetEntity: Profile::class, inversedBy: 'idUser')]
+	#[ORM\JoinColumn(name:'idUser', referencedColumnName:'idUser')]
+	private $profile;
+
 	//-----------------------------------------------------------
 
 	public function getIdUser() {
