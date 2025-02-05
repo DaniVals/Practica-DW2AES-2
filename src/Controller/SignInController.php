@@ -55,6 +55,13 @@ class SignInController extends AbstractController
     
     #[Route('/activationSent', name:'send_activation')]
     public function sendActivation(MailerInterface $mailer, Request $request){
+        $token = bin2hex(random_bytes(32)); //Token de 64 caracteres
+        $expiration = date("Y-m-d H:i:s", strtotime("+1 day")); //Fecha de expiración del token
+        // Insertar el token en la bbdd y su expiración con las entidades
+
+
+
+
         $email = $request->get('email');
         $name = $request->get('name');
         $message = (new Email())
@@ -82,12 +89,7 @@ class SignInController extends AbstractController
 
     #[Route('/activation', name:'activation')]
     public function activateAccount(EntityManagerInterface $entityManager){
-        $email = $_POST['email'];
-        $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
-        $user->setActive(1);
-        $entityManager->persist($user);
-        $entityManager->flush();
-        return $this->redirectToRoute('ctrl_login');
+
     }
     
     public function checkSignIn(EntityManagerInterface $entityManager, $name, $surname, $email, $phone, $password, $password2, $bDate){
