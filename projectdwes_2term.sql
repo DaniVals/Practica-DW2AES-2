@@ -148,7 +148,7 @@ ALTER TABLE `profile`
 -- Indices de la tabla `role`
 --
 ALTER TABLE `role`
-  ADD PRIMARY KEY (`idRol`),
+  ADD PRIMARY KEY (`idRole`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
@@ -215,7 +215,7 @@ ALTER TABLE `profile`
 -- Filtros para la tabla `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `FK_UR_IdR` FOREIGN KEY (`role`) REFERENCES `role` (`idRol`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `FK_UR_IdR` FOREIGN KEY (`role`) REFERENCES `role` (`idRole`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
@@ -225,7 +225,7 @@ COMMIT;
 -- Insert en la tabla de roles
 -- Roles ROLE_NOTV, ROLE_USER, ROLE_ADMIN
 
-INSERT INTO `role` (`idRol`, `name`) VALUES
+INSERT INTO `role` (`idRole`, `name`) VALUES
 (0, 'ROLE_NOTV'),
 (1, 'ROLE_USER'),
 (2, 'ROLE_ADMIN');
