@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+		{% include "content.html.twig" %}
+		<link rel="stylesheet" href="{{asset('css/thread.css')}}">
+		<link rel="stylesheet" href="{{asset('css/userProfile.css')}}">
+        <title>Post</title>
+		{# targerPost #}
+    </head>
+	{% include "header.html.twig" %}
+    <body>
+		<div id="post">
+			{# {{ dump() }} #}
+			<h3 class="postUser">{{ targerPost.PosterUser.Profile.userName }}</h3>
+
+			<img src="{{ targerPost.contentRoute }}" alt="post image" class="postImg">
+
+			<div class="postStats">
+				<span class="likes">{{ targerPost.likes }} likes</span>
+				<span class="dislikes">{{ targerPost.dislikes }} dislikes</span>
+				<span class="comments">{{ targerPost.commentAmount }} comments</span>
+			</div>
+		</div>
+    </body>
+</html>

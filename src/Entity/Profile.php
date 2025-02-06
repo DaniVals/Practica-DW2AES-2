@@ -21,9 +21,12 @@ class Profile
 	#[ORM\Column(type:'integer', name:'following')]
     private $following;
 
-	#[ORM\OneToOne(targetEntity: User::class, inversedBy: 'profile')]
+	#[ORM\OneToOne(targetEntity: User::class, inversedBy: 'Profile')]
 	#[ORM\JoinColumn(name: 'idProfile', referencedColumnName: 'idUser')]
 	private $User;
+	
+	// #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'idPoster')]
+	// private $posts;
 
 //-----------------------------------------------------------
 
@@ -61,6 +64,8 @@ class Profile
 	public function setUser(?User $User) {
 		$this->idUser = $User;
 	}
+
+//-----------------------------------------------------------
 
 	public function toArray(?bool $fullProfile = true): array {
 		if ($fullProfile) {

@@ -69,10 +69,10 @@ class Post
 		$this->commentAmount = $commentAmount;
 	}
 
-	public function getContentRoute() : ?int {
+	public function getContentRoute() : ?string {
 		return $this->contentRoute;
 	}
-	public function setContentRoute(?int $contentRoute) {
+	public function setContentRoute(?string $contentRoute) {
 		$this->contentRoute = $contentRoute;
 	}
 	
@@ -82,6 +82,8 @@ class Post
 	public function setPosterUser(?User $PosterUser) {
 		$this->PosterUser = $PosterUser;
 	}
+
+//-----------------------------------------------------------
 
 	public function toArray() : array {
         return [

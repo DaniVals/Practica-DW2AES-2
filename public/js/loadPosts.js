@@ -32,11 +32,14 @@ function loadPost() {
 					postDiv.appendChild(postUser);
 				
 					// post photo
-					let postImg = document.createElement('img');
-					postImg.src = post.contentRoute;
-					postImg.alt = 'post image';
-					postImg.className = 'postImg';
-					postDiv.appendChild(postImg);
+					let postImgLink = document.createElement('a');
+					postImgLink.href = '/feed/' + post.idPost;
+						let postImg = document.createElement('img');
+						postImg.src = post.contentRoute;
+						postImg.alt = 'post image';
+						postImg.className = 'postImg';
+						postImgLink.appendChild(postImg);
+					postDiv.appendChild(postImgLink);
 
 					// post stats
 					let postStats = document.createElement('div');

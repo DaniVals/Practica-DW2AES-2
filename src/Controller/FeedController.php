@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Role;
+use App\Entity\Post;
 use App\Entity\Comment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,8 +25,11 @@ class  FeedController extends AbstractController {
     }
 
     #[Route('/feed/{idPost}', name:'load_post')]
-    public function load_post($idPost) {   
-        return $this->render('navigation/post.html.twig', ['idPost' => $idPost]);
+    public function load_post($idPost, EntityManagerInterface $entityManager) {
+
+		$targerPost = $entityManager->getRepository(Post::class)->findOneBy(['idPost' => $idPost]);
+
+        return $this->render('navigation/post.html.twig', ['targerPost' => $targerPost]);
     }
 
     #[Route('/feed/{idPost}/comment', name:'load_comments')]

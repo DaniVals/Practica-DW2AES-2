@@ -34,13 +34,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	
 	#[ORM\ManyToOne(targetEntity: Role::class, inversedBy: 'idRole')]
 	#[ORM\JoinColumn(name:'role', referencedColumnName:'idRole')]
-	private $role;
+	private $Role;
 	
 	#[ORM\OneToOne(targetEntity: Profile::class, mappedBy: 'User')]
-	private $profile;
-	
-	// #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'idPoster')]
-	// private $posts;
+	private $Profile;
 
 	//-----------------------------------------------------------
 
@@ -97,18 +94,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 	}
 
 	public function getRole() : ?Role {
-		return $this->role;
+		return $this->Role;
 	}
 	public function setRole(?Role $role) {
-		$this->role = $role;
+		$this->Role = $role;
 	}
 
 	public function getProfile() : ?Profile {
-		return $this->profile;
+		return $this->Profile;
 	}
 	public function setProfile(?Profile $profile) {
-		$this->profile = $profile;
+		$this->Profile = $profile;
 	}
+
+//-----------------------------------------------------------
 
 	public function toArray(): array {
 		return [
@@ -118,17 +117,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 			'email' => $this->email,
 			'phoneNumber' => $this->phoneNumber,
 			'birthDate' => $this->birthDate,
-			'role' => $this->role->toArray(),
-			'profile' => $this->profile->toArray(false)
+			'role' => $this->Role->toArray(),
+			'profile' => $this->Profile->toArray(false)
 		];
 	}
-
-//-----------------------------------------------------------
 
 	public function getRoles(): array
 	{
 		// Switch para asignar roles
-		switch ($this->role->getIdRole()) {
+		switch ($this->Role->getIdRole()) {
 			case 0:
 				return ['ROLE_NOTV'];
 				break;
