@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-02-2025 a las 12:48:22
+-- Tiempo de generación: 06-02-2025 a las 12:02:46
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,8 +44,9 @@ CREATE TABLE `accactivation` (
 
 CREATE TABLE `comment` (
   `idComment` int(11) NOT NULL,
-  `commentedPost` int(10) NOT NULL,
-  `commentedComment` int(10) DEFAULT NULL,
+  `idUser` int(10) NOT NULL,
+  `commPost` int(10) NOT NULL,
+  `commComment` int(10) DEFAULT NULL,
   `content` varchar(255) NOT NULL,
   `likes` int(6) NOT NULL DEFAULT 0,
   `dislikes` int(6) NOT NULL DEFAULT 0,
@@ -136,8 +137,9 @@ ALTER TABLE `accactivation`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`idComment`),
-  ADD KEY `FK_CC_PIdP` (`commentedComment`),
-  ADD KEY `FK_CP_UIdP` (`commentedPost`);
+  ADD KEY `FK_CC_PIdP` (`commComment`),
+  ADD KEY `FK_CP_UIdP` (`commPost`),
+  ADD KEY `FK_CIdU_UIdU` (`idUser`);
 
 --
 -- Indices de la tabla `post`
@@ -150,7 +152,8 @@ ALTER TABLE `post`
 -- Indices de la tabla `profile`
 --
 ALTER TABLE `profile`
-  ADD PRIMARY KEY (`userName`),
+  ADD PRIMARY KEY (`idUser`) USING BTREE,
+  ADD UNIQUE KEY `userName` (`userName`),
   ADD KEY `FK_IdU_UIdU` (`idUser`);
 
 --
@@ -189,7 +192,7 @@ ALTER TABLE `post`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUser` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -205,8 +208,9 @@ ALTER TABLE `accactivation`
 -- Filtros para la tabla `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `FK_CC_PIdP` FOREIGN KEY (`commentedComment`) REFERENCES `comment` (`idComment`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_CP_UIdP` FOREIGN KEY (`commentedPost`) REFERENCES `post` (`idPost`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_CC_CIdC` FOREIGN KEY (`commComment`) REFERENCES `comment` (`idComment`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_CIdU_UIdU` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_CP_PIdP` FOREIGN KEY (`commPost`) REFERENCES `post` (`idPost`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `post`
@@ -239,4 +243,4 @@ INSERT INTO `user` (`idUser`, `name`, `surname`, `email`, `phoneNumber`, `passwo
 
 INSERT INTO `user` (`idUser`, `name`, `surname`, `email`, `phoneNumber`, `password`, `birthDate`, `role`) VALUES (NULL, 'daniel', 'vals', 'danivals@gmail.com', '682828282', '$2y$13$nOfO3CoR1FT21nn5cxURpezp7gkeBD4fmaB42karngaKQ45Vru2km', '2005-12-15', '2');
 
-INSERT INTO user (idUser, name, surname, email, phoneNumber, password, birthDate, role) VALUES (NULL, 'alex', 'mayo', 'alexmayo@example.com', '666677778', '$2y$13$XpbqfMlxwVTwq1X2wPogDOG3DkpQdygg4JxQyFhwqNAQacxdm/hqi', '2003-01-03', '2');
+INSERT INTO `user` (`idUser`, name, `surname`, `email`, `phoneNumber`, `password`, `birthDate`, `role`) VALUES (NULL, 'alex', 'mayo', 'alexmayo@example.com', '666677778', '$2y$13$XpbqfMlxwVTwq1X2wPogDOG3DkpQdygg4JxQyFhwqNAQacxdm/hqi', '2003-01-03', '2');
