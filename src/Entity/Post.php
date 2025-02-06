@@ -94,4 +94,16 @@ class Post
             'contentRoute' => $this->contentRoute,
         ];
 	}
+
+	public function getPostInfoForAJAX() {
+		return [
+			'idPost' => $this->idPost,
+			'PosterUser' => $this->PosterUser->getProfile()->toArray(false),
+			'likes' => $this->likes,
+			'dislikes' => $this->dislikes,
+			'postingTime' => $this->postingTime,
+			'commentAmount' => $this->commentAmount,
+			'contentRoute' => $this->contentRoute,
+		];
+	}
 }

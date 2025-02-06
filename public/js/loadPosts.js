@@ -17,22 +17,19 @@ function loadPost() {
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			const posts = JSON.parse(this.responseText);
-			console.log(posts);
+			// console.log(posts);
 
 			for (let i = 0; i < posts.length; i++) {
 				const post = posts[i];
-				
-				// $post["idPost"]
-				// $post["idPoster"]
-				// $post["likes"]
-				// $post["dislikes"]
-				// $post["postingTime"]
-				// $post["commentAmount"]
-				// $post["contentRoute"]
-				
-				// post
+			
 				let postDiv = document.createElement('div');
 				postDiv.className = 'post';
+
+					// post user
+					let postUser = document.createElement('h3');
+					postUser.className = 'postUser';
+					postUser.textContent = post.PosterUser.userName;
+					postDiv.appendChild(postUser);
 				
 					// post photo
 					let postImg = document.createElement('img');
