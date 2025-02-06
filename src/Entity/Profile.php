@@ -33,6 +33,13 @@ class Profile
 
 //-----------------------------------------------------------
 
+	public function getIdUser() : ?int {
+		return $this->idUser;
+	}
+	public function setIdUser(?int $idUser) {
+		$this->idUser = $idUser;
+	}
+
 	public function getUserName() : ?string {
 		return $this->userName;
 	}

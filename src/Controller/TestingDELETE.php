@@ -13,20 +13,22 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+use App\Entity\User;
+use App\Entity\Profile;
 use App\Entity\Post;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TestingDELETE extends AbstractController
 {
 	#[Route('/profile', name:'profile')]
-    public function loadProfile() {
+    public function loadProfile(entityManagerInterface $entityManager) {
 
-		$usuario["idUser"] = "0";
-		$usuario["userName"] = "nombre";
-		$usuario["bio"] = "una biografia muy bonita";
-		$usuario["followers"] = "777";
-		$usuario["following"] = "69";
-		return $this->render("navigation/profile.html.twig" , [ "targetUser" => $usuario ]);
+		$targetProfile = $this->getUser();
+		$targetProfile = $targetProfile->getProfile();
+		// $targetProfile = $entityManager->getRepository(Profile::class)->findOneBy(['idUser' => 1]);
+
+		// return new JsonResponse($targetProfile->toArray());
+		return $this->render("navigation/profile.html.twig" , [ "targetProfile" => $targetProfile ]);
     }
 	#[Route('/posts', name:'posts')]
     public function loadPosts(entityManagerInterface $entityManager) {

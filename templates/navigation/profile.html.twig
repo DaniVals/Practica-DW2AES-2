@@ -5,18 +5,17 @@
 		{% include "content.html.twig" %}
 		<link rel="stylesheet" href="{{asset('css/thread.css')}}">
 		<link rel="stylesheet" href="{{asset('css/userProfile.css')}}">
-        <title>@{{targerUser.userName}}</title>
-		{# esto deberia poner el nombre del usuario que estas buscando #}
-		{# targerUser #}
+        <title>@{{targetProfile.userName}}</title>
+		{# targetProfile #}
     </head>
 	{% include "header.html.twig" %}
     <body>
 		<div id="profileHeader">
-			<img src="{{asset('userData/'~targetUser.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
+			<img src="{{asset('userData/'~targetProfile.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
 			<!-- idUser -->
-			<h1>{{targetUser.userName}}</h1>
-			<p>{{targetUser.bio}}</p>
-			<p>Seguidores: <span>{{targetUser.followers}}</span> Siguiendo: <span>{{targetUser.following}}</span></p>
+			<h1>{{targetProfile.userName}}</h1>
+			<p>{{targetProfile.bio}}</p>
+			<p>Seguidores: <span>{{targetProfile.followers}}</span> Siguiendo: <span>{{targetProfile.following}}</span></p>
 		</div>
     </body>
 </html>
