@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Role;
+use App\Entity\Profile;
 use App\Entity\Accactivation;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +26,7 @@ class SignInController extends AbstractController
     #[Route('/signIn', name:'ctrl_signin')]
     public function signIn(entityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {   
+        $username = $_POST['_user'];
         $name = $_POST['_username'];
         $surname = $_POST['_surname'];
         $email = $_POST['_email'];
@@ -44,7 +46,16 @@ class SignInController extends AbstractController
             // Asignar el rol de usuario 0 de la tabla role
             $role = $entityManager->getRepository(Role::class)->findOneBy(['idRole' => 0]);
             $user->setRole($role);
+
+			$profile = new Profile();
+			$profile->setUserName($username);
+			$profile->setBio('Hello, I am new to ShadowGram!');
+			$profile->setFollowers(0);
+			$profile->setFollowing(0);
+			$profile->setUser($user);
+			$user->setProfile($profile);
 	    $user->getRoles();
+            $entityManager->persist($profile);
             $entityManager->persist($user);
             $entityManager->flush();
 
