@@ -22,7 +22,7 @@ class Profile
     private $following;
 
 	#[ORM\OneToOne(targetEntity: User::class, inversedBy: 'Profile')]
-	#[ORM\JoinColumn(name: 'idProfile', referencedColumnName: 'idUser')]
+	#[ORM\JoinColumn(name: 'idUser', referencedColumnName: 'idUser')]
 	private $User;
 	
 	// #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'idPoster')]
