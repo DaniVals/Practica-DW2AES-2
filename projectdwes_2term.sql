@@ -120,13 +120,6 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `user`
---
-
-INSERT INTO `user` (`idUser`, `name`, `surname`, `email`, `phoneNumber`, `password`, `birthDate`, `role`) VALUES
-(1, 'alex', 'mayo', 'alexmayo@example.com', 666677778, '$2y$13$XpbqfMlxwVTwq1X2wPogDOG3DkpQdygg4JxQyFhwqNAQacxdm/hqi', '2003-01-03', 1);
-
---
 -- Índices para tablas volcadas
 --
 
@@ -242,8 +235,8 @@ COMMIT;
 --
 -- DATOS POR DEFECTO
 --
-INSERT INTO `user` (`idUser`, `name`, `surname`, `email`, `phoneNumber`, `password`, `birthDate`, `role`) VALUES (NULL, 'Ivan', 'Money Gang', 'shadow_purpleWizzardMoneyGang@shadowgoverment.com', '666666666', '$2y$13$8wOBV5Vee3zj23aCDiKVQ.Fe4rPpO2nK8fXnKPuQ5I7f7JuMnFUWi', '2005-06-15', '1');
+INSERT INTO `user` (`idUser`, `name`, `surname`, `email`, `phoneNumber`, `password`, `birthDate`, `role`) VALUES (NULL, 'Ivan', 'Money Gang', 'shadow_purpleWizzardMoneyGang@shadowgoverment.com', '666666666', '$2y$13$8wOBV5Vee3zj23aCDiKVQ.Fe4rPpO2nK8fXnKPuQ5I7f7JuMnFUWi', '2005-06-15', '2');
 
-INSERT INTO `user` (`idUser`, `name`, `surname`, `email`, `phoneNumber`, `password`, `birthDate`, `role`) VALUES (NULL, 'Ivan', 'Money Gang', 'shadow_purpleWizzardMoneyGang@shadowgoverment.com', '666666666', '$2y$13$8wOBV5Vee3zj23aCDiKVQ.Fe4rPpO2nK8fXnKPuQ5I7f7JuMnFUWi', '2005-06-15', '1');
+INSERT INTO `user` (`idUser`, `name`, `surname`, `email`, `phoneNumber`, `password`, `birthDate`, `role`) VALUES (NULL, 'daniel', 'vals', 'danivals@gmail.com', '682828282', '$2y$13$nOfO3CoR1FT21nn5cxURpezp7gkeBD4fmaB42karngaKQ45Vru2km', '2005-12-15', '2');
 
-INSERT INTO `user` (`idUser`, `name`, `surname`, `email`, `phoneNumber`, `password`, `birthDate`, `role`) VALUES (NULL, 'Ivan', 'Money Gang', 'shadow_purpleWizzardMoneyGang@shadowgoverment.com', '666666666', '$2y$13$8wOBV5Vee3zj23aCDiKVQ.Fe4rPpO2nK8fXnKPuQ5I7f7JuMnFUWi', '2005-06-15', '1');
+INSERT INTO user (idUser, name, surname, email, phoneNumber, password, birthDate, role) VALUES (NULL, 'alex', 'mayo', 'alexmayo@example.com', '666677778', '$2y$13$XpbqfMlxwVTwq1X2wPogDOG3DkpQdygg4JxQyFhwqNAQacxdm/hqi', '2003-01-03', '2');
