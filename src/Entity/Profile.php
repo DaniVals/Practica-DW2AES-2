@@ -62,7 +62,7 @@ class Profile
 		return $this->User;
 	}
 	public function setUser(?User $User) {
-		$this->idUser = $User;
+		$this->User = $User;
 	}
 
 //-----------------------------------------------------------
