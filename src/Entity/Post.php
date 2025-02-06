@@ -29,9 +29,9 @@ class Post
 	#[ORM\Column(type:'string', name:'contentRoute')]
 	private $contentRoute;
 
-	#[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'idUser')]
+	#[ORM\ManyToOne(targetEntity: Profile::class, inversedBy: 'posts')]
 	#[ORM\JoinColumn(name: 'idPoster', referencedColumnName: 'idUser')]
-	private $PosterUser;
+	private $PosterProfile;
 
 //-----------------------------------------------------------
 
@@ -77,19 +77,19 @@ class Post
 		$this->contentRoute = $contentRoute;
 	}
 	
-	public function getPosterUser() : ?User {
-		return $this->PosterUser;
+	public function getPosterProfile() : ?Profile {
+		return $this->PosterProfile;
 	}
-	public function setPosterUser(?User $PosterUser) {
-		$this->PosterUser = $PosterUser;
+	public function setPosterProfile(?Profile $PosterProfile) {
+		$this->PosterProfile = $PosterProfile;
 	}
 
 //-----------------------------------------------------------
 
-	public function toArray() : array {
+	public function toArray(?bool $fullProfile = true) : array {
         return [
             'idPost' => $this->idPost,
-            'PosterUser' => $this->PosterUser->getProfile()->toArray(),
+            'PosterUser' => $this->PosterProfile->toArray(false),
             'likes' => $this->likes,
             'dislikes' => $this->dislikes,
             'postingTime' => $this->postingTime,
@@ -101,7 +101,7 @@ class Post
 	public function getPostInfoForAJAX() {
 		return [
 			'idPost' => $this->idPost,
-			'PosterUser' => $this->PosterUser->getProfile()->toArray(false),
+			'PosterUser' => $this->PosterProfile->toArray(false),
 			'likes' => $this->likes,
 			'dislikes' => $this->dislikes,
 			'postingTime' => $this->postingTime,

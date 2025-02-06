@@ -49,6 +49,7 @@ class TestingDELETE extends AbstractController
 
 		$post1 = $entityManager->getRepository(Post::class)->findOneBy(['idPost' => 1]);
 		array_push($posts, $post1->getPostInfoForAJAX());
+		array_push($posts, $post1->getPosterProfile()->toArray());
 
 		// $post2 = new Post();
 		// $post2->setIdPost(0);

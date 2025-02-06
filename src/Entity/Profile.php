@@ -9,7 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Profile
 {
 	#[ORM\Id]
-    #[ORM\Column(type:'string', name:'userName')]
+	#[ORM\Column(type:'integer', name:'idUser')]
+	private $idUser;
+	
+	#[ORM\Column(type:'string', name:'userName')]
     private $userName;
 	
 	#[ORM\Column(type:'string', name:'bio')]
@@ -25,8 +28,8 @@ class Profile
 	#[ORM\JoinColumn(name: 'idUser', referencedColumnName: 'idUser')]
 	private $User;
 	
-	// #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'idPoster')]
-	// private $posts;
+	#[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'idPoster')]
+	private $posts;
 
 //-----------------------------------------------------------
 
@@ -71,15 +74,16 @@ class Profile
 		if ($fullProfile) {
 			return [
 				"userName" => $this->userName,
-				"User" => $this->User->toArray(),
+				// "User" => $this->User->toArray(),
 				"bio" => $this->bio,
 				"followers" => $this->followers,
-				"following" => $this->following
+				"following" => $this->following,
+				"posts" => $this->posts
 			];
 		}
 		return [
 			"userName" => $this->userName,
-			"idProfile" => $this->User->getIdUser(),
+			// "User" => $this->User->getIdUser(),
 			"bio" => $this->bio,
 			"followers" => $this->followers,
 			"following" => $this->following
