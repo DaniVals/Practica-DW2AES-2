@@ -13,11 +13,12 @@ class Comment
 	#[ORM\GeneratedValue]
 	private $idComment;
 
-	#[ORM\Column(type:'integer', name:'commentedPost')]
-	private $commentedPost;
+	#[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'idPost')]
+    #[ORM\JoinColumn(name: 'commPost', referencedColumnName: 'idPost')]
+	private $commPost;
 
 	#[ORM\Column(type:'integer', name:'commentedComment')]
-	// onetomany post
+	//onetomany
 	private $commentedComment;
 
 	#[ORM\Column(type:'string', name:'content')]
@@ -41,11 +42,11 @@ class Comment
 		$this->idComment = $idComment;
 	}
 
-	public function getCommentedPost() {
-		return $this->commentedPost;
+	public function getCommPost() {
+		return $this->commPost;
 	}
-	public function setCommentedPost($commentedPost) {
-		$this->commentedPost = $commentedPost;
+	public function setCommPost($commPost) {
+		$this->commPost = $commPost;
 	}
 
 	public function getCommentedComment() {
