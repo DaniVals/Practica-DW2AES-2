@@ -237,3 +237,13 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+--
+-- DATOS POR DEFECTO
+--
+INSERT INTO `user` (`idUser`, `name`, `surname`, `email`, `phoneNumber`, `password`, `birthDate`, `role`) VALUES (NULL, 'Ivan', 'Money Gang', 'shadow_purpleWizzardMoneyGang@shadowgoverment.com', '666666666', '$2y$13$8wOBV5Vee3zj23aCDiKVQ.Fe4rPpO2nK8fXnKPuQ5I7f7JuMnFUWi', '2005-06-15', '1');
+
+INSERT INTO `user` (`idUser`, `name`, `surname`, `email`, `phoneNumber`, `password`, `birthDate`, `role`) VALUES (NULL, 'Ivan', 'Money Gang', 'shadow_purpleWizzardMoneyGang@shadowgoverment.com', '666666666', '$2y$13$8wOBV5Vee3zj23aCDiKVQ.Fe4rPpO2nK8fXnKPuQ5I7f7JuMnFUWi', '2005-06-15', '1');
+
+INSERT INTO `user` (`idUser`, `name`, `surname`, `email`, `phoneNumber`, `password`, `birthDate`, `role`) VALUES (NULL, 'Ivan', 'Money Gang', 'shadow_purpleWizzardMoneyGang@shadowgoverment.com', '666666666', '$2y$13$8wOBV5Vee3zj23aCDiKVQ.Fe4rPpO2nK8fXnKPuQ5I7f7JuMnFUWi', '2005-06-15', '1');
