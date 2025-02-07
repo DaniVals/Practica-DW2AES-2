@@ -4,18 +4,31 @@ document.addEventListener('readystatechange', function() {
 	if (document.readyState === 'complete') {
 		loadPost();
 
+		window.addEventListener("scroll", function() {
+			if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight) {
+				loadPost();
+			}
+		});		
+
 		document.getElementById(idButtonLoadMore).addEventListener('click', function() {
 			loadPost();
 		});
 	}
 });
 
+var isLoading = false;
 
 function loadPost() {
+	if (isLoading) {
+		console.log('Posts are loading...');
+		return;
+	}
+	isLoading = true;
 
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
+
 			const posts = JSON.parse(this.responseText);
 			// console.log(posts);
 
@@ -66,8 +79,13 @@ function loadPost() {
 				// TODO: mostrar el usuario con un enlace
 				document.body.appendChild(postDiv);
 			}
+			console.log('Posts loaded');
+			isLoading = false;
 		}
 	};
-	xhttp.open('GET', '/posts', true);
+	xhttp.open('GET', '/loadPost');
+    xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 	xhttp.send();
+	console.log('Loading posts...');
+	
 }

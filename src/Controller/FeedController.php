@@ -28,9 +28,9 @@ class  FeedController extends AbstractController {
     #[Route('/feed/{idPost}', name:'load_post')]
     public function load_post($idPost, EntityManagerInterface $entityManager) {
 
-		$targerPost = $entityManager->getRepository(Post::class)->findOneBy(['idPost' => $idPost]);
+		$targetPost = $entityManager->getRepository(Post::class)->findOneBy(['idPost' => $idPost]);
 
-        return $this->render('navigation/post.html.twig', ['targerPost' => $targerPost]);
+        return $this->render('navigation/post.html.twig', ['targetPost' => $targetPost]);
     }
 
     #[Route('/feed/{idPost}/comment', name:'load_comments')]

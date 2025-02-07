@@ -30,12 +30,6 @@ class PostLoader extends AbstractController {
             // if ($post->getIdPost() <= $getWatched) {
             //     continue;
             // }
-            $idPost = $post->getIdPost();
-            $content = $post->getContent();
-            $likes = $post->getLikes();
-            $dislikes = $post->getDislikes();
-            $postingTime = $post->getPostingTime();
-            $idUser = $post->getIdUser();
             $post_arr[] = $post->getPostInfoForAJAX();
         }
         return new JsonResponse($post_arr);
