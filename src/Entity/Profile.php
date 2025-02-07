@@ -11,27 +11,27 @@ class Profile
 	#[ORM\Id]
 	#[ORM\Column(type:'integer', name:'idUser')]
 	private $idUser;
-	
+
 	#[ORM\Column(type:'string', name:'userName')]
-    private $userName;
-	
+	private $userName;
+
 	#[ORM\Column(type:'string', name:'bio')]
-    private $bio;
-	
+	private $bio;
+
 	#[ORM\Column(type:'integer', name:'followers')]
-    private $followers;
-	
+	private $followers;
+
 	#[ORM\Column(type:'integer', name:'following')]
-    private $following;
+	private $following;
 
 	#[ORM\OneToOne(targetEntity: User::class, inversedBy: 'Profile')]
 	#[ORM\JoinColumn(name: 'idUser', referencedColumnName: 'idUser')]
 	private $User;
-	
+
 	#[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'idPoster')]
 	private $posts;
 
-//-----------------------------------------------------------
+	//-----------------------------------------------------------
 
 	public function getIdUser() : ?int {
 		return $this->idUser;
