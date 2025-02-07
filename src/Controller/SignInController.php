@@ -46,17 +46,18 @@ class SignInController extends AbstractController
             // Asignar el rol de usuario 0 de la tabla role
             $role = $entityManager->getRepository(Role::class)->findOneBy(['idRole' => 0]);
             $user->setRole($role);
-
-			$profile = new Profile();
-			$profile->setUserName($username);
-			$profile->setBio('Hello, I am new to ShadowGram!');
-			$profile->setFollowers(0);
-			$profile->setFollowing(0);
-			$profile->setUser($user);
-			$user->setProfile($profile);
-	    $user->getRoles();
-            $entityManager->persist($profile);
+            $user->getRoles();
             $entityManager->persist($user);
+            $entityManager->flush();
+
+            $profile = new Profile();
+            $profile->setUserName($username);
+            $profile->setIdUser($user->getIdUser());
+            $profile->setBio('Hello, I am new to ShadowGram!');
+            $profile->setFollowers(0);
+            $profile->setFollowing(0);
+            $profile->setUser($user);
+            $entityManager->persist($profile);
             $entityManager->flush();
 
             //Mandar correo de activación
