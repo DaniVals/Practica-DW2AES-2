@@ -16,10 +16,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ProfileController extends AbstractController {
     
-//     #[Route('/{user}', name:'load_profile')]
-//     public function loadProfile($user, EntityManagerInterface $entityManager) {
-//         $targetProfile = $entityManager->getRepository(Profile::class)->findOneBy(['userName' => $user]);
-//         return $this->render('navigation/profile.html.twig', ['targetProfile' => $targetProfile]);
-//     }
+     #[Route('/{userName}', name:'load_profile')]
+     public function loadProfile($userName, EntityManagerInterface $entityManager) {
+         $targetProfile = $entityManager->getRepository(Profile::class)->findOneBy(['userName' => $userName]);
+         return $this->render('navigation/profile.html.twig', ['targetProfile' => $targetProfile]);
+     }
 }
-//
+
