@@ -16,6 +16,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Entity\User;
 use App\Entity\Profile;
 use App\Entity\Post;
+use App\Entity\Comment;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TestingDELETE extends AbstractController
@@ -29,5 +30,14 @@ class TestingDELETE extends AbstractController
 
 		// return new JsonResponse($targetProfile->toArray());
 		return $this->render("navigation/profile.html.twig" , [ "targetProfile" => $targetProfile ]);
+    }
+	#[Route('/comment', name:'comment')]
+    public function loadComment(entityManagerInterface $entityManager) {
+		$comments = array();
+
+		$post1 = $entityManager->getRepository(Comment::class)->findOneBy(['idComment' => 1]);
+		array_push($comments, $post1->toArray());
+
+		return new JsonResponse($comments);
     }
 }

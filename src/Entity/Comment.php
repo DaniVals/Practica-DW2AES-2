@@ -9,17 +9,17 @@ use Doctrine\ORM\Mapping as ORM;
 class Comment
 {
 	#[ORM\Id]
-	#[ORM\Column(type:'integer', name:'idComment')]
 	#[ORM\GeneratedValue]
+	#[ORM\Column(type:'integer', name:'idComment')]
 	private $idComment;
 
-	#[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'idPost')]
+	#[ORM\ManyToOne(targetEntity: Post::class)]
     #[ORM\JoinColumn(name: 'commPost', referencedColumnName: 'idPost')]
 	private $commPost;
 
-	#[ORM\Column(type:'integer', name:'commentedComment')]
+	#[ORM\Column(type:'integer', name:'commComment')]
 	//onetomany
-	private $commentedComment;
+	private $commComment;
 
 	#[ORM\Column(type:'string', name:'content')]
 	private $content;
@@ -49,11 +49,11 @@ class Comment
 		$this->commPost = $commPost;
 	}
 
-	public function getCommentedComment() {
-		return $this->commentedComment;
+	public function getCommComment() {
+		return $this->commComment;
 	}
-	public function setCommentedComment($commentedComment) {
-		$this->commentedComment = $commentedComment;
+	public function setCommComment($commComment) {
+		$this->commComment = $commComment;
 	}
 
 	public function getContent() {

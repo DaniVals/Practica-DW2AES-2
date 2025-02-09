@@ -10,7 +10,6 @@ class Post
 {
 	#[ORM\Id]
 	#[ORM\GeneratedValue]
-	#[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'commPost')]
 	#[ORM\Column(type:'integer', name:'idPost')]
 	private $idPost;
 
