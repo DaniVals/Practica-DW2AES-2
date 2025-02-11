@@ -4,11 +4,12 @@ document.addEventListener('readystatechange', function() {
 	if (document.readyState === 'complete') {
 		loadPost();
 
-		window.addEventListener("scroll", function() {
-			if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight) {
-				loadPost();
-			}
-		});		
+		// Esto hace que se recargue automaticamente al llegar al final de la pagina
+		// window.addEventListener("scroll", function() {
+		// 	if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight) {
+		// 		loadPost();
+		// 	}
+		// });		
 
 		document.getElementById(idButtonLoadMore).addEventListener('click', function() {
 			loadPost();
@@ -29,6 +30,7 @@ function loadPost() {
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 
+			const divLoadMore = document.getElementById("loadedPosts");
 			const posts = JSON.parse(this.responseText);
 			console.log(posts);
 
@@ -87,7 +89,7 @@ function loadPost() {
 
 				// TODO: que se ponga por devajo del boton de cargar mas
 				// TODO: mostrar el usuario con un enlace
-				document.body.appendChild(postDiv);
+				divLoadMore.appendChild(postDiv);
 			}
 			console.log('Posts loaded');
 			isLoading = false;
