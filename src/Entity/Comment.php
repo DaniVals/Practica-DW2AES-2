@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity] 
 #[ORM\Table(name: 'comment')]
@@ -34,15 +34,15 @@ class Comment
 	#[ORM\Column(type:'datetime_immutable', name:'postingTime')]
 	private $postingTime;
 	
-	#[ORM\ManyToOne(targetEntity: Comment::class, inversedBy: 'commComment')]
-    #[ORM\JoinColumn(name: 'idComment', referencedColumnName: 'idComment')]
-	private $commComment;
+	#[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'allComments')]
+    #[ORM\JoinColumn(name: 'commComment', referencedColumnName: 'idComment', nullable: true)]
+	private $commComment = null;
 	
-	#[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'idComment')]
-	private $allComments;
+	#[ORM\OneToMany(targetEntity: self::class, mappedBy: 'commComment')]
+	private Collection $allComments;
 	
     public function __construct() {
-        $this->allComments = new ArrayCollection();
+        $this->allComments = new Collection();
     }
 
 //-----------------------------------------------------------
@@ -68,7 +68,8 @@ class Comment
 		$this->commPost = $commPost;
 	}
 
-	public function getCommComment() : ?Comment {
+	public function getCommComment() {
+	// public function getCommComment() : ?Comment {
 		return $this->commComment;
 	}
 	public function setCommComment($commComment) {
@@ -107,11 +108,8 @@ class Comment
 
 	function toArray() {
 
-		$returned = array();
-
-		$returned['idComment'] = $this->idComment;
-		
-		return [
+		$returned = [
+            'idComment' => $this->idComment,
             'content' => $this->content,
             'likes' => $this->likes,
             'dislikes' => $this->dislikes,
@@ -119,8 +117,16 @@ class Comment
 			
             'idUser' => $this->idUser->toArray(),
             'commPost' => $this->commPost->getIdPost(),
-            'commComment' => $this->getCommComment(),
-            'allComments' => $this->allComments
         ];
+
+		if ($this->commComment) {
+			$returned['commComment'] = $this->commComment->getIdComment();
+		}else{
+			$returned['commComment'] = null;
+		}
+
+		$returned['allComments'] = array_map(fn($comment) => $comment->toArray(), $this->allComments->toArray());
+		
+		return $returned;
 	}
 }

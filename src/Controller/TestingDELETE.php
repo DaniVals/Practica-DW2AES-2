@@ -37,8 +37,12 @@ class TestingDELETE extends AbstractController
 
 		$post1 = $entityManager->getRepository(Comment::class)->findOneBy(['idComment' => 1]);
 		array_push($comments, $post1->toArray());
-		// $post2 = $entityManager->getRepository(Comment::class)->findOneBy(['idComment' => 2]);
-		// array_push($comments, $post2->toArray());
+		$post2 = $entityManager->getRepository(Comment::class)->findOneBy(['idComment' => 2]);
+		array_push($comments, $post2->toArray());
+		$post2 = $entityManager->getRepository(Comment::class)->findOneBy(['idComment' => 3]);
+		array_push($comments, $post2->toArray());
+
+		// dump($comments);
 
 		return new JsonResponse($comments);
     }
