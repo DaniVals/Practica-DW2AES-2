@@ -40,7 +40,7 @@ function loadPost() {
 
 					// post user
 					let postUserLink = document.createElement('a');
-					postUserLink.href = '/' + post.PosterUser.userName;
+					postUserLink.href = '/profile/' + post.PosterUser.userName;
 					postUserLink.className = 'postUser';
 
 						let postUserImg = document.createElement('img');
