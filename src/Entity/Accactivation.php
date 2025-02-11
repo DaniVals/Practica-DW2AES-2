@@ -9,7 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Accactivation
 {
 	#[ORM\Id]
-    #[ORM\Column(type:'integer', name:'idUser')]
+	#[ORM\OneToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: 'idUser', referencedColumnName: 'idUser')]
     private $idUser;
 
 	#[ORM\Column(type:'string', name:'token')]

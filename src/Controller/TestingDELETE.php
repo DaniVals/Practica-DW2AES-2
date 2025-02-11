@@ -21,22 +21,24 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TestingDELETE extends AbstractController
 {
-	#[Route('/profile', name:'profile')]
-    public function loadProfile(entityManagerInterface $entityManager) {
+	// #[Route('/profile', name:'profile')]
+    // public function loadProfile(entityManagerInterface $entityManager) {
 
-		$targetProfile = $this->getUser();
-		$targetProfile = $targetProfile->getProfile();
-		// $targetProfile = $entityManager->getRepository(Profile::class)->findOneBy(['idUser' => 1]);
+	// 	$targetProfile = $this->getUser();
+	// 	// $targetProfile = $targetProfile->getProfile();
+	// 	// $targetProfile = $entityManager->getRepository(Profile::class)->findOneBy(['idUser' => 1]);
 
-		// return new JsonResponse($targetProfile->toArray());
-		return $this->render("navigation/profile.html.twig" , [ "targetProfile" => $targetProfile ]);
-    }
-	#[Route('/comment', name:'comment')]
+	// 	// return new JsonResponse($targetProfile->toArray());
+	// 	return $this->render("navigation/profile.html.twig" , [ "targetProfile" => $targetProfile ]);
+    // }
+	#[Route('/comment/view', name:'comment')]
     public function loadComment(entityManagerInterface $entityManager) {
 		$comments = array();
 
 		$post1 = $entityManager->getRepository(Comment::class)->findOneBy(['idComment' => 1]);
 		array_push($comments, $post1->toArray());
+		// $post2 = $entityManager->getRepository(Comment::class)->findOneBy(['idComment' => 2]);
+		// array_push($comments, $post2->toArray());
 
 		return new JsonResponse($comments);
     }
