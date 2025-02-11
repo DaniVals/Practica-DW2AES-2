@@ -88,7 +88,7 @@ class Post
 	public function toArray(?bool $fullProfile = true) : array {
         return [
             'idPost' => $this->idPost,
-            'PosterUser' => $this->PosterProfile->toArray(false),
+            'PosterUser' => $this->PosterProfile->toArray(),
             'likes' => $this->likes,
             'dislikes' => $this->dislikes,
             'postingTime' => $this->postingTime,
@@ -100,7 +100,7 @@ class Post
 	public function getPostInfoForAJAX() {
 		return [
 			'idPost' => $this->idPost,
-			'PosterUser' => $this->PosterProfile->toArray(false),
+			'PosterUser' => $this->PosterProfile->toArray(),
 			'likes' => $this->likes,
 			'dislikes' => $this->dislikes,
 			'postingTime' => $this->postingTime,

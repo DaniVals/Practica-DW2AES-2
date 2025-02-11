@@ -77,17 +77,7 @@ class Profile
 
 //-----------------------------------------------------------
 
-	public function toArray(?bool $fullProfile = true): array {
-		if ($fullProfile) {
-			return [
-				"userName" => $this->userName,
-				"idUser" => $this->User->toArray(),
-				"bio" => $this->bio,
-				"followers" => $this->followers,
-				"following" => $this->following,
-				"posts" => $this->posts
-			];
-		}
+	public function toArray(): array {
 		return [
 			"userName" => $this->userName,
 			"idUser" => $this->User->getIdUser(),
