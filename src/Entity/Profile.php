@@ -29,7 +29,7 @@ class Profile
 	private $User;
 
 	#[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'idPoster')]
-	private $posts;
+	private $Posts;
 
 	//-----------------------------------------------------------
 
@@ -73,6 +73,13 @@ class Profile
 	}
 	public function setUser(?User $User) {
 		$this->User = $User;
+	}
+
+	public function getPosts() : ?array {
+		return $this->Posts;
+	}
+	public function setPosts(?array $Posts) {
+		$this->Posts = $Posts;
 	}
 
 //-----------------------------------------------------------
