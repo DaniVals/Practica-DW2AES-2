@@ -30,7 +30,7 @@ function loadPost() {
 		if (this.readyState == 4 && this.status == 200) {
 
 			const posts = JSON.parse(this.responseText);
-			// console.log(posts);
+			console.log(posts);
 
 			for (let i = 0; i < posts.length; i++) {
 				const post = posts[i];
@@ -39,18 +39,28 @@ function loadPost() {
 				postDiv.className = 'post';
 
 					// post user
-					let postUser = document.createElement('h3');
-					postUser.className = 'postUser';
-					postUser.textContent = post.PosterUser.userName;
-					postDiv.appendChild(postUser);
+					let postUserLink = document.createElement('a');
+					postUserLink.href = '/' + post.PosterUser.userName;
+					postUserLink.className = 'postUser';
+
+						let postUserImg = document.createElement('img');
+						postUserImg.src = "userData/" + post.PosterUser.idUser + "/profilePicture.png";
+						postUserImg.alt = 'user image';
+						postUserLink.appendChild(postUserImg);
+
+						let postUser = document.createElement('span');
+						postUser.textContent = post.PosterUser.userName;
+						postUserLink.appendChild(postUser);
+
+					postDiv.appendChild(postUserLink);
 				
 					// post photo
 					let postImgLink = document.createElement('a');
 					postImgLink.href = '/feed/' + post.idPost;
+					postImgLink.className = 'postImg';
 						let postImg = document.createElement('img');
 						postImg.src = post.contentRoute;
 						postImg.alt = 'post image';
-						postImg.className = 'postImg';
 						postImgLink.appendChild(postImg);
 					postDiv.appendChild(postImgLink);
 

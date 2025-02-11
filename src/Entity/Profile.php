@@ -81,7 +81,7 @@ class Profile
 		if ($fullProfile) {
 			return [
 				"userName" => $this->userName,
-				// "User" => $this->User->toArray(),
+				"idUser" => $this->User->toArray(),
 				"bio" => $this->bio,
 				"followers" => $this->followers,
 				"following" => $this->following,
@@ -90,7 +90,7 @@ class Profile
 		}
 		return [
 			"userName" => $this->userName,
-			// "User" => $this->User->getIdUser(),
+			"idUser" => $this->User->getIdUser(),
 			"bio" => $this->bio,
 			"followers" => $this->followers,
 			"following" => $this->following

@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PostLoader extends AbstractController {
     
-    #[Route('/loadPost', name:'load_post')]
+    #[Route('/loadPost', name:'load_post_ajax')]
     public function loadPost(EntityManagerInterface $entityManager, Request $request) {
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToRoute('feed');
