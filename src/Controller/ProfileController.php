@@ -21,5 +21,9 @@ class ProfileController extends AbstractController {
          $targetProfile = $entityManager->getRepository(Profile::class)->findOneBy(['userName' => $userName]);
          return $this->render('navigation/profile.html.twig', ['targetProfile' => $targetProfile]);
      }
+    #[Route('/profile', name:'redirect_profile')]
+    public function redirectProfile() {
+        return $this->redirectToRoute('load_profile');
+    }
 }
 
