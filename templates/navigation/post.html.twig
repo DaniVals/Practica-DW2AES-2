@@ -11,7 +11,7 @@
     </head>
 	{% include "header.html.twig" %}
     <body>
-		<div class="post" value="{{ targetPost.idPost }}">
+		<div class="post">
 			{# {{ dump() }} #}
 			<a href="{{ path('load_profile', { 'userName': targetPost.PosterProfile.userName })}}" class="postUser">
 				<img src="{{asset('userData/'~targetPost.PosterProfile.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">

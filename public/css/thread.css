@@ -57,8 +57,50 @@ body{
 	justify-content: space-around;
 }
 
+
 .showCommentsLink{
 	text-align: center;
 	margin: 10px;
 	display: block;
+}
+
+.comment {
+	/* border-bottom: 1px solid var(--body-border-color); */
+	margin: var(--post-margin);
+	padding: var(--post-padding);
+}
+
+.comment .commentUser{
+	display: flex;
+	align-items: center;
+	margin: 15px;
+}
+.comment .commentUser img{
+	width:  20px;
+	height: 20px;
+	border-radius: 50%;
+
+	/* debug */
+	/* background-color: royalblue; */
+}
+.comment .commentUser span{
+	margin-left: 15px;
+	color: var(--txt-color);
+}
+.comment .commentContent{
+	margin-left: 15px;
+	margin-top: -10px;
+}
+
+.comment .commentStats{
+	padding: 5px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.comment .commentList{
+	margin-left: 20px;
+	
+	/* debug */
+	/* background-color: #fff6; */
 }

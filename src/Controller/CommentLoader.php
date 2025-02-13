@@ -24,9 +24,14 @@ class CommentLoader extends AbstractController {
         //     return $this->redirectToRoute('feed');
         // }
 		
-		$requested = $_POST['idPost'];
-		// $requested = 2;
-		$comments = $entityManager->getRepository(Comment::class)->findBy(['idPost' => $requested]);
+		// $requested = $_POST['idPost'];
+		$requested = 2;
+        $post = $entityManager->getRepository(Post::class)->findOneBy(['idPost' => $requested]);
+		$comments = $entityManager->getRepository(Comment::class)->findBy(
+			['commPost' => $post],
+			['postingTime' => 'ASC']
+		);
+		// TODO: cambiar esto si se hace bidireccional
 
 		$comment_arr = [];
 		foreach ($comments as $comment) {
