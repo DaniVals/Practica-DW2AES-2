@@ -32,3 +32,14 @@ html{
 	background-color: var(--bg-color);
 	color: var(--txt-color);
 }
+
+/* <a> */
+.linkButton{
+	padding: 5px;
+	border: 1px solid black;
+	border-radius: 50px;
+	background-color: var(--bg-color-2);
+}
+.linkButton:hover{
+	background-color: var(--bg-color-3);
+}

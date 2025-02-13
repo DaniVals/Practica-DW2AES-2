@@ -21,7 +21,7 @@ class  FeedController extends AbstractController {
     }
 
     #[Route('/feed', name:'feed')]
-    public function load_feed() {   
+    public function load_feed() {
         return $this->render('navigation/feed.html.twig');
     }
 
@@ -35,21 +35,21 @@ class  FeedController extends AbstractController {
 
     #[Route('/feed/{idPost}/comment', name:'load_comments')]
     public function load_comments($idPost, EntityManagerInterface $entityManager) {   
-        // Leer de la bbdd los comentario de un post y almacenarlos en un array
-        $comments_arr = [];
-        $comments = $entityManager->getRepository(Comment::class)->findBy(['commentedComment' => $idPost]);
-        foreach ($comments as $comment) {
-            // $user = $entityManager->getRepository(User::class)->findOneBy(['idUser' => $comment->getIdUser()]);
-            $content = $comment->getContent();
-            $likes = $comment->getLikes();
-            $dislikes = $comment->getDislikes();
-            $postTime = $comment->getPostingTime();
-            $user = 1;
-            $comments_arr[] = ['user' => $user, 'content' => $content, 'likes' => $likes, 'dislikes' => $dislikes, 'postingTime' => $postTime];
-        }
+        // // Leer de la bbdd los comentario de un post y almacenarlos en un array
+        // $comments_arr = [];
+        // $comments = $entityManager->getRepository(Comment::class)->findBy(['commentedComment' => $idPost]);
+        // foreach ($comments as $comment) {
+        //     // $user = $entityManager->getRepository(User::class)->findOneBy(['idUser' => $comment->getIdUser()]);
+        //     $content = $comment->getContent();
+        //     $likes = $comment->getLikes();
+        //     $dislikes = $comment->getDislikes();
+        //     $postTime = $comment->getPostingTime();
+        //     $user = 1;
+        //     $comments_arr[] = ['user' => $user, 'content' => $content, 'likes' => $likes, 'dislikes' => $dislikes, 'postingTime' => $postTime];
+        // }
 
-        return new Response(JSON_encode($comments_arr));
+        // return new Response(JSON_encode($comments_arr));
 
-        return $this->render('navigation/comments.html.twig', ['idPost' => $idPost, 'comments' => $comments]);
+        return $this->render('navigation/comments.html.twig', ['idPost' => $idPost]);
     }
 }

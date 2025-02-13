@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+		{% include "content.html.twig" %}
+		<link rel="stylesheet" href="{{asset('css/thread.css')}}">
+		<link rel="stylesheet" href="{{asset('css/userProfile.css')}}">
+		
+		<script src="{{asset('js/loadComments.js')}}"></script>
+
+        <title>Comments</title>
+		{# TODO: poner nombre #}
+		{# targetPost #}
+    </head>
+	{% include "header.html.twig" %}
+    <body>
+		<div class="post" id="{{ idPost }}">
+		</div>
+    </body>
+</html>

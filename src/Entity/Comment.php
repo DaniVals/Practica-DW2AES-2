@@ -129,4 +129,16 @@ class Comment
 		
 		return $returned;
 	}
+
+	function getCommentInfoForAJAX() {
+		return [
+			'idComment' => $this->idComment,
+			'content' => $this->content,
+			'likes' => $this->likes,
+			'dislikes' => $this->dislikes,
+			'postingTime' => $this->postingTime,
+			'Profile' => $this->idUser->toArray(),
+			'commComment' => $this->commComment ? $this->commComment->getCommentInfoForAJAX() : null,
+		];
+	}
 }

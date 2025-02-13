@@ -6,13 +6,17 @@
 		<link rel="stylesheet" href="{{asset('css/thread.css')}}">
 		<link rel="stylesheet" href="{{asset('css/userProfile.css')}}">
         <title>Post</title>
+		{# TODO: poner nombre #}
 		{# targetPost #}
     </head>
 	{% include "header.html.twig" %}
     <body>
-		<div class="post">
+		<div class="post" value="{{ targetPost.idPost }}">
 			{# {{ dump() }} #}
-			<h3 class="postUser">{{ targetPost.PosterProfile.userName }}</h3>
+			<a href="{{ path('load_profile', { 'userName': targetPost.PosterProfile.userName })}}" class="postUser">
+				<img src="{{asset('userData/'~targetPost.PosterProfile.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
+				<span class="postUser">{{ targetPost.PosterProfile.userName }}</span>
+			</a>
 
 			<img src="{{ targetPost.contentRoute }}" alt="post image" class="postImg">
 
@@ -21,6 +25,7 @@
 				<span class="dislikes">{{ targetPost.dislikes }} dislikes</span>
 				<span class="comments">{{ targetPost.commentAmount }} comments</span>
 			</div>
+			<a href="{{ path('load_comments', { 'idPost': targetPost.idPost })}}" class="linkButton showCommentsLink"> Ver comentarios </a>
 		</div>
     </body>
 </html>
