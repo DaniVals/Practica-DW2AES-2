@@ -15,13 +15,16 @@ class Friendship
 	#[ORM\Column(type:'integer', name:'idFriendship')]
 	private $idFriendship;
 
-	#[ORM\Column(type:'integer', name:'idRequestor')]
-	private $idRequestor;
+	#[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: 'idRequestor', referencedColumnName: 'idUser')]
+	private $IdRequestor;
 
-	#[ORM\Column(type:'integer', name:'idRequested')]
-	private $idRequested;
+	#[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: 'idRequested', referencedColumnName: 'idUser')]
+	private $IdRequested;
 	
-	#[ORM\Column(type:'integer', name:'frState')]
+	#[ORM\ManyToOne(targetEntity: State::class, inversedBy: 'idState')]
+	#[ORM\JoinColumn(name:'frState', referencedColumnName:'idState')]
 	private $frState;
 	
 	#[ORM\Column(type:'datetime', name:'frDate')]
@@ -37,17 +40,17 @@ class Friendship
 	}
 
 	public function getIdRequestor() : ?int {
-		return $this->idRequestor;
+		return $this->IdRequestor;
 	}
-	public function setIdRequestor(?int $idRequestor) {
-		$this->idRequestor = $idRequestor;
+	public function setIdRequestor(?int $IdRequestor) {
+		$this->IdRequestor = $IdRequestor;
 	}
 
 	public function getIdRequested() : ?int {
-		return $this->idRequested;
+		return $this->IdRequested;
 	}
-	public function setIdRequested(?int $idRequested) {
-		$this->idRequested = $idRequested;
+	public function setIdRequested(?int $IdRequested) {
+		$this->IdRequested = $IdRequested;
 	}
 
 	public function getFrState() : ?int {
