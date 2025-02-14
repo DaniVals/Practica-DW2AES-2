@@ -27,5 +27,48 @@ class ProfileController extends AbstractController {
 		$userName = $userName->getProfile()->getUserName();
 		return $this->redirectToRoute('load_profile', ['userName' => $userName]);
     }
-}
+    #[Route('/profileEdit', name:'edit_profile')]
+    public function editProfile(EntityManagerInterface $entityManager) {
+		$user = $this->getUser();
+		$targetProfile = $user->getProfile();
+		
+		$error = "";
+		
+		// procesar formulario por post
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			
+			// NUEVO NOMBRE DE USUARIO
+			$newUserName = $_POST['username'];
+			$namedProfile = $entityManager->getRepository(Profile::class)->findOneBy(['userName' => $newUserName]);
+			
+			if ($namedProfile != null && $namedProfile->getIdUser() != $user->getIdUser()) {
+				// \Doctrine\DBAL\Exception\UniqueConstraintViolationException
+				$error .= "El nombre de usuario ya está en uso ";
+			}else {
+				$targetProfile->setUserName($newUserName);
+			}
+			
+			// NUEVA BIOGRAFIA
+			$targetProfile->setBio($_POST['bio']);
+			
+			// NUEVA FOTO DE PERFIL
+			// guardar foto en la carpeta public/userData
+			if ($_FILES['profilePicture']['error'] == UPLOAD_ERR_OK) {
+				$filePath = 'userData/' . $targetProfile->getIdUser() . '/ProfilePicture.png';
+				move_uploaded_file($_FILES['profilePicture']['tmp_name'], $filePath);
+			}else {
+				// $error .= "Error al subir la imagen ";
+			}
+			
+			$entityManager->persist($targetProfile);
+			$entityManager->flush();
 
+			// que devuelva al formulario con un codigo de error exitoso
+			if ($error == "") {
+				$error = "Se ha actualizado el perfil correctamente";
+			}
+		}
+
+		return $this->render('navigation/profileEdit.html.twig', ['targetProfile' => $targetProfile, "error" => $error]);
+    }
+}

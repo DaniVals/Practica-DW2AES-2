@@ -5,19 +5,33 @@
 		{% include "content.html.twig" %}
 		<link rel="stylesheet" href="{{asset('css/thread.css')}}">
 		<link rel="stylesheet" href="{{asset('css/userProfile.css')}}">
-        <title>Perfil</title>
+        <title>Editar Perfil</title>
 		{# esto deberia poner el nombre del usuario que estas buscando #}
-		{# targerUser #}
+		{# targetProfile #}
     </head>
 	{% include "header.html.twig" %}
     <body>
 		<div id="profileHeader">
+			{# manejar errores #}
+			{% if error != "" %}
+				<p>{{error}}</p>
+			{% endif %}
 			<h2>Editar perfil</h2>
-			<img src="{{asset('userData/'~targetUser.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
+			<img src="{{asset('userData/'~targetProfile.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
 			<!-- idUser -->
-			<h1>{{targetUser.userName}}</h1>
-			<p>{{targetUser.bio}}</p>
-			<p>Seguidores: <span>{{targetUser.followers}}</span> Siguiendo: <span>{{targetUser.following}}</span></p>
+			<form action="{{ path('edit_profile') }}" method="post" enctype="multipart/form-data">
+				<label for="profilePicture">Cambiar foto de perfil</label>
+				<input type="file" name="profilePicture" id="profilePicture">
+				<br>
+				<label for="bio">Cambiar biografía</label>
+				<textarea name="bio" id="bio" cols="50" rows="2">{{targetProfile.bio}}</textarea>
+				<br>
+				<label for="username">Cambiar nombre de usuario</label>
+				<input type="text" name="username" id="username" value="{{targetProfile.userName}}">
+				<br>
+				<input type="submit" value="Guardar cambios">
+			</form>
+			<a href="{{ path('redirect_profile') }}" class="linkButton">Volver</a>
 		</div>
     </body>
 </html>

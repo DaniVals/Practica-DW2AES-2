@@ -19,3 +19,8 @@
 	border-radius: 50px;
 	border: 2px solid;
 }
+
+#profileHeader .linkButton{
+	float: right;
+	color: var(--txt-color);
+}

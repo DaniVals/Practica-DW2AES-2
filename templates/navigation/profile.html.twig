@@ -18,6 +18,11 @@
 			<h1>{{targetProfile.userName}}</h1>
 			<p>{{targetProfile.bio}}</p>
 			<p>Seguidores: <span>{{targetProfile.followers}}</span> Siguiendo: <span>{{targetProfile.following}}</span></p>
+
+			{# si es tu perfil, te sale el boton de editar tu perfil #}
+			{% if targetProfile.idUser == app.user.idUser %}
+				<a href="{{ path('edit_profile') }}" class="linkButton">Editar perfil</a>
+			{% endif %}
 		</div>
 		
 		<input type="hidden" id="ajaxRoute" value="{{ path('load_post_user_ajax', {userId: targetProfile.idUser}) }}">
