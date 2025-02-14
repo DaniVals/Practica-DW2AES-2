@@ -58,10 +58,14 @@ body{
 }
 
 
+.showPostsLink,
 .showCommentsLink{
 	text-align: center;
 	margin: 10px;
 	display: block;
+}
+.showPostsLink{
+	width: calc(100% - 20px);
 }
 
 .comment {
