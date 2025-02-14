@@ -16,13 +16,13 @@ function loadComments() {
 	isLoading = true;
 
 	const Post = document.getElementsByClassName('post')[0];
-	console.log(Post);
+	// console.log(Post);
 
 	let xhttp = new XMLHttpRequest();
 	xhttp.onload = function() {
 
 		const comments = JSON.parse(this.responseText);
-		console.log(comments);
+		// console.log(comments);
 
 		/*
 			Profile: {userName: 'monstah', idUser: 4, bio: 'Hola SadowGram', followers: 0, following: 0}

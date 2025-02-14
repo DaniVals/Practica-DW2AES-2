@@ -13,6 +13,7 @@
 	{% include "header.html.twig" %}
     <body>
 		<div id="loadedPosts"></div>
+		<input type="hidden" id="ajaxRoute" value="{{ path('load_post_ajax') }}">
 		<button id="loadMore" class="linkButton showPostsLink">Cargar Mas</button>
     </body>
 </html>

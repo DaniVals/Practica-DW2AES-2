@@ -6,6 +6,8 @@
 		<link rel="stylesheet" href="{{asset('css/thread.css')}}">
 		<link rel="stylesheet" href="{{asset('css/userProfile.css')}}">
         <title>@{{targetProfile.userName}}</title>
+
+		<script src="{{asset('js/loadPosts.js')}}"></script>
 		{# targetProfile #}
     </head>
 	{% include "header.html.twig" %}
@@ -17,5 +19,8 @@
 			<p>{{targetProfile.bio}}</p>
 			<p>Seguidores: <span>{{targetProfile.followers}}</span> Siguiendo: <span>{{targetProfile.following}}</span></p>
 		</div>
+		
+		<input type="hidden" id="ajaxRoute" value="{{ path('load_post_user_ajax', {userId: targetProfile.idUser}) }}">
+		<div id="loadedPosts"></div>
     </body>
 </html>

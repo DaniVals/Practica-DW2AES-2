@@ -26,13 +26,15 @@ function loadPost() {
 	}
 	isLoading = true;
 
+	const ajaxRoute = document.getElementById("ajaxRoute").value;
+
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 
 			const divLoadMore = document.getElementById("loadedPosts");
 			const posts = JSON.parse(this.responseText);
-			console.log(posts);
+			// console.log(posts);
 
 			for (let i = 0; i < posts.length; i++) {
 				const post = posts[i];
@@ -46,7 +48,7 @@ function loadPost() {
 					postUserLink.className = 'postUser';
 
 						const postUserImg = document.createElement('img');
-						postUserImg.src = "userData/" + post.PosterUser.idUser + "/profilePicture.png";
+						postUserImg.src = "/userData/" + post.PosterUser.idUser + "/profilePicture.png";
 						postUserImg.alt = 'user image';
 						postUserLink.appendChild(postUserImg);
 
@@ -100,7 +102,7 @@ function loadPost() {
 			isLoading = false;
 		}
 	};
-	xhttp.open('GET', '/loadPost');
+	xhttp.open('GET', ajaxRoute);
     xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 	xhttp.send();
 	console.log('Loading posts...');

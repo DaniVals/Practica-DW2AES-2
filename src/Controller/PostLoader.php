@@ -34,4 +34,21 @@ class PostLoader extends AbstractController {
         }
         return new JsonResponse($post_arr);
     }
+    #[Route('/loadPost/user/{userId}', name:'load_post_user_ajax')]
+    public function loadPostUser($userId, EntityManagerInterface $entityManager, Request $request) {
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToRoute('feed');
+        }
+		$profile = $entityManager->getRepository(Profile::class)->findOneBy(['idUser' => $userId]);
+		$posts = $entityManager->getRepository(Post::class)->findBy(['PosterProfile' => $profile]);
+		$post_arr = [];
+		// $getWatched = $request->query->get('watched');
+		foreach ($posts as $post) {
+			// if ($post->getIdPost() <= $getWatched) {
+			//     continue;
+			// }
+			$post_arr[] = $post->getPostInfoForAJAX();
+		}
+		return new JsonResponse($post_arr);
+	}
 }
