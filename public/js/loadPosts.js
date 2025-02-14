@@ -21,7 +21,7 @@ var isLoading = false;
 
 function loadPost() {
 	if (isLoading) {
-		console.log('Posts are loading...');
+		console.log('Posts are already loading');
 		return;
 	}
 	isLoading = true;
@@ -37,50 +37,55 @@ function loadPost() {
 			for (let i = 0; i < posts.length; i++) {
 				const post = posts[i];
 			
-				let postDiv = document.createElement('div');
+				const postDiv = document.createElement('div');
 				postDiv.className = 'post';
 
 					// post user
-					let postUserLink = document.createElement('a');
+					const postUserLink = document.createElement('a');
 					postUserLink.href = '/profile/' + post.PosterUser.userName;
 					postUserLink.className = 'postUser';
 
-						let postUserImg = document.createElement('img');
+						const postUserImg = document.createElement('img');
 						postUserImg.src = "userData/" + post.PosterUser.idUser + "/profilePicture.png";
 						postUserImg.alt = 'user image';
 						postUserLink.appendChild(postUserImg);
 
-						let postUser = document.createElement('span');
+						const postUser = document.createElement('span');
 						postUser.textContent = post.PosterUser.userName;
 						postUserLink.appendChild(postUser);
+
+						
+						const commentDate = document.createElement('span');
+						commentDate.textContent = post["postingTime"]["date"];
+						postUserLink.appendChild(commentDate);
 
 					postDiv.appendChild(postUserLink);
 				
 					// post photo
-					let postImgLink = document.createElement('a');
+					const postImgLink = document.createElement('a');
 					postImgLink.href = '/feed/' + post.idPost;
 					postImgLink.className = 'postImg';
-						let postImg = document.createElement('img');
+						const postImg = document.createElement('img');
 						postImg.src = post.contentRoute;
 						postImg.alt = 'post image';
 						postImgLink.appendChild(postImg);
 					postDiv.appendChild(postImgLink);
 
 					// post stats
-					let postStats = document.createElement('div');
+					const postStats = document.createElement('div');
 					postStats.className = 'postStats';
 
-						let spanLikes = document.createElement('span');
+						const spanLikes = document.createElement('span');
 						spanLikes.className = 'likes';
 						spanLikes.textContent = post.likes + ' likes';
 						postStats.appendChild(spanLikes);
 
-						let spanDislikes = document.createElement('span');
+						const spanDislikes = document.createElement('span');
 						spanDislikes.className = 'dislikes';
 						spanDislikes.textContent = post.dislikes + ' dislikes';
 						postStats.appendChild(spanDislikes);
 
-						let spanComments = document.createElement('span');
+						const spanComments = document.createElement('span');
 						spanComments.className = 'comments';
 						spanComments.textContent = post.commentAmount + ' comments';
 						postStats.appendChild(spanComments);

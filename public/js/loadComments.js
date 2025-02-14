@@ -10,7 +10,7 @@ var isLoading = false;
 
 function loadComments() {
 	if (isLoading) {
-		console.log('Comments are loading...');
+		console.log('Comments are already loading');
 		return;
 	}
 	isLoading = true;
@@ -35,10 +35,6 @@ function loadComments() {
 		*/
 		comments.forEach(comment => {
 
-			console.log("mostrando comentario");
-			console.log(comment);
-			
-			
 			let commentDiv;
 			if (comment["commComment"] == null) {
 				commentDiv = document.createElement('div');
@@ -58,6 +54,10 @@ function loadComments() {
 					const profileName = document.createElement('span');
 					profileName.textContent = comment["Profile"]["userName"];
 					profile.appendChild(profileName);
+
+					const commentDate = document.createElement('span');
+					commentDate.textContent = comment["postingTime"]["date"];
+					profile.appendChild(commentDate);
 				commentDiv.appendChild(profile);
 
 				const content = document.createElement('p');
