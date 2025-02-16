@@ -22,6 +22,15 @@
 			{# si es tu perfil, te sale el boton de editar tu perfil #}
 			{% if targetProfile.idUser == app.user.idUser %}
 				<a href="{{ path('edit_profile') }}" class="linkButton">Editar perfil</a>
+			{% else %}
+			{# un switch con los estados de Friendship (switch no existe en tiwg T_T) #}
+				{% if relationshipState == 'PENDING' %}
+					<a href="{{ path('friend_profile', {userName: targetProfile.userName, newState: 0}) }}" class="linkButton">Cancelar Solicitud</a>
+				{% elseif relationshipState == 'ACCEPTED' %}
+					<a href="{{ path('friend_profile', {userName: targetProfile.userName, newState: 0}) }}" class="linkButton">Eliminar Amigo</a>
+				{% else %}
+					<a href="{{ path('friend_profile', {userName: targetProfile.userName, newState: 1}) }}" class="linkButton">Enviar Solicitud</a>
+				{% endif %}
 			{% endif %}
 		</div>
 		

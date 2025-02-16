@@ -7,6 +7,8 @@ use App\Entity\Role;
 use App\Entity\Post;
 use App\Entity\Profile;
 use App\Entity\Comment;
+use App\Entity\Friendship;
+use App\Entity\State;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,8 +20,44 @@ class ProfileController extends AbstractController {
     
 	#[Route('/profile/{userName}', name:'load_profile')]
 	public function loadProfile($userName, EntityManagerInterface $entityManager) {
+
+		$userProfile = $this->getUser();
 		$targetProfile = $entityManager->getRepository(Profile::class)->findOneBy(['userName' => $userName]);
-		return $this->render('navigation/profile.html.twig', ['targetProfile' => $targetProfile]);
+
+		$relationship = $entityManager->getRepository(Friendship::class)->findOneBy(['IdRequestor' => $userProfile, 'IdRequested' => $targetProfile->getUser()]);
+
+		$relationshipState = "NULO";
+		if ($relationship != null) {
+			$relationshipState = $relationship->getFrState()->getName();
+		}
+
+		return $this->render('navigation/profile.html.twig', ['targetProfile' => $targetProfile, 'relationshipState' => $relationshipState]);
+	}
+	#[Route('/profile/{userName}/friendRequest/{newState}', name:'friend_profile')]
+	public function sendFriendRequest($userName, $newState, EntityManagerInterface $entityManager) {
+
+		$targetUser = $entityManager->getRepository(Profile::class)->findOneBy(['userName' => $userName])->getUser();
+		$pendingState = $entityManager->getRepository(State::class)->findOneBy(['idState' => $newState]);
+		
+		$userUser = $this->getUser();
+
+		$friendRequest = $entityManager->getRepository(Friendship::class)->findOneBy(['IdRequestor' => $userUser, 'IdRequested' => $targetUser]);
+
+		if ($friendRequest != null) {
+			$friendRequest->setFrState($pendingState);
+			
+		}else {
+			$friendRequest = new Friendship();
+			$friendRequest->setIdRequestor($userUser);
+			$friendRequest->setIdRequested($targetUser);
+			$friendRequest->setFrDate(new \DateTime());
+			$friendRequest->setFrState($pendingState);
+		}
+
+		$entityManager->persist($friendRequest);
+		$entityManager->flush();
+
+		return $this->redirectToRoute('load_profile', ['userName' => $userName]);
 	}
     #[Route('/profile', name:'redirect_profile')]
     public function redirectProfile() {

@@ -53,10 +53,10 @@ class Friendship
 		$this->IdRequested = $IdRequested;
 	}
 
-	public function getFrState() : ?int {
+	public function getFrState() : ?State {
 		return $this->frState;
 	}
-	public function setFrState(?int $frState) {
+	public function setFrState(?State $frState) {
 		$this->frState = $frState;
 	}
 
