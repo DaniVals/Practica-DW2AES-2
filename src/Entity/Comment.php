@@ -55,10 +55,10 @@ class Comment
 		$this->idComment = $idComment;
 	}
 
-	public function getIdUser() : ?Profile {
+	public function getProfileUser() : ?Profile {
 		return $this->idUser;
 	}
-	public function setIdUser(?Profile $idUser) {
+	public function setProfileUser(?Profile $idUser) {
 		$this->idUser = $idUser;
 	}
 
