@@ -6,7 +6,9 @@ security:
                 property: email 
     access_control:
         - { path: ^/feed, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/newPost, roles: [ROLE_USER, ROLE_ADMIN] }
         - { path: ^/profile, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/profileEdit, roles: [ROLE_USER, ROLE_ADMIN] }
         - { path: ^/admin, roles: [ROLE_ADMIN] }
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:

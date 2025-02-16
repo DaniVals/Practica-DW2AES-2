@@ -52,4 +52,44 @@ class  FeedController extends AbstractController {
 
         return $this->render('navigation/comments.html.twig', ['idPost' => $idPost]);
     }
+
+    #[Route('/newPost', name:'new_post')]
+    public function new_post(EntityManagerInterface $entityManager) {
+		
+		$user = $this->getUser();
+		$posterProfile = $user->getProfile();
+
+		$error = "";
+
+		// procesar formulario por post
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			if ($_FILES['postPhoto']['error'] == UPLOAD_ERR_OK) {
+			
+				$newPost = new Post();
+				$newPost->setLikes(0);
+				$newPost->setDislikes(0);
+				$newPost->setCommentAmount(0);
+				$newPost->setPostingTime(new \DateTimeImmutable());
+				$newPost->setPosterProfile($posterProfile);
+				$newPost->setContentRoute("");
+
+				// subimos el post para que tenga una id
+				$entityManager->persist($newPost);
+				$entityManager->flush();
+				
+				$filePath = 'userData'.'/' . $posterProfile->getIdUser() . '/posts'.'/' . $newPost->getIdPost() .'.png';
+				move_uploaded_file($_FILES['postPhoto']['tmp_name'], $filePath);
+				$newPost->setContentRoute('/'.$filePath);
+
+				$entityManager->persist($newPost);
+				$entityManager->flush();
+				
+				return $this->redirectToRoute('load_post', ['idPost' => $newPost->getIdPost()]);
+			}else {
+				$error .= "Sube una imagen ";
+			}
+		}
+
+        return $this->render('navigation/postCreate.html.twig', ["error" => $error]);
+    }
 }
