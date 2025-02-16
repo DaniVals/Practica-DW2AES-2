@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 #[ORM\Entity] 
 #[ORM\Table(name: 'accactivation')]
@@ -21,24 +22,24 @@ class Accactivation
 
 //-----------------------------------------------------------
 
-	public function getIdUser() {
+	public function getIdUser() : ?int {
 		return $this->idUser;
 	}
-	public function setIdUser($idUser) {
+	public function setIdUser(?int $idUser) {
 		$this->idUser = $idUser;
 	}
 
-	public function getToken() {
+	public function getToken() : ?string {
 		return $this->token;
 	}
-	public function setToken($token) {
+	public function setToken(?string $token) {
 		$this->token = $token;
 	}
 
-	public function getExpiration() {
+	public function getExpiration() : ?DateTime {
 		return $this->expiration;
 	}
-	public function setExpiration($expiration) {
+	public function setExpiration(?DateTime $expiration) {
 		$this->expiration = $expiration;
 	}
 }

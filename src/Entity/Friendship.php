@@ -39,17 +39,17 @@ class Friendship
 		$this->idFriendship = $idFriendship;
 	}
 
-	public function getIdRequestor() : ?int {
+	public function getIdRequestor() : ?User {
 		return $this->IdRequestor;
 	}
-	public function setIdRequestor(?int $IdRequestor) {
+	public function setIdRequestor(?User $IdRequestor) {
 		$this->IdRequestor = $IdRequestor;
 	}
 
-	public function getIdRequested() : ?int {
+	public function getIdRequested() : ?User {
 		return $this->IdRequested;
 	}
-	public function setIdRequested(?int $IdRequested) {
+	public function setIdRequested(?User $IdRequested) {
 		$this->IdRequested = $IdRequested;
 	}
 

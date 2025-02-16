@@ -3,6 +3,7 @@
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 #[ORM\Entity] 
 #[ORM\Table(name: 'comment')]
@@ -47,60 +48,59 @@ class Comment
 
 //-----------------------------------------------------------
 
-	public function getIdComment() {
+	public function getIdComment() : ?int {
 		return $this->idComment;
 	}
-	public function setIdComment($idComment) {
+	public function setIdComment(?int $idComment) {
 		$this->idComment = $idComment;
 	}
 
-	public function getIdUser() {
+	public function getIdUser() : ?Profile {
 		return $this->idUser;
 	}
-	public function setIdUser($idUser) {
+	public function setIdUser(?Profile $idUser) {
 		$this->idUser = $idUser;
 	}
 
-	public function getCommPost() {
+	public function getCommPost() : ?Post {
 		return $this->commPost;
 	}
-	public function setCommPost($commPost) {
+	public function setCommPost(?Post $commPost) {
 		$this->commPost = $commPost;
 	}
 
-	public function getCommComment() {
-	// public function getCommComment() : ?Comment {
+	public function getCommComment() : ?Comment {
 		return $this->commComment;
 	}
-	public function setCommComment($commComment) {
+	public function setCommComment(?Comment $commComment) {
 		$this->commComment = $commComment;
 	}
 
-	public function getContent() {
+	public function getContent() : ?string {
 		return $this->content;
 	}
-	public function setContent($content) {
+	public function setContent(?string $content) {
 		$this->content = $content;
 	}
 
-	public function getLikes() {
+	public function getLikes() : ?int {
 		return $this->likes;
 	}
-	public function setLikes($likes) {
+	public function setLikes(?int $likes) {
 		$this->likes = $likes;
 	}
 
-	public function getDislikes() {
+	public function getDislikes() : ?int {
 		return $this->dislikes;
 	}
-	public function setDislikes($dislikes) {
+	public function setDislikes(?int $dislikes) {
 		$this->dislikes = $dislikes;
 	}
 
-	public function getPostingTime() {
+	public function getPostingTime() : ?DateTime {
 		return $this->postingTime;
 	}
-	public function setPostingTime($postingTime) {
+	public function setPostingTime(?DateTime $postingTime) {
 		$this->postingTime = $postingTime;
 	}
 
