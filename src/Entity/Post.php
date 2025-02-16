@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity] 
@@ -57,10 +58,10 @@ class Post
 		$this->dislikes = $dislikes;
 	}
 
-	public function getPostingTime() : ?DateTime {
+	public function getPostingTime() : ?DateTimeImmutable {
 		return $this->postingTime;
 	}
-	public function setPostingTime(?DateTime $postingTime) {
+	public function setPostingTime(?DateTimeImmutable $postingTime) {
 		$this->postingTime = $postingTime;
 	}
 
