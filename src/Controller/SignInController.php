@@ -52,7 +52,7 @@ class SignInController extends AbstractController
 
             $profile = new Profile();
             $profile->setUserName($username);
-            $profile->setIdUser($user->getIdUser());
+            $profile->setUser($user);
             $profile->setBio('Hello, I am new to ShadowGram!');
             $profile->setFollowers(0);
             $profile->setFollowing(0);
@@ -72,14 +72,13 @@ class SignInController extends AbstractController
         $email = $request->get('email');
         $name = $request->get('name');
         $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
-        $idUser = $user->getIdUser();
 
         // Insertar el token en la bbdd y su expiración con las entidades
         $token = bin2hex(random_bytes(32)); //Token de 64 caracteres
         $expiration = date("Y-m-d H:i:s", strtotime("+1 day")); //Fecha de expiración del token
         $expiration = new \DateTime($expiration);
         $accactivation = new Accactivation();
-        $accactivation->setIdUser($idUser);
+        $accactivation->setUser($user);
         $accactivation->setToken($token);
         $accactivation->setExpiration($expiration);
         $entityManager->persist($accactivation);

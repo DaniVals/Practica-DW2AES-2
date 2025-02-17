@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		{% include "content.html.twig" %}
+		{# lo añado aunque se supone que no se ve esta pagina #}
+		<link rel="stylesheet" href="{{asset('css/form.css')}}">
+		<title>Recuperacion de cuenta</title>
+	</head>
+	<body>
+		<h1>
+		Formulario para poner una nueva contraseña
+		</h1>
+		<form action="{{path('reset_password_post', {'token' : token }) }}" method="post">
+			<input type="text" name="email" placeholder="Email">
+			<input type="password" name="password1" placeholder="Contraseña">
+			<input type="password" name="password2" placeholder="Repite la contraseña">
+			<input type="submit" value="Enviar">
+		</form>
+	</body>
+</html>

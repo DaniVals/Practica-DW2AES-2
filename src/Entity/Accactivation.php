@@ -22,11 +22,11 @@ class Accactivation
 
 //-----------------------------------------------------------
 
-	public function getIdUser() : ?int {
+	public function getUser() : ?User {
 		return $this->idUser;
 	}
-	public function setIdUser(?int $idUser) {
-		$this->idUser = $idUser;
+	public function setUser(?User $IdUser) {
+		$this->idUser = $IdUser;
 	}
 
 	public function getToken() : ?string {
@@ -39,7 +39,7 @@ class Accactivation
 	public function getExpiration() : ?DateTime {
 		return $this->expiration;
 	}
-	public function setExpiration(?DateTime $expiration) {
+	public function setExpiration(\DateTime $expiration) {
 		$this->expiration = $expiration;
 	}
 }
