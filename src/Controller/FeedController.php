@@ -99,6 +99,8 @@ class  FeedController extends AbstractController {
 		$user = $this->getUser();
 		$posterProfile = $user->getProfile();
 
+		$post = $entityManager->getRepository(Post::class)->findOneBy(['idPost' => $post]);
+
 		// procesar formulario por post
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$newComment = new Comment();
@@ -107,7 +109,7 @@ class  FeedController extends AbstractController {
 			$newComment->setPostingTime(new \DateTimeImmutable());
 			$newComment->setProfileUser($posterProfile);
 			$newComment->setContent($_POST['commentText']);
-			$newComment->setCommPost($entityManager->getRepository(Post::class)->findOneBy(['idPost' => $post]));
+			$newComment->setCommPost($post);
 
 			if ($comment < 0) {
 				$newComment->setCommComment(null);
@@ -117,9 +119,12 @@ class  FeedController extends AbstractController {
 
 			$entityManager->persist($newComment);
 			$entityManager->flush();
+
+			// recontar el numero de comentarios
+			$post->recountComments($entityManager);
 		}
 
-        return $this->redirectToRoute('load_comments', ['idPost' => $post]);
+        return $this->redirectToRoute('load_comments', ['idPost' => $post->getIdPost()]);
     }
 	
     #[Route('/following', name:'feed_mutuals')]

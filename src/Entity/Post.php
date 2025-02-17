@@ -5,6 +5,7 @@ namespace App\Entity;
 use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[ORM\Entity] 
 #[ORM\Table(name: 'post')]
@@ -87,6 +88,13 @@ class Post
 	}
 
 //-----------------------------------------------------------
+
+	public function recountComments(EntityManagerInterface $entityManager) {
+		$comments = $entityManager->getRepository(Comment::class)->findBy(['commPost' => $this]);
+		$this->commentAmount = count($comments);
+		$entityManager->persist($this);
+		$entityManager->flush();
+	}
 
 	public function toArray(?bool $fullProfile = true) : array {
         return [
