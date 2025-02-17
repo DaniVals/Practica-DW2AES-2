@@ -26,7 +26,7 @@ class UserFinderController extends AbstractController {
 
     // Cada vez que se escriba una letra, JS hará una petición al servidor para buscar usuarios que coincidan con la o las letras
     // Se mostrará una lista de usuarios que empiezen con la o las letras
-    #[Route('/find', name:'find_user')]
+    #[Route('/findAJAX', name:'find_user_AJAX')]
     public function find_user(EntityManagerInterface $entityManager, Request $request) {
         // Devolver un JSON con los usuarios que coincidan con la búsqueda
         $search = $request->get('search');
@@ -37,7 +37,7 @@ class UserFinderController extends AbstractController {
             ->getResult();
         $usernames = [];
         foreach ($profiles as $profile) {
-            $usernames[] = $profile->getUserName();
+            $usernames[] = $profile->toArray();
         }
         return new JsonResponse($usernames);  
     }
