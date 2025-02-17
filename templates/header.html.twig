@@ -7,6 +7,7 @@
 		<li><a href="{{ path('feed') }}">Home</a></li>
 		<li><a href="{{ path('redirect_profile') }}">Profile</a></li>
 		<li><a href="{{ path('new_post') }}">Create a post</a></li>
+		<li><a href="{{ path('notifications') }}">Notificaciones</a></li>
 		{# mostrar la opcion de admin si tiene ese rol #}
 		{% if is_granted('ROLE_ADMIN') %}
 			<li><a href="{{ path('admin_dashboard') }}">Admin</a></li>

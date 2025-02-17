@@ -13,6 +13,8 @@
 	--header-width: 25%;
 
 	--thread-right-margin: 150px;
+
+	--notificacion-height: 70px;
 }
 
 /* media querry que cambie el ancho de la cabecera a 150px */

@@ -33,10 +33,17 @@ class ProfileController extends AbstractController {
 
 		return $this->render('navigation/profile.html.twig', ['targetProfile' => $targetProfile, 'relationshipState' => $relationshipState]);
 	}
-	#[Route('/profile/{userName}/friendRequest/{newState}', name:'friend_profile')]
+
+
+	#[Route('/profile/{userName}/friendSendRequest/{newState}', name:'friend_profile')]
 	public function sendFriendRequest($userName, $newState, EntityManagerInterface $entityManager) {
 
 		$targetUser = $entityManager->getRepository(Profile::class)->findOneBy(['userName' => $userName])->getUser();
+
+		// evitar crear solicitudes aceptadas instantaneamente
+		if ($newState == 2) {
+			$newState = 0;
+		}
 		$pendingState = $entityManager->getRepository(State::class)->findOneBy(['idState' => $newState]);
 		
 		$userUser = $this->getUser();
@@ -59,6 +66,55 @@ class ProfileController extends AbstractController {
 
 		return $this->redirectToRoute('load_profile', ['userName' => $userName]);
 	}
+	#[Route('/profile/{userName}/friendRequest/{accepting}/{newState}', name:'friend_notification')]
+	public function acceptFriendRequest($userName, $newState, $accepting, EntityManagerInterface $entityManager) {
+
+		// basicamente hace lo mismo pero te redirije a las notificaciones
+		
+		// evitar crear solicitudes aceptadas instantaneamente
+		if ($newState == 2 && $accepting != "true") {
+			$newState = 1;
+		}
+
+		$State = $entityManager->getRepository(State::class)->findOneBy(['idState' => $newState]);
+		$targetUser = $entityManager->getRepository(Profile::class)->findOneBy(['userName' => $userName])->getUser();
+		
+		$userUser = $this->getUser();
+		$friendRequest = null;
+
+		if ($accepting == "true") {
+			$friendRequest = $entityManager->getRepository(Friendship::class)->findOneBy(
+				['IdRequestor' => $targetUser, 'IdRequested' => $userUser]
+			);
+		}else {
+			$friendRequest = $entityManager->getRepository(Friendship::class)->findOneBy(
+				['IdRequestor' => $userUser, 'IdRequested' => $targetUser]
+			);
+		}
+		
+
+		if ($friendRequest != null) {
+			$friendRequest->setFrState($State);
+			
+			$entityManager->persist($friendRequest);
+			$entityManager->flush();
+		}
+		// no hay else ya que si no podrias hacer que te siga gente sin que te envien nada
+
+		return $this->redirectToRoute('notifications');
+	}
+    #[Route('/notifications', name:'notifications')]
+    public function notifications(EntityManagerInterface $entityManager) {
+
+		$user = $this->getUser();
+		$pendingState = $entityManager->getRepository(State::class)->findOneBy(['idState' => 1]);
+		$sendedToYou = $entityManager->getRepository(Friendship::class)->findBy(['IdRequested' => $user, 'frState' => $pendingState]);
+		$sendedByYou = $entityManager->getRepository(Friendship::class)->findBy(['IdRequestor' => $user, 'frState' => $pendingState]);
+
+		return $this->render('navigation/notificationList.html.twig', ['sendedToYou' => $sendedToYou, 'sendedByYou' => $sendedByYou]);
+	}
+
+
     #[Route('/profile', name:'redirect_profile')]
     public function redirectProfile() {
 		$userName = $this->getUser();

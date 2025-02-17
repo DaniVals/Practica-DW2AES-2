@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+		{% include "content.html.twig" %}
+		<link rel="stylesheet" href="{{asset('css/thread.css')}}">
+		<link rel="stylesheet" href="{{asset('css/notifications.css')}}">
+        <title>Your friend requests</title>
+    </head>
+	{% include "header.html.twig" %}
+    <body>
+	
+		{# sendedToYou #}
+		<h2 class="sectionTitle">Nuevas Solicitudes</h2>
+		{% for requestTY in sendedToYou %}
+			<div class="notificationFriendRequest">
+				<a href="{{ path('load_profile', { 'userName': requestTY.getUserRequestor.Profile.userName })}}">
+					<img src="{{asset('userData/'~requestTY.getUserRequestor.Profile.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
+					<p>{{requestTY.getUserRequestor.Profile.userName}}</p>
+				</a>
+				<a href="{{ path('friend_notification', {userName: requestTY.getUserRequestor.Profile.userName, accepting: "true", newState: 2}) }}" class="linkButton">Aceptar Solicitud</a>
+			</div>
+		{% endfor %}
+		
+		{# sendedByYou #}
+		<h2 class="sectionTitle">Solicitudes Pendientes</h2>
+		{% for requestBY in sendedByYou %}
+			<div class="notificationFriendRequest">
+				<a href="{{ path('load_profile', { 'userName': requestBY.getUserRequested.Profile.userName })}}">
+					<img src="{{asset('userData/'~requestBY.getUserRequested.Profile.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
+					<p>{{requestBY.getUserRequested.Profile.userName}}</p>
+				</a>
+				<a href="{{ path('friend_notification', {userName: requestBY.getUserRequested.Profile.userName, accepting: "false", newState: 0}) }}" class="linkButton">Cancelar Solicitud</a>
+			</div>
+		{% endfor %}
+    </body>
+</html>
