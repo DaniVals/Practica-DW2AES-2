@@ -6,6 +6,7 @@ security:
                 property: email 
     access_control:
         - { path: ^/feed, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/mutuals, roles: [ROLE_USER, ROLE_ADMIN] }
         - { path: ^/newPost, roles: [ROLE_USER, ROLE_ADMIN] }
         - { path: ^/notifications, roles: [ROLE_USER, ROLE_ADMIN] }
         - { path: ^/profile, roles: [ROLE_USER, ROLE_ADMIN] }

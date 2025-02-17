@@ -92,4 +92,9 @@ class  FeedController extends AbstractController {
 
         return $this->render('navigation/postCreate.html.twig', ["error" => $error]);
     }
+	
+    #[Route('/following', name:'feed_mutuals')]
+    public function load_feed_mutuals() {
+        return $this->render('navigation/feedFriends.html.twig');
+    }
 }
