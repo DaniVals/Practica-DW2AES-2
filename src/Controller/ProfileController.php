@@ -48,8 +48,8 @@ class ProfileController extends AbstractController {
 			
 		}else {
 			$friendRequest = new Friendship();
-			$friendRequest->setIdRequestor($userUser);
-			$friendRequest->setIdRequested($targetUser);
+			$friendRequest->setUserRequestor($userUser);
+			$friendRequest->setUserRequested($targetUser);
 			$friendRequest->setFrDate(new \DateTime());
 			$friendRequest->setFrState($pendingState);
 		}
