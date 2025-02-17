@@ -4,7 +4,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 #[ORM\Entity] 
 #[ORM\Table(name: 'user')]
@@ -77,10 +77,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 		$this->phoneNumber = $phoneNumber;
 	}
 
-	public function getBirthDate() : ?Date {
+	public function getBirthDate() : \DateTime {
 		return $this->birthDate;
 	}
-	public function setBirthDate(?Date $birthDate) {
+	public function setBirthDate(\DateTime $birthDate) {
 		$this->birthDate = $birthDate;
 	}
 

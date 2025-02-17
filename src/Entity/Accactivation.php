@@ -36,7 +36,7 @@ class Accactivation
 		$this->token = $token;
 	}
 
-	public function getExpiration() : ?DateTime {
+	public function getExpiration() : \DateTime {
 		return $this->expiration;
 	}
 	public function setExpiration(\DateTime $expiration) {

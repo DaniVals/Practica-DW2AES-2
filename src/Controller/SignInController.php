@@ -57,6 +57,7 @@ class SignInController extends AbstractController
             $profile->setFollowers(0);
             $profile->setFollowing(0);
             $profile->setUser($user);
+            $profile->setIdUser($user->getIdUser());
             $entityManager->persist($profile);
             $entityManager->flush();
 
@@ -120,7 +121,7 @@ class SignInController extends AbstractController
                 $expiration = $accactivation->getExpiration();
                 $now = new \DateTime();
                 if ($now < $expiration){
-                    $idUser = $accactivation->getIdUser();
+                    $idUser = $accactivation->getUser();
                     $user = $entityManager->getRepository(User::class)->findOneBy(['idUser' => $idUser]);
                     $role = $entityManager->getRepository(Role::class)->findOneBy(['idRole' => 1]);
                     $user->setRole($role);

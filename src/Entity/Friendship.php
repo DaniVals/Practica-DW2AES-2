@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 #[ORM\Entity] 
 #[ORM\Table(name: 'friendship')]
@@ -18,8 +18,7 @@ class Friendship
 	#[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: 'idRequestor', referencedColumnName: 'idUser')]
 	private $IdRequestor;
-
-	#[ORM\ManyToOne(targetEntity: User::class)]
+#[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(name: 'idRequested', referencedColumnName: 'idUser')]
 	private $IdRequested;
 	
@@ -60,10 +59,10 @@ class Friendship
 		$this->frState = $frState;
 	}
 
-	public function getFrDate() : ?DateTime {
+	public function getFrDate() : \DateTime {
 		return $this->frDate;
 	}
-	public function setFrDate(?DateTime $frDate) {
+	public function setFrDate(\DateTime $frDate) {
 		$this->frDate = $frDate;
 	}
 }
