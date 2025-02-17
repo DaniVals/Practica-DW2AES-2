@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sobre Nosotros - IES Clara del Rey</title>
+        {% include "content.html.twig" %}
+        <link rel="stylesheet" href="{{ asset('css/thread.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/userProfile.css') }}">
+    </head>
+    <body>
+        {% include "header.html.twig" %}
+
+        <div class="about-us-container">
+            <h1>Sobre Nosotros</h1>
+            <p>Bienvenidos a ShadowGram. Somos una aplicación comprometida con la privacidad y respeto entre los usuarios.</p>
+
+            <h2>Nuestra Ubicación</h2>
+            <p>Aquí puedes ver la ubicación de nuestras oficinas:</p>
+
+            {# Iframe de Google Maps #}
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.3075148304106!2d-3.666678523486065!3d40.4463302538364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228d2f6b86b6d%3A0xf68494880cb18c73!2sIES%20Clara%20Del%20Rey!5e0!3m2!1sen!2sus!4v1739793176487!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </body>
+</html>
