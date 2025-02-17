@@ -7,15 +7,15 @@
 		<li><a href="{{ path('feed') }}">Home</a></li>
 		<li><a href="{{ path('feed_mutuals') }}">Tus amigos</a></li>
 		<li><a href="{{ path('redirect_profile') }}">Tu Perfil</a></li>
-		<li><a href="{{ path('load_finder') }}">Buscar a alguien</a></li>
+		<li><a href="{{ path('load_finder') }}">Buscar usuario</a></li>
 		<li><a href="{{ path('new_post') }}">Crea un post</a></li>
 		<li><a href="{{ path('notifications') }}">Notificaciones</a></li>
-		<li><a href="{{ path('about_us') }}">About Us</a></li>
+		<li><a href="{{ path('about_us') }}">Sobre nosotros</a></li>
 		{# mostrar la opcion de admin si tiene ese rol #}
 		{% if is_granted('ROLE_ADMIN') %}
-			<li><a href="{{ path('admin_dashboard') }}">Admin</a></li>
+			<li><a href="{{ path('admin_dashboard') }}">Zona admin</a></li>
 		{% endif %}
-		<li><a href="{{ path('ctrl_logout') }}">Log Out</a></li>
+		<li><a href="{{ path('ctrl_logout') }}">Cerrar sesión</a></li>
 	</ul>
 
 </header>
