@@ -39,9 +39,9 @@ class PostLoader extends AbstractController {
 #[Route('/loadPost/timeline', name: 'load_post_timeline_ajax')]
 public function loadPostTimeline(EntityManagerInterface $entityManager, Request $request): JsonResponse
 {
-    if (!$request->isXmlHttpRequest()) {
-        return $this->redirectToRoute('feed');
-    }
+    // if (!$request->isXmlHttpRequest()) {
+    //     return $this->redirectToRoute('feed');
+    // }
 
     $user = $this->getUser();
     if (!$user) {
@@ -57,7 +57,7 @@ public function loadPostTimeline(EntityManagerInterface $entityManager, Request 
         ->from(Friendship::class, 'f')
         ->leftJoin('f.IdRequestor', 'u1')
         ->leftJoin('f.IdRequested', 'u2')
-        ->where('(f.IdRequestor = :userId OR f.IdRequested = :userId)')
+        ->where('(f.IdRequestor = :userId)')
         ->andWhere('f.frState = 2')  
         ->setParameter('userId', $this->getUser())
         ->getQuery()
