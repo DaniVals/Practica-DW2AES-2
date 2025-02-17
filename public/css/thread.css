@@ -95,6 +95,14 @@ body{
 	margin-left: 15px;
 	margin-top: -10px;
 }
+.comment form{
+	margin-left: 15px;
+	opacity: 0.5;
+}
+.comment form:focus{
+	/* no funciona, te dejo alex para que veas lo que intento */
+	opacity: 1;
+}
 
 .comment .commentStats{
 	padding: 5px;

@@ -1,5 +1,3 @@
-const idButtonLoadMore = 'loadMore';
-
 document.addEventListener('readystatechange', function() {
 	if (document.readyState === 'complete') {
 		loadComments();
@@ -16,7 +14,9 @@ function loadComments() {
 	isLoading = true;
 
 	const Post = document.getElementsByClassName('post')[0];
-	// console.log(Post);
+	const ajaxRoute = document.getElementById("ajaxRoute").value;
+	const createPostRoute = document.getElementById("createPostRoute").value.slice(0, -1);
+	console.log(createPostRoute);
 
 	let xhttp = new XMLHttpRequest();
 	xhttp.onload = function() {
@@ -33,7 +33,15 @@ function loadComments() {
 			postingTime: {date: '2025-02-11 00:00:00.000000', timezone_type: 3, timezone: 'Europe/Berlin'}
 			[[Prototype]]: Object
 		*/
-		comments.forEach(comment => {
+		if (comments.length == 0) {
+			let commentDiv = document.createElement('div');
+			commentDiv.className = 'emptyErrorMessage';
+			commentDiv.textContent = 'No comments yet';
+			Post.appendChild(commentDiv);
+		}
+
+		for (let i = 0; i < comments.length; i++) {
+			const comment = comments[i];
 
 			let commentDiv;
 			if (comment["commComment"] == null) {
@@ -64,6 +72,20 @@ function loadComments() {
 				content.className = 'commentContent';
 				content.textContent = comment["content"];
 				commentDiv.appendChild(content);
+				
+				const form = document.createElement('form');
+				form.method = 'post';
+				form.action = createPostRoute + comment["idComment"];
+					let input = document.createElement('input');
+					input.type = 'text';
+					input.name = 'commentText';
+					form.appendChild(input);
+
+					input = document.createElement('input');
+					input.type = 'submit';
+					input.value = 'Responder';
+					form.appendChild(input);
+				commentDiv.appendChild(form);
 
 				const commentList = document.createElement('ul');
 				commentList.className = 'commentList';
@@ -83,16 +105,28 @@ function loadComments() {
 					}
 				}
 			}
-		});
+		}
+
+		const form = document.createElement('form');
+		form.method = 'post';
+		form.action = createPostRoute + '-1';
+			let input = document.createElement('input');
+			input.type = 'text';
+			input.name = 'commentText';
+			form.appendChild(input);
+
+			input = document.createElement('input');
+			input.type = 'submit';
+			input.value = 'Publicar comentario';
+			form.appendChild(input);
+		Post.appendChild(form);
 
 		console.log('Comments loaded');
 		isLoading = false;
 	};
-	xhttp.open('POST', '/loadComments');
+	xhttp.open('GET', ajaxRoute + "?idPost=" + Post.id);
     xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-	
-
-	xhttp.send("idPost=" + Post.id);
+	xhttp.send();
 	console.log('Loading comments...');
 	
 }

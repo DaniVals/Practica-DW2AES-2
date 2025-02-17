@@ -20,12 +20,12 @@ class CommentLoader extends AbstractController {
     
     #[Route('/loadComments', name:'load_comments_ajax')]
     public function loadPost(EntityManagerInterface $entityManager, Request $request) {
-        // if (!$request->isXmlHttpRequest()) {
-        //     return $this->redirectToRoute('feed');
-        // }
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToRoute('feed');
+        }
 		
-		// $requested = $_POST['idPost'];
-		$requested = 2;
+		$requested = $request->get('idPost');
+
         $post = $entityManager->getRepository(Post::class)->findOneBy(['idPost' => $requested]);
 		$comments = $entityManager->getRepository(Comment::class)->findBy(
 			['commPost' => $post],

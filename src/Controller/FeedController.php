@@ -92,6 +92,35 @@ class  FeedController extends AbstractController {
 
         return $this->render('navigation/postCreate.html.twig', ["error" => $error]);
     }
+
+    #[Route('/newComment/{post}/{comment}', name:'new_comment')]
+    public function new_comment($post, $comment, EntityManagerInterface $entityManager) {
+		
+		$user = $this->getUser();
+		$posterProfile = $user->getProfile();
+
+		// procesar formulario por post
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			$newComment = new Comment();
+			$newComment->setLikes(0);
+			$newComment->setDislikes(0);
+			$newComment->setPostingTime(new \DateTimeImmutable());
+			$newComment->setProfileUser($posterProfile);
+			$newComment->setContent($_POST['commentText']);
+			$newComment->setCommPost($entityManager->getRepository(Post::class)->findOneBy(['idPost' => $post]));
+
+			if ($comment < 0) {
+				$newComment->setCommComment(null);
+			}else {
+				$newComment->setCommComment($entityManager->getRepository(Comment::class)->findOneBy(['idComment' => $comment]));
+			}
+
+			$entityManager->persist($newComment);
+			$entityManager->flush();
+		}
+
+        return $this->redirectToRoute('load_comments', ['idPost' => $post]);
+    }
 	
     #[Route('/following', name:'feed_mutuals')]
     public function load_feed_mutuals() {

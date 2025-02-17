@@ -3,6 +3,7 @@
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 #[ORM\Entity] 
@@ -43,7 +44,7 @@ class Comment
 	private Collection $allComments;
 	
     public function __construct() {
-        $this->allComments = new Collection();
+        $this->allComments = new ArrayCollection();
     }
 
 //-----------------------------------------------------------
@@ -97,10 +98,10 @@ class Comment
 		$this->dislikes = $dislikes;
 	}
 
-	public function getPostingTime() : ?DateTime {
+	public function getPostingTime() : \DateTimeImmutable {
 		return $this->postingTime;
 	}
-	public function setPostingTime(?DateTime $postingTime) {
+	public function setPostingTime(\DateTimeImmutable $postingTime) {
 		$this->postingTime = $postingTime;
 	}
 
