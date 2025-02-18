@@ -1,4 +1,5 @@
 const idButtonLoadMore = 'loadMore';
+const reactPostRoute = '/reactPost/'
 
 document.addEventListener('readystatechange', function() {
 	if (document.readyState === 'complete') {
@@ -11,9 +12,9 @@ document.addEventListener('readystatechange', function() {
 		// 	}
 		// });		
 
-		document.getElementById(idButtonLoadMore).addEventListener('click', function() {
-			loadPost();
-		});
+		// document.getElementById(idButtonLoadMore).addEventListener('click', function() {
+		// 	loadPost();
+		// });
 	}
 });
 
@@ -34,7 +35,7 @@ function loadPost() {
 
 			const divLoadMore = document.getElementById("loadedPosts");
 			const posts = JSON.parse(this.responseText);
-			// console.log(posts);
+			console.log(posts);
 
 			for (let i = 0; i < posts.length; i++) {
 				const post = posts[i];
@@ -79,12 +80,52 @@ function loadPost() {
 
 						const spanLikes = document.createElement('span');
 						spanLikes.className = 'likes';
-						spanLikes.textContent = post.likes + ' likes';
+						spanLikes.textContent = post.likes;
+
+							// button to give a like
+							const likeButton = document.createElement('button');
+
+							// change based on localStorage
+							if (localStorage.getItem('likedPost_' + post.idPost) === 'true') {
+								likeButton.className = 'likeGivenButton';
+							} else {
+								likeButton.className = 'likeButton';
+							}
+
+							likeButton.addEventListener('click', function() {
+								if (localStorage.getItem('likedPost_' + post.idPost) === 'true') {
+									unlikePost(post["idPost"], spanLikes);
+								} else {
+									likePost(post["idPost"], spanLikes);
+								}
+							});
+							spanLikes.appendChild(likeButton);
+
 						postStats.appendChild(spanLikes);
 
 						const spanDislikes = document.createElement('span');
 						spanDislikes.className = 'dislikes';
-						spanDislikes.textContent = post.dislikes + ' dislikes';
+						spanDislikes.textContent = post.dislikes;
+
+							// button to give a like
+							const dislikeButton = document.createElement('button');
+
+							// change based on localStorage
+							if (localStorage.getItem('dislikedPost_' + post.idPost) === 'true') {
+								dislikeButton.className = 'dislikeGivenButton';
+							} else {
+								dislikeButton.className = 'dislikeButton';
+							}
+
+							dislikeButton.addEventListener('click', function() {
+								if (localStorage.getItem('dislikedPost_' + post.idPost) === 'true') {
+									undislikePost(post["idPost"], spanDislikes);
+								} else {
+									dislikePost(post["idPost"], spanDislikes);
+								}
+							});
+							spanDislikes.appendChild(dislikeButton);
+
 						postStats.appendChild(spanDislikes);
 
 						const spanComments = document.createElement('span');
@@ -107,4 +148,113 @@ function loadPost() {
 	xhttp.send();
 	console.log('Loading posts...');
 	
+}
+
+function likePost(postId, span) {
+	let comment = { AAA: "dando like a post", postId: postId, span: span };
+	console.log(comment);
+	
+	let xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			const response = JSON.parse(this.responseText);
+			span.textContent = response["newLikes"];
+
+			
+			let likeButton = document.createElement('button');
+			likeButton.className = 'likeGivenButton';
+			span.appendChild(likeButton);
+
+			likeButton.removeEventListener('click', arguments.callee);
+			likeButton.addEventListener('click', function() {
+				unlikePost(postId, span);
+			});
+
+			localStorage.setItem('likedPost_' + postId, true);
+		}
+	};
+	xhttp.open('GET', reactPostRoute + '0/' + postId);
+	xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+	xhttp.send();
+}
+// ==============================
+function unlikePost(postId, span) {
+	let comment = { AAA: "quitando like a post", postId: postId, span: span };
+	console.log(comment);
+
+	let xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			const response = JSON.parse(this.responseText);
+			span.textContent = response["newLikes"];
+			
+			let likeButton = document.createElement('button');
+			likeButton.className = 'likeButton';
+			span.appendChild(likeButton);
+
+			likeButton.removeEventListener('click', arguments.callee);
+			likeButton.addEventListener('click', function() {
+				likePost(postId, span);
+			});
+
+			localStorage.setItem('likedPost_' + postId, false);
+		}
+	};
+	xhttp.open('GET', reactPostRoute + '2/' + postId);
+	xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+	xhttp.send();
+}
+function dislikePost(postId, span) {
+	let comment = { AAA: "dando dislike a post", postId: postId, span: span };
+	console.log(comment);
+	
+	let xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			const response = JSON.parse(this.responseText);
+			span.textContent = response["newDislikes"];
+
+			
+			let dislikeButton = document.createElement('button');
+			dislikeButton.className = 'dislikeGivenButton';
+			span.appendChild(dislikeButton);
+
+			dislikeButton.removeEventListener('click', arguments.callee);
+			dislikeButton.addEventListener('click', function() {
+				undislikePost(postId, span);
+			});
+
+			localStorage.setItem('dislikedPost_' + postId, true);
+		}
+	};
+	xhttp.open('GET', reactPostRoute + '1/' + postId);
+	xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+	xhttp.send();
+}
+
+function undislikePost(postId, span) {
+	let comment = { AAA: "quitando dislike a post", postId: postId, span: span };
+	console.log(comment);
+
+	let xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			const response = JSON.parse(this.responseText);
+			span.textContent = response["newDislikes"];
+			
+			let dislikeButton = document.createElement('button');
+			dislikeButton.className = 'dislikeButton';
+			span.appendChild(dislikeButton);
+
+			dislikeButton.removeEventListener('click', arguments.callee);
+			dislikeButton.addEventListener('click', function() {
+				dislikePost(postId, span);
+			});
+
+			localStorage.setItem('dislikedPost_' + postId, false);
+		}
+	};
+	xhttp.open('GET', reactPostRoute + '3/' + postId);
+	xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+	xhttp.send();
 }

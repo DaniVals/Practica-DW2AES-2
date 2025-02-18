@@ -56,7 +56,29 @@ body{
 	display: flex;
 	justify-content: space-around;
 }
-
+.post .likeButton,
+.post .likeGivenButton,
+.post .dislikeButton,
+.post .dislikeGivenButton{
+	background-color: #0000;
+	border: none;
+	background-size: contain;
+	width:  3vh;
+	height: 3vh;
+	cursor: pointer;
+}
+.post .likeButton{
+	background-image: url('/images/like.svg');
+}
+.post .likeGivenButton{
+	background-image: url('/images/like-fill.svg');
+}
+.post .dislikeButton{
+	background-image: url('/images/dislike.svg');
+}
+.post .dislikeGivenButton{
+	background-image: url('/images/dislike-fill.svg');
+}
 
 .showPostsLink,
 .showCommentsLink{
