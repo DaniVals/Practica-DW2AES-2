@@ -34,6 +34,19 @@ class AdminController extends AbstractController
     {
         // Devolver todos los datos del usuairo 
         $user = $entityManager->getRepository(User::class)->find($id);
+		$profile = $user->getProfile();
+
+		// editarlo si entra por Post
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			
+			$profile->setBio($_POST['bio']);
+			$profile->setUsername($_POST['userName']);
+			
+			$entityManager->persist($profile);
+			$entityManager->flush();
+			return $this->redirectToRoute('admin_users');
+		}
+
         return $this->render('admin/user_form.html.twig', ['user' => $user]);
     }
 

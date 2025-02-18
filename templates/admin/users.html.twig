@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		{% include "content.html.twig" %}
+		<link rel="stylesheet" href="{{asset('css/thread.css')}}"> 
+		<link rel="stylesheet" href="{{asset('css/userList.css')}}"> 
+		<link rel="stylesheet" href="{{asset('css/admin.css')}}"> 
+		<title>Zona de Admin</title>
+		<script src="{{asset('js/admin/users.js')}}"></script>
+	</head>
+	{% include "header.html.twig" %}
+	<body>
+		{% for user in users %}
+		{# mostar al usuario user asi #}
+		<div class="user" id="{{user.idUser}}">
+			<a href="/profile/{{user.Profile.userName}}">
+				<img src="/userData/{{user.idUser}}/profilePicture.png" alt="user image">
+				<span>{{user.Profile.userName}}</span>
+			</a>
+		</div>
+			
+		{% endfor %}
+	</body>
+	<div id="formularios_por_drop">
+		<div id="drop_to_edit">
+			<input type="hidden" id="drop_to_edit_route" value="{{path('admin_user_edit', {'id': 0})}}">
+			suelta aqui para EDITAR al usuario
+		</div>
+		<div id="drop_to_delete">
+			<input type="hidden" id="drop_to_delete_route" value="{{path('admin_user_delete', {'id': 0})}}">
+			suelta aqui para BORRAR al usuario
+		</div>
+	</div>
+</html>
