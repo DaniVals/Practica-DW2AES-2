@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
 		{% include "content.html.twig" %}
 		<link rel="stylesheet" href="{{asset('css/thread.css')}}">
-		{# TODO: meterle CSS #}
+		<link rel="stylesheet" href="{{asset('css/postPhoto.css')}}">
         <title>Nuevo Post</title>
     </head>
 	{% include "header.html.twig" %}
@@ -15,14 +15,13 @@
 				<p>{{error}}</p>
 			{% endif %}
 
-			<h2>¿Que hay de nuevo?</h2>
+			<h2>¿Qué hay de nuevo?</h2>
 			<form action="{{ path('new_post') }}" method="post" enctype="multipart/form-data">
 
-				<label for="postPhoto">Foto</label>
 				<input type="file" name="postPhoto" id="postPhoto" required>
 				<br>
 
-				<input type="submit" value="Subir Foto">
+				<input type="submit" value="Subir Foto" id="submitPost">
 			</form>
 
 		</div>

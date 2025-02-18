@@ -1,0 +1,26 @@
+.post {
+	height: 150px;
+	padding: 10px;
+}
+.post h2 {
+	margin-top: 10px;
+	margin-bottom: 20px;
+	display: flex;
+	justify-self: center;
+}
+.post #submitPost {
+	float: right;
+	color: var(--txt-color);
+	text-decoration: none;
+	padding: 5px 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	background-color: var(--bg-color-2);
+	border: 1px solid var(--txt-clickable-color);
+	border-radius: .5em;
+	cursor: pointer;
+}
+.post #submitPost:hover {
+	color: var(--txt-clickable-color);
+	background-color: var(--bg-color-3);
+}

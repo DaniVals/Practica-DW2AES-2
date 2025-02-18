@@ -22,12 +22,15 @@
 	border: 2px solid var(--bg-color-3);
 }
 
-#profileHeader .linkButton{
+.linkButton{
 	float: right;
 	color: var(--txt-color);
 	text-decoration: none;
 	padding: 5px 10px;
 	margin-top: 10px;
+}
+.linkButton:hover {
+	color: var(--txt-clickable-color);
 }
 #profileHeader #sig {
 	margin-left: 50px;
@@ -35,8 +38,24 @@
 #profileHeader #bio {
 	text-wrap: balance;
 }
+#delAcc {
+	border: 2px solid var(--bg-color-3);
+	border-radius: .5em;
+	height: 150px;
+	padding: 10px;
+}
+#delAcc h2 {
+	display: flex;
+	justify-self: center;
+	margin: 10px 0;
+}
 @media only screen and (max-width:700px) {
 	#profileHeader p span{
 		display: block;
+	}
+}
+@media only screen and (max-width:500px) {
+	#delAcc {
+		height: 175px;
 	}
 }

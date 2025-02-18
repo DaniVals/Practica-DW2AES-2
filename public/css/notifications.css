@@ -2,24 +2,23 @@
 	/* text-align: center; */
 	padding: 10px;
 	padding-top: 25px;
-	border: 2px solid var(--bg-color-3);
-	border-radius: .5em;
 }
 
 .notificationFriendRequest{
 
 	width: 100%;
 	padding: 10px;
+	margin-bottom: 10px;
 	height: var(--notificacion-height);
 	
 	display: flex;
 	justify-content: space-between;
 	
-	border-top: 1px solid;
 	overflow-x: hidden;
 
 	/* debug */
-	background-color: #898;
+	background-color: var(--bg-color-4);
+	border-radius: .5em;
 }
 
 .notificationFriendRequest a{
@@ -28,6 +27,8 @@
 }
 .notificationFriendRequest a p{
 	margin-top: 15px;
+	color: var(--txt-color);
+	text-decoration: none;
 }
 .notificationFriendRequest img{
 	width:  calc(var(--notificacion-height) - 20px);
