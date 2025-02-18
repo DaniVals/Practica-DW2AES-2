@@ -6,15 +6,13 @@ use App\Entity\User;
 use App\Entity\Role;
 use App\Entity\Post;
 use App\Entity\Profile;
-use App\Entity\Comment;
 use App\Entity\Friendship;
 use App\Entity\State;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ProfileController extends AbstractController {
     
@@ -178,5 +176,21 @@ class ProfileController extends AbstractController {
 		}
 
 		return $this->render('navigation/profileEdit.html.twig', ['targetProfile' => $targetProfile, "error" => $error]);
-    }
+	}
+
+	#[Route('/profileEdit/delete', name:'delete_profile')]
+	public function deleteProfile(EntityManagerInterface $entityManager, SessionInterface $session, TokenStorageInterface $tokenStorage) {
+		
+		$user = $this->getUser();
+		$currentUser = $tokenStorage->getToken()->getUser();
+		if($currentUser === $user){
+			$tokenStorage->setToken(null);
+			$session->invalidate();
+		}
+
+		$entityManager->remove($user);
+		$entityManager->flush();
+
+		return $this->redirectToRoute('ctrl_login');
+	}
 }
