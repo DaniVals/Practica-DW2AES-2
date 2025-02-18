@@ -46,3 +46,9 @@ html{
 .linkButton:hover{
 	background-color: var(--bg-color-3);
 }
+
+/* messages like "No comments yet, be the first" or "This post does not exist" */
+.emptyErrorMessage{
+	text-align: center;
+	margin: 5px;
+}

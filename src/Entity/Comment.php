@@ -98,6 +98,9 @@ class Comment
 		$this->dislikes = $dislikes;
 	}
 
+	public function getPostingTimeShort() : ?string {
+		return $this->postingTime ? $this->postingTime->format('Y-m-d H:i:s') : null;
+	}
 	public function getPostingTime() : \DateTimeImmutable {
 		return $this->postingTime;
 	}
@@ -137,7 +140,7 @@ class Comment
 			'content' => $this->content,
 			'likes' => $this->likes,
 			'dislikes' => $this->dislikes,
-			'postingTime' => $this->postingTime,
+			'postingTime' => $this->getPostingTimeShort(),
 			'Profile' => $this->idUser->toArray(),
 			'commComment' => $this->commComment ? $this->commComment->getCommentInfoForAJAX() : null,
 		];

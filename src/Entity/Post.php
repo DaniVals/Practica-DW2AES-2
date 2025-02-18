@@ -59,6 +59,9 @@ class Post
 		$this->dislikes = $dislikes;
 	}
 
+	public function getPostingTimeShort() : ?string {
+		return $this->postingTime ? $this->postingTime->format('Y-m-d H:i:s') : null;
+	}
 	public function getPostingTime() : ?DateTimeImmutable {
 		return $this->postingTime;
 	}
@@ -114,7 +117,7 @@ class Post
 			'PosterUser' => $this->PosterProfile->toArray(),
 			'likes' => $this->likes,
 			'dislikes' => $this->dislikes,
-			'postingTime' => $this->postingTime,
+			'postingTime' => $this->getPostingTimeShort(),
 			'commentAmount' => $this->commentAmount,
 			'contentRoute' => $this->contentRoute,
 		];

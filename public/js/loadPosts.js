@@ -58,7 +58,7 @@ function loadPost() {
 
 						
 						const commentDate = document.createElement('span');
-						commentDate.textContent = post["postingTime"]["date"];
+						commentDate.textContent = post["postingTime"];
 						postUserLink.appendChild(commentDate);
 
 					postDiv.appendChild(postUserLink);

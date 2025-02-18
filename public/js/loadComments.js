@@ -24,15 +24,6 @@ function loadComments() {
 		const comments = JSON.parse(this.responseText);
 		// console.log(comments);
 
-		/*
-			Profile: {userName: 'monstah', idUser: 4, bio: 'Hola SadowGram', followers: 0, following: 0}
-			commComment: nullcontent: "muerte a la grasa\r\n"
-			idComment: 2
-			dislikes: 9
-			likes: 6
-			postingTime: {date: '2025-02-11 00:00:00.000000', timezone_type: 3, timezone: 'Europe/Berlin'}
-			[[Prototype]]: Object
-		*/
 		if (comments.length == 0) {
 			let commentDiv = document.createElement('div');
 			commentDiv.className = 'emptyErrorMessage';
@@ -64,7 +55,7 @@ function loadComments() {
 					profile.appendChild(profileName);
 
 					const commentDate = document.createElement('span');
-					commentDate.textContent = comment["postingTime"]["date"];
+					commentDate.textContent = comment["postingTime"];
 					profile.appendChild(commentDate);
 				commentDiv.appendChild(profile);
 
