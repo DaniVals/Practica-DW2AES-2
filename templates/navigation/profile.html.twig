@@ -5,7 +5,12 @@
 		{% include "content.html.twig" %}
 		<link rel="stylesheet" href="{{asset('css/thread.css')}}">
 		<link rel="stylesheet" href="{{asset('css/userProfile.css')}}">
-        <title>@{{targetProfile.userName}}</title>
+		
+		{% if targetProfile == null %}
+        	<title>Usuario no encontrado</title>
+		{% else %}
+        	<title>@{{targetProfile.userName}}</title>
+		{% endif %}
 
 		<script src="{{asset('js/loadPosts.js')}}"></script>
 		{# targetProfile #}
@@ -13,28 +18,35 @@
 	{% include "header.html.twig" %}
     <body>
 		<div id="profileHeader">
-			<img src="{{asset('userData/'~targetProfile.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
-			{# idUser #}
-			<h1>{{targetProfile.userName}}</h1>
-			<p id="bio">{{targetProfile.bio}}</p>
-			<p><span id="seg">Seguidores: {{targetProfile.followers}}</span> <span id="sig">Siguiendo: {{targetProfile.following}}</span></p>
-
-			{# si es tu perfil, te sale el boton de editar tu perfil #}
-			{% if targetProfile.idUser == app.user.idUser %}
-				<a href="{{ path('edit_profile') }}" class="linkButton">Editar perfil</a>
+		
+			{% if targetProfile == null %}
+				<p class="emptyErrorMessage">Este usuario no existe</p>
 			{% else %}
-			{# un switch con los estados de Friendship (switch no existe en tiwg T_T) #}
-				{% if relationshipState == 'PENDING' %}
-					<a href="{{ path('friend_profile', {userName: targetProfile.userName, newState: 0}) }}" class="linkButton">Cancelar Solicitud</a>
-				{% elseif relationshipState == 'ACCEPTED' %}
-					<a href="{{ path('friend_profile', {userName: targetProfile.userName, newState: 0}) }}" class="linkButton">Eliminar Amigo</a>
+				<img src="{{asset('userData/'~targetProfile.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
+				{# idUser #}
+				<h1>{{targetProfile.userName}}</h1>
+				<p id="bio">{{targetProfile.bio}}</p>
+				<p><span id="seg">Seguidores: {{targetProfile.followers}}</span> <span id="sig">Siguiendo: {{targetProfile.following}}</span></p>
+
+				{# si es tu perfil, te sale el boton de editar tu perfil #}
+				{% if targetProfile.idUser == app.user.idUser %}
+					<a href="{{ path('edit_profile') }}" class="linkButton">Editar perfil</a>
 				{% else %}
-					<a href="{{ path('friend_profile', {userName: targetProfile.userName, newState: 1}) }}" class="linkButton">Enviar Solicitud</a>
+				{# un switch con los estados de Friendship (switch no existe en tiwg T_T) #}
+					{% if relationshipState == 'PENDING' %}
+						<a href="{{ path('friend_profile', {userName: targetProfile.userName, newState: 0}) }}" class="linkButton">Cancelar Solicitud</a>
+					{% elseif relationshipState == 'ACCEPTED' %}
+						<a href="{{ path('friend_profile', {userName: targetProfile.userName, newState: 0}) }}" class="linkButton">Eliminar Amigo</a>
+					{% else %}
+						<a href="{{ path('friend_profile', {userName: targetProfile.userName, newState: 1}) }}" class="linkButton">Enviar Solicitud</a>
+					{% endif %}
 				{% endif %}
 			{% endif %}
 		</div>
 		
-		<input type="hidden" id="ajaxRoute" value="{{ path('load_post_user_ajax', {userId: targetProfile.idUser}) }}">
+		{% if targetProfile != null %}
+			<input type="hidden" id="ajaxRoute" value="{{ path('load_post_user_ajax', {userId: targetProfile.idUser}) }}">
+		{% endif %}
 		<div id="loadedPosts"></div>
     </body>
 </html>

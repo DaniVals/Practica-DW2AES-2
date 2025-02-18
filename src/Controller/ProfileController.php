@@ -22,8 +22,11 @@ class ProfileController extends AbstractController {
 		$userProfile = $this->getUser();
 		$targetProfile = $entityManager->getRepository(Profile::class)->findOneBy(['userName' => $userName]);
 
+		if ($targetProfile == null) {
+			return $this->render('navigation/profile.html.twig', ['targetProfile' => null, 'relationshipState' => null]);
+		}
+		
 		$relationship = $entityManager->getRepository(Friendship::class)->findOneBy(['IdRequestor' => $userProfile, 'IdRequested' => $targetProfile->getUser()]);
-
 		$relationshipState = "NULO";
 		if ($relationship != null) {
 			$relationshipState = $relationship->getFrState()->getName();

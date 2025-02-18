@@ -12,20 +12,25 @@
     <body>
 		<div class="post">
 			{# {{ dump() }} #}
-			<a href="{{ path('load_profile', { 'userName': targetPost.PosterProfile.userName })}}" class="postUser">
-				<img src="{{asset('userData/'~targetPost.PosterProfile.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
-				<span class="postUser">{{ targetPost.PosterProfile.userName }}</span>
-				<span class="postTime">{{ targetPost.getPostingTimeShort }}</span>
-			</a>
 
-			<img src="{{ targetPost.contentRoute }}" alt="post image" class="postImg">
+			{% if targetPost == null %}
+				<p class="emptyErrorMessage">El post no existe</p>
+			{% else %}
+				<a href="{{ path('load_profile', { 'userName': targetPost.PosterProfile.userName })}}" class="postUser">
+					<img src="{{asset('userData/'~targetPost.PosterProfile.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
+					<span class="postUser">{{ targetPost.PosterProfile.userName }}</span>
+					<span class="postTime">{{ targetPost.getPostingTimeShort }}</span>
+				</a>
 
-			<div class="postStats">
-				<span class="likes">{{ targetPost.likes }} likes</span>
-				<span class="dislikes">{{ targetPost.dislikes }} dislikes</span>
-				<span class="comments">{{ targetPost.commentAmount }} comments</span>
-			</div>
-			<a href="{{ path('load_comments', { 'idPost': targetPost.idPost })}}" class="linkButton showCommentsLink"> Ver comentarios </a>
+				<img src="{{ targetPost.contentRoute }}" alt="post image" class="postImg">
+
+				<div class="postStats">
+					<span class="likes">{{ targetPost.likes }} likes</span>
+					<span class="dislikes">{{ targetPost.dislikes }} dislikes</span>
+					<span class="comments">{{ targetPost.commentAmount }} comments</span>
+				</div>
+				<a href="{{ path('load_comments', { 'idPost': targetPost.idPost })}}" class="linkButton showCommentsLink"> Ver comentarios </a>
+			{% endif %}
 		</div>
     </body>
 </html>
