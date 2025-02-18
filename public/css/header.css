@@ -1,6 +1,6 @@
 header{
-	/* background-color: var(--bg-color); */
-	border: 1px solid black;
+	background-image: linear-gradient(var(--bg-color), var(--bg-color-2));
+	border: 2px solid var(--bg-color-3);
 	border-radius: 40px;
 
 	position: fixed;
@@ -15,22 +15,23 @@ header h1{
 	margin: 20px 0px;
 	text-align: center;
 }
+@media only screen and (max-width:900px) {
+	header h1 {
+		font-size: large;
+	}
+}
 header li{	
 	/* ocultar el puntito */
 	list-style-type: none;
-
-	margin-bottom: 10px;
-	margin-left: 5px;
+	padding: 10px 15px;
 }
 header a{
 	color: var(--txt-color);
 	text-decoration: none;
-	padding: 5px 10px;
-	border-radius: 50px;
 
 	transition: var(--header-buttons-transition);
 }
-header a:hover{
+header li:hover {
 	background-color: var(--button-hover-color);
 }
 

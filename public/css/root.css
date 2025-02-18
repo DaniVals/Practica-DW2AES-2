@@ -1,5 +1,6 @@
 :root{
 	--txt-color: #fff;
+	--txt-clickable-color: #000;
 	--bg-color: #336;
 	--bg-color-2: #669;
 	--bg-color-3: #99c;
@@ -13,14 +14,14 @@
 	--header-width: 25%;
 
 	--thread-right-margin: 150px;
-
+	
 	--notificacion-height: 70px;
 }
 
 /* media querry que cambie el ancho de la cabecera a 150px */
-@media (max-width: 800px){
+@media only screen and (max-width: 900px){
 	:root{
-		--header-width: 150px;
+		--thread-right-margin: 0;
 	}
 }
 
