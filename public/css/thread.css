@@ -68,8 +68,8 @@ body{
 	background-color: #0000;
 	border: none;
 	background-size: contain;
-	width:  3vh;
-	height: 3vh;
+	width:  1.5em;
+	height: 1.5em;
 	cursor: pointer;
 }
 .post .likeButton{
