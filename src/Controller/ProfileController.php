@@ -63,6 +63,13 @@ class ProfileController extends AbstractController {
 
 		$entityManager->persist($friendRequest);
 		$entityManager->flush();
+		
+		$targetUser->getProfile()->recountFollowersAndFollowing($entityManager);
+		$userUser->getProfile()->recountFollowersAndFollowing($entityManager);
+
+		$entityManager->persist($targetUser);
+		$entityManager->persist($userUser);
+		$entityManager->flush();
 
 		return $this->redirectToRoute('load_profile', ['userName' => $userName]);
 	}
@@ -97,6 +104,13 @@ class ProfileController extends AbstractController {
 			$friendRequest->setFrState($State);
 			
 			$entityManager->persist($friendRequest);
+			$entityManager->flush();
+
+			$targetUser->getProfile()->recountFollowersAndFollowing($entityManager);
+			$userUser->getProfile()->recountFollowersAndFollowing($entityManager);
+
+			$entityManager->persist($targetUser);
+			$entityManager->persist($userUser);
 			$entityManager->flush();
 		}
 		// no hay else ya que si no podrias hacer que te siga gente sin que te envien nada

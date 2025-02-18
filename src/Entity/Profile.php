@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[ORM\Entity] 
 #[ORM\Table(name: 'profile')]
@@ -92,5 +93,13 @@ class Profile
 			"followers" => $this->followers,
 			"following" => $this->following
 		];
+	}
+
+	// funcion para recontar seguidores y seguidos
+	public function recountFollowersAndFollowing(EntityManagerInterface $entityManager) {
+		$followers = $entityManager->getRepository(Friendship::class)->findBy(['IdRequested' => $this->User, 'frState' => 2]);
+		$following = $entityManager->getRepository(Friendship::class)->findBy(['IdRequestor' => $this->User, 'frState' => 2]);
+		$this->followers = count($followers);
+		$this->following = count($following);
 	}
 }
