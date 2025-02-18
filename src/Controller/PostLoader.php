@@ -99,7 +99,13 @@ class PostLoader extends AbstractController {
             return $this->redirectToRoute('feed');
         }
         $profile = $entityManager->getRepository(Profile::class)->findOneBy(['idUser' => $userId]);
-        $posts = $entityManager->getRepository(Post::class)->findBy(['PosterProfile' => $profile]);
+		$posts = $entityManager->getRepository(Post::class)
+			->createQueryBuilder('p')
+			->where('p.PosterProfile = :profile')
+			->setParameter('profile', $profile)
+			->orderBy('p.postingTime', 'DESC')
+			->getQuery()
+			->getResult();
         $post_arr = [];
         // $getWatched = $request->query->get('watched');
         foreach ($posts as $post) {
