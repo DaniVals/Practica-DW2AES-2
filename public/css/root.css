@@ -4,6 +4,7 @@
 	--bg-color: #336;
 	--bg-color-2: #669;
 	--bg-color-3: #99c;
+	--bg-color-4: #225;
 	--button-hover-color: #fff3;
 
 	--header-buttons-transition: 0.2s;
@@ -34,6 +35,7 @@
 html{
 	background-color: var(--bg-color);
 	color: var(--txt-color);
+	padding: 10px;
 }
 
 /* <a> */
@@ -42,6 +44,7 @@ html{
 	border: 1px solid black;
 	border-radius: 50px;
 	background-color: var(--bg-color-2);
+	cursor: pointer;
 }
 .linkButton:hover{
 	background-color: var(--bg-color-3);

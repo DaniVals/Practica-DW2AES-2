@@ -23,13 +23,18 @@ header h1{
 header li{	
 	/* ocultar el puntito */
 	list-style-type: none;
-	padding: 10px 15px;
 }
 header a{
+	padding: 10px 15px;
 	color: var(--txt-color);
 	text-decoration: none;
+	width: 100%;
+	display: block;
 
 	transition: var(--header-buttons-transition);
+}
+header a:hover {
+	color: var(--txt-clickable-color);
 }
 header li:hover {
 	background-color: var(--button-hover-color);

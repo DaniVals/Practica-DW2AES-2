@@ -1,8 +1,10 @@
 #profileHeader{
-	min-height: 150px;
+	height: fit-content;
 	padding: 10px;
+	margin-bottom: 20px;
 	
-	border-bottom: 1px solid;
+	border: 2px solid var(--bg-color-3);
+	border-radius: .5em;
 	overflow-x: hidden;
 
 	/* debug */
@@ -17,10 +19,24 @@
 	margin-right: 25px;
 
 	border-radius: 50px;
-	border: 2px solid;
+	border: 2px solid var(--bg-color-3);
 }
 
 #profileHeader .linkButton{
 	float: right;
 	color: var(--txt-color);
+	text-decoration: none;
+	padding: 5px 10px;
+	margin-top: 10px;
+}
+#profileHeader #sig {
+	margin-left: 50px;
+}
+#profileHeader #bio {
+	text-wrap: balance;
+}
+@media only screen and (max-width:700px) {
+	#profileHeader p span{
+		display: block;
+	}
 }

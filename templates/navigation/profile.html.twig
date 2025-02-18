@@ -16,8 +16,8 @@
 			<img src="{{asset('userData/'~targetProfile.idUser~'/ProfilePicture.png')}}" alt="ProfilePicture">
 			{# idUser #}
 			<h1>{{targetProfile.userName}}</h1>
-			<p>{{targetProfile.bio}}</p>
-			<p>Seguidores: <span>{{targetProfile.followers}}</span> Siguiendo: <span>{{targetProfile.following}}</span></p>
+			<p id="bio">{{targetProfile.bio}}</p>
+			<p><span id="seg">Seguidores: {{targetProfile.followers}}</span> <span id="sig">Siguiendo: {{targetProfile.following}}</span></p>
 
 			{# si es tu perfil, te sale el boton de editar tu perfil #}
 			{% if targetProfile.idUser == app.user.idUser %}

@@ -42,16 +42,17 @@ button{
 	border: none;
 
 	transition: all 0.3s;
+	cursor: pointer;
 }
 a {
 	padding: 5px;
 	border-radius: .25em;
 	text-decoration: none;
+	cursor: pointer;
 }
 button:hover, a:hover {
 	background-color: var(--bg-color-3);
 	border: 1px solid var(--txt-color);
-	cursor: pointer;
 }
 a:hover:visited {
 	color: var(--txt-clickable-color);
