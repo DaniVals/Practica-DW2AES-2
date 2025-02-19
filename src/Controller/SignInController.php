@@ -61,6 +61,20 @@ class SignInController extends AbstractController
             $entityManager->persist($profile);
             $entityManager->flush();
 
+			// Crear una carpeta en el servidor para el usuario con su id
+			$id = $user->getIdUser();
+			$dir = "userData/$id";
+			if (!file_exists($dir)) {
+				mkdir($dir, 0777, true);
+			}
+
+			// Crear la carpeta para los post del usuario
+			$dir = "userData/$id/posts";
+			if (!file_exists($dir)) {
+				mkdir($dir, 0777, true);
+			}
+		
+
             //Mandar correo de activación
             return $this->redirectToRoute('send_activation', ['email' => $email, 'name' => $name,]);
         }
